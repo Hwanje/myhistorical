@@ -204,6 +204,22 @@ body.theme-dark .theme-toggle .icon-sun { opacity: 1; transform: rotate(0); }
 body.theme-light .theme-toggle .icon-moon { opacity: 1; transform: rotate(0); }
 body.theme-light .theme-toggle .icon-sun { opacity: 0; transform: rotate(180deg); }
 
+/* iOS Safari 폴백: CSS 변수가 어떤 이유로든 실패해도 기본 테마 색상은 적용되도록 */
+html, body {
+background-color: #f1e9d8;
+color: #1a1612;
+}
+
+@media (prefers-color-scheme: dark) {
+html, body {
+background-color: #1a1612;
+color: #e8dfc9;
+}
+}
+
+body.theme-dark, body.theme-dark html { background-color: #1a1612; color: #e8dfc9; }
+body.theme-light, body.theme-light html { background-color: #f1e9d8; color: #1a1612; }
+
 - { box-sizing: border-box; margin: 0; padding: 0; }
 
 html {

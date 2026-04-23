@@ -12,7 +12,8 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="한국사 학습">
 <meta name="mobile-web-app-capable" content="yes">
-<meta name="theme-color" content="#f1e9d8">
+<meta name="theme-color" content="#f1e9d8" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#1a1612" media="(prefers-color-scheme: dark)">
 <meta name="format-detection" content="telephone=no">
 
 <!-- iOS 홈 화면 아이콘 (SVG 인라인, data URI) -->
@@ -30,6 +31,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@400;700;800&family=Gowun+Batang:wght@400;700&family=Noto+Serif+KR:wght@300;400;500;700;900&family=Special+Elite&display=swap" rel="stylesheet">
 <style>
   :root {
+    /* 라이트 테마 (기본) - 한지/먹색 */
     --ink: #1a1612;
     --ink-soft: #3a342c;
     --paper: #f1e9d8;
@@ -41,7 +43,166 @@
     --rule: #2a241c;
     --hanji: #ebe0c7;
     --stain: rgba(120, 80, 40, 0.08);
+    --noise-opacity: 0.35;
+    --noise-blend: multiply;
+    --shadow-soft: rgba(26, 22, 18, 0.15);
+    --focus-correct: #d4e8d6;
+    --focus-correct-border: #2a5d3a;
+    --focus-correct-text: #1e4229;
+    --focus-correct-bg: #e8f0e4;
+    --focus-wrong: #f4dede;
+    --focus-wrong-bg: #f7e8e8;
   }
+
+/* 다크 테마 - 깊은 먹색 배경 / 은은한 한지 글씨 */
+@media (prefers-color-scheme: dark) {
+:root {
+–ink: #e8dfc9;              /* 글자: 연한 한지색 */
+–ink-soft: #b8ad93;          /* 보조 글자 */
+–paper: #1a1612;             /* 배경: 깊은 먹색 */
+–paper-light: #241e17;       /* 연한 배경(카드) */
+–paper-dark: #0f0c08;        /* 더 어두운 테두리/그림자 */
+–seal: #c84545;              /* 인장: 밝은 주홍 */
+–seal-dark: #9f2d2d;
+–gold: #d4b368;              /* 금박 - 조금 더 밝게 */
+–rule: #8a7e65;              /* 테두리선 */
+–hanji: #2e2720;             /* 강조 배경 */
+–stain: rgba(255, 220, 160, 0.04);
+–noise-opacity: 0.22;
+–noise-blend: screen;
+–shadow-soft: rgba(0, 0, 0, 0.5);
+–focus-correct: #1e3a28;
+–focus-correct-border: #6fa878;
+–focus-correct-text: #b8dbbf;
+–focus-correct-bg: #253426;
+–focus-wrong: #3a1e1e;
+–focus-wrong-bg: #3a2424;
+}
+}
+
+/* 수동 다크 모드 클래스 */
+body.theme-dark {
+–ink: #e8dfc9;
+–ink-soft: #b8ad93;
+–paper: #1a1612;
+–paper-light: #241e17;
+–paper-dark: #0f0c08;
+–seal: #c84545;
+–seal-dark: #9f2d2d;
+–gold: #d4b368;
+–rule: #8a7e65;
+–hanji: #2e2720;
+–stain: rgba(255, 220, 160, 0.04);
+–noise-opacity: 0.22;
+–noise-blend: screen;
+–shadow-soft: rgba(0, 0, 0, 0.5);
+–focus-correct: #1e3a28;
+–focus-correct-border: #6fa878;
+–focus-correct-text: #b8dbbf;
+–focus-correct-bg: #253426;
+–focus-wrong: #3a1e1e;
+–focus-wrong-bg: #3a2424;
+}
+
+/* 수동 라이트 모드 클래스 (시스템이 다크여도 강제 라이트) */
+body.theme-light {
+–ink: #1a1612;
+–ink-soft: #3a342c;
+–paper: #f1e9d8;
+–paper-light: #f7f1e1;
+–paper-dark: #e4d8bf;
+–seal: #a02828;
+–seal-dark: #7a1c1c;
+–gold: #a8884a;
+–rule: #2a241c;
+–hanji: #ebe0c7;
+–stain: rgba(120, 80, 40, 0.08);
+–noise-opacity: 0.35;
+–noise-blend: multiply;
+–shadow-soft: rgba(26, 22, 18, 0.15);
+–focus-correct: #d4e8d6;
+–focus-correct-border: #2a5d3a;
+–focus-correct-text: #1e4229;
+–focus-correct-bg: #e8f0e4;
+–focus-wrong: #f4dede;
+–focus-wrong-bg: #f7e8e8;
+}
+
+/* 다크모드에서 era 색상들을 조금 더 밝게 - legend와 타임라인 dot 모두 */
+@media (prefers-color-scheme: dark) {
+.legend-dot, .timeline-dot { filter: brightness(1.4) saturate(1.1); }
+.timeline-content.era-1,
+.timeline-content.era-2,
+.timeline-content.era-3 { filter: brightness(1.3); }
+}
+
+body.theme-dark .legend-dot,
+body.theme-dark .timeline-dot { filter: brightness(1.4) saturate(1.1); }
+body.theme-dark .timeline-content.era-1,
+body.theme-dark .timeline-content.era-2,
+body.theme-dark .timeline-content.era-3 { filter: brightness(1.3); }
+
+body.theme-light .legend-dot,
+body.theme-light .timeline-dot { filter: none; }
+body.theme-light .timeline-content.era-1,
+body.theme-light .timeline-content.era-2,
+body.theme-light .timeline-content.era-3 { filter: none; }
+
+/* ============ 테마 토글 버튼 ============ */
+.theme-toggle {
+background: transparent;
+border: 1.5px solid var(–ink);
+width: 40px;
+height: 40px;
+min-height: 40px;
+display: inline-flex;
+align-items: center;
+justify-content: center;
+cursor: pointer;
+color: var(–ink);
+font-size: 1.1rem;
+transition:
+background 0.3s ease,
+color 0.3s ease,
+transform 0.25s cubic-bezier(0.2, 0.9, 0.3, 1),
+border-color 0.3s ease;
+padding: 0;
+line-height: 1;
+}
+
+.theme-toggle:hover {
+background: var(–ink);
+color: var(–paper);
+}
+
+.theme-toggle:active {
+transform: scale(0.92) rotate(15deg);
+}
+
+.theme-toggle .icon-sun,
+.theme-toggle .icon-moon {
+transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease;
+position: absolute;
+}
+
+.theme-toggle {
+position: relative;
+overflow: hidden;
+}
+
+/* 라이트 모드: 달 아이콘 보임 (다크로 전환 유도) */
+.theme-toggle .icon-moon { opacity: 1; transform: rotate(0); }
+.theme-toggle .icon-sun { opacity: 0; transform: rotate(180deg); }
+
+/* 다크 모드: 해 아이콘 보임 (라이트로 전환 유도) */
+@media (prefers-color-scheme: dark) {
+body:not(.theme-light) .theme-toggle .icon-moon { opacity: 0; transform: rotate(-180deg); }
+body:not(.theme-light) .theme-toggle .icon-sun { opacity: 1; transform: rotate(0); }
+}
+body.theme-dark .theme-toggle .icon-moon { opacity: 0; transform: rotate(-180deg); }
+body.theme-dark .theme-toggle .icon-sun { opacity: 1; transform: rotate(0); }
+body.theme-light .theme-toggle .icon-moon { opacity: 1; transform: rotate(0); }
+body.theme-light .theme-toggle .icon-sun { opacity: 0; transform: rotate(180deg); }
 
 - { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -115,10 +276,10 @@ content: ‘’;
 position: fixed;
 inset: 0;
 background-image: url(“data:image/svg+xml,%3Csvg xmlns=‘http://www.w3.org/2000/svg’ width=‘200’ height=‘200’%3E%3Cfilter id=‘n’%3E%3CfeTurbulence type=‘fractalNoise’ baseFrequency=‘0.9’ numOctaves=‘3’/%3E%3CfeColorMatrix values=‘0 0 0 0 0.3 0 0 0 0 0.25 0 0 0 0 0.15 0 0 0 0.08 0’/%3E%3C/filter%3E%3Crect width=‘100%25’ height=‘100%25’ filter=‘url(%23n)’/%3E%3C/svg%3E”);
-opacity: 0.35;
+opacity: var(–noise-opacity);
 pointer-events: none;
 z-index: 1;
-mix-blend-mode: multiply;
+mix-blend-mode: var(–noise-blend);
 }
 
 main, header, nav, section { position: relative; z-index: 2; }
@@ -302,6 +463,8 @@ gap: 1rem;
 border-top: 1px solid var(–rule);
 padding-top: 0.9rem;
 }
+
+.current-view-label { flex: 1; }
 
 .menu-toggle {
 display: flex;
@@ -1115,7 +1278,7 @@ font-weight: 700;
 font-size: 1rem;
 }
 
-.score-display .correct { color: #2a5d3a; }
+.score-display .correct { color: var(–focus-correct-border); }
 .score-display .wrong { color: var(–seal); }
 
 .progress-bar {
@@ -1233,20 +1396,20 @@ transform: scale(1.15);
 }
 
 .option.correct {
-background: #d4e8d6;
-border-color: #2a5d3a;
+background: var(–focus-correct);
+border-color: var(–focus-correct-border);
 border-width: 2px;
 animation: correctBloom 0.5s cubic-bezier(0.2, 1.5, 0.3, 1);
 }
 
 @keyframes correctBloom {
 0%   { transform: scale(1); }
-40%  { transform: scale(1.03); background: #b8e0c0; }
+40%  { transform: scale(1.03); }
 100% { transform: scale(1); }
 }
 
 .option.wrong {
-background: #f4dede;
+background: var(–focus-wrong);
 border-color: var(–seal);
 border-width: 2px;
 animation: wrongShake 0.45s cubic-bezier(0.4, 0, 0.2, 1);
@@ -1289,12 +1452,12 @@ max-height: 500px;
 }
 }
 .feedback.correct-fb {
-background: #e8f0e4;
-border-color: #2a5d3a;
-color: #1e4229;
+background: var(–focus-correct-bg);
+border-color: var(–focus-correct-border);
+color: var(–focus-correct-text);
 }
 .feedback.wrong-fb {
-background: #f7e8e8;
+background: var(–focus-wrong-bg);
 border-color: var(–seal);
 color: var(–seal-dark);
 }
@@ -1906,20 +2069,20 @@ margin-right: 0.5rem;
 }
 
 .correct-answer-display {
-background: #e8f0e4;
-border-left: 3px solid #2a5d3a;
+background: var(–focus-correct-bg);
+border-left: 3px solid var(–focus-correct-border);
 padding: 0.7rem 1rem;
 margin-top: 0.5rem;
 font-family: ‘Nanum Myeongjo’, serif;
 font-size: 0.95rem;
-color: #1e4229;
+color: var(–focus-correct-text);
 font-weight: 700;
 }
 
 .correct-answer-display .label {
 font-family: ‘Special Elite’, monospace;
 font-size: 0.7rem;
-color: #2a5d3a;
+color: var(–focus-correct-border);
 letter-spacing: 0.15em;
 margin-right: 0.5rem;
 font-weight: 400;
@@ -2263,6 +2426,10 @@ margin-top: 0.5rem;
       <span class="menu-toggle-label">메뉴</span>
     </button>
     <div class="current-view-label" id="current-view-label" data-num="01">개념 정리</div>
+    <button class="theme-toggle" id="theme-toggle" aria-label="테마 전환" title="테마 전환">
+      <span class="icon-sun">☀︎</span>
+      <span class="icon-moon">☾</span>
+    </button>
   </div>
 </header>
 
@@ -3878,6 +4045,63 @@ showInstallBanner();
 if (isStandalone()) {
   document.body.classList.add('pwa-mode');
 }
+
+// ============ 테마 토글 (라이트/다크) ============
+(function() {
+  const toggleBtn = document.getElementById('theme-toggle');
+  const body = document.body;
+  const themeColorMeta = document.querySelector('meta[name="theme-color"]:not([media])') ||
+                         document.querySelector('meta[name="theme-color"]');
+
+  // 저장된 테마 불러오기
+  const savedTheme = localStorage.getItem('theme');
+  if (savedTheme === 'dark') {
+    body.classList.add('theme-dark');
+  } else if (savedTheme === 'light') {
+    body.classList.add('theme-light');
+  }
+  // 저장된 값이 없으면 시스템 기본을 따름 (class 안 붙음)
+
+  function getCurrentTheme() {
+    if (body.classList.contains('theme-dark')) return 'dark';
+    if (body.classList.contains('theme-light')) return 'light';
+    // 시스템 기본 확인
+    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+  }
+
+  function applyThemeColor(theme) {
+    // 상태바 색상 업데이트 (iOS PWA)
+    const color = theme === 'dark' ? '#1a1612' : '#f1e9d8';
+    document.querySelectorAll('meta[name="theme-color"]').forEach(m => {
+      if (!m.hasAttribute('media')) m.setAttribute('content', color);
+    });
+  }
+
+  toggleBtn.addEventListener('click', () => {
+    const current = getCurrentTheme();
+    const next = current === 'dark' ? 'light' : 'dark';
+
+    // 기존 클래스 제거 후 새 클래스 부여
+    body.classList.remove('theme-dark', 'theme-light');
+    body.classList.add('theme-' + next);
+    localStorage.setItem('theme', next);
+    applyThemeColor(next);
+
+    // 토글 애니메이션용 pulse
+    toggleBtn.style.transform = 'scale(0.85) rotate(20deg)';
+    setTimeout(() => { toggleBtn.style.transform = ''; }, 200);
+  });
+
+  // 시스템 테마 변경 시 사용자가 수동 설정을 안 했으면 따라감
+  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+    if (!localStorage.getItem('theme')) {
+      applyThemeColor(e.matches ? 'dark' : 'light');
+    }
+  });
+
+  // 초기 상태바 색상 설정
+  applyThemeColor(getCurrentTheme());
+})();
 
 // ============ 스크롤 방향 감지 - 헤더 숨김/표시 ============
 (function() {

@@ -2666,6 +2666,121 @@
     text-align: center;
     margin-top: 0.5rem;
   }
+
+  /* ============ 단원 학습 홈 (대단원/소단원) ============ */
+  .home-intro { color: var(--ink-soft); font-size: 0.95rem; margin-bottom: 1.4rem; line-height: 1.7; }
+  .da-block { margin-bottom: 1.6rem; border: 1px solid var(--ink-soft); background: var(--paper-light); box-shadow: 4px 4px 0 var(--paper-dark); }
+  .da-head {
+    display: flex; align-items: center; gap: 0.85rem; padding: 0.9rem 1.1rem;
+    cursor: pointer; border-left: 7px solid var(--da-color, var(--seal)); position: relative;
+  }
+  .da-roman {
+    font-family: 'Nanum Myeongjo', serif; font-weight: 800; font-size: 1.15rem;
+    width: 2.1rem; height: 2.1rem; flex: none; display: grid; place-items: center;
+    color: #fff; background: var(--da-color, var(--seal)); border-radius: 4px;
+  }
+  .da-titles { flex: 1; min-width: 0; }
+  .da-name { font-family: 'Nanum Myeongjo', serif; font-weight: 800; font-size: 1.12rem; color: var(--ink); }
+  .da-sub { font-size: 0.72rem; color: var(--ink-soft); letter-spacing: 0.04em; margin-top: 2px; }
+  .da-chevron { transition: transform 0.25s; color: var(--ink-soft); font-size: 1.1rem; }
+  .da-block.open .da-chevron { transform: rotate(180deg); }
+  .da-chapters {
+    display: grid; gap: 0; max-height: 0; overflow: hidden;
+    transition: max-height 0.35s ease; border-top: 0 solid transparent;
+  }
+  .da-block.open .da-chapters { max-height: 900px; border-top: 1px dashed var(--ink-soft); }
+  .ch-row {
+    display: flex; align-items: center; gap: 0.8rem; padding: 0.85rem 1.1rem 0.85rem 1.3rem;
+    cursor: pointer; border-bottom: 1px dotted var(--paper-dark); transition: background 0.15s;
+  }
+  .ch-row:last-child { border-bottom: none; }
+  .ch-row:hover, .ch-row:active { background: var(--hanji); }
+  .ch-num {
+    font-family: 'Special Elite', monospace; font-size: 0.95rem; font-weight: 700;
+    color: var(--da-color, var(--seal)); width: 2rem; flex: none;
+  }
+  .ch-info { flex: 1; min-width: 0; }
+  .ch-name { font-size: 0.97rem; font-weight: 700; color: var(--ink); line-height: 1.35; }
+  .ch-meta { font-size: 0.72rem; color: var(--ink-soft); margin-top: 3px; }
+  .ch-prog-wrap { width: 64px; flex: none; }
+  .ch-prog-bar { height: 6px; background: var(--paper-dark); border-radius: 3px; overflow: hidden; }
+  .ch-prog-fill { height: 100%; background: var(--da-color, var(--seal)); width: 0%; transition: width 0.4s; }
+  .ch-prog-label { font-size: 0.62rem; color: var(--ink-soft); text-align: right; margin-top: 2px; }
+  .ch-arrow { color: var(--ink-soft); font-size: 1.1rem; flex: none; }
+
+  /* ============ 소단원 상세(챕터) 뷰 ============ */
+  .chapter-top { margin-bottom: 1.3rem; }
+  .chapter-back {
+    background: transparent; border: none; color: var(--ink-soft); font-size: 0.85rem;
+    cursor: pointer; padding: 0.3rem 0; margin-bottom: 0.6rem; font-family: inherit;
+  }
+  .chapter-back:hover { color: var(--seal); }
+  .chapter-da-tag {
+    display: inline-block; font-size: 0.7rem; letter-spacing: 0.05em; color: #fff;
+    background: var(--da-color, var(--seal)); padding: 0.2rem 0.6rem; border-radius: 3px; margin-bottom: 0.5rem;
+  }
+  .chapter-title { font-family: 'Nanum Myeongjo', serif; font-weight: 800; font-size: 1.5rem; line-height: 1.3; color: var(--ink); }
+  .chapter-actions { display: flex; flex-wrap: wrap; gap: 0.55rem; margin: 1rem 0 1.4rem; }
+  .chapter-action-btn {
+    flex: 1 1 calc(50% - 0.3rem); min-width: 130px; padding: 0.75rem 0.5rem; cursor: pointer;
+    background: var(--paper-light); border: 1.5px solid var(--ink-soft); color: var(--ink);
+    font-family: inherit; font-size: 0.9rem; font-weight: 700; box-shadow: 2px 2px 0 var(--paper-dark);
+    transition: transform 0.1s, box-shadow 0.1s; display: flex; flex-direction: column; align-items: center; gap: 3px;
+  }
+  .chapter-action-btn small { font-weight: 400; font-size: 0.68rem; color: var(--ink-soft); }
+  .chapter-action-btn:active { transform: translate(2px,2px); box-shadow: 0 0 0 var(--paper-dark); }
+  .chapter-action-btn.flash { background: var(--seal); color: #fff; border-color: var(--seal-dark); }
+  .chapter-action-btn.flash small { color: rgba(255,255,255,0.8); }
+  .chapter-section-label {
+    font-family: 'Nanum Myeongjo', serif; font-size: 1.1rem; font-weight: 700; margin: 1.5rem 0 0.8rem;
+    padding-bottom: 0.4rem; border-bottom: 2px solid var(--seal); display: flex; align-items: center; gap: 0.5rem;
+  }
+
+  /* ============ 플래시카드 학습 모드 ============ */
+  .flash-overlay {
+    position: fixed; inset: 0; background: var(--paper); z-index: 1200; display: none;
+    flex-direction: column; padding: 1rem; overflow-y: auto;
+  }
+  .flash-overlay.active { display: flex; }
+  .flash-bar { display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.5rem; }
+  .flash-close { background: none; border: 1.5px solid var(--ink); color: var(--ink); width: 2rem; height: 2rem; border-radius: 50%; cursor: pointer; font-size: 1.1rem; }
+  .flash-progress { font-family: 'Special Elite', monospace; font-size: 0.9rem; color: var(--ink-soft); }
+  .flash-stat { font-size: 0.8rem; }
+  .flash-stat .fk { color: var(--focus-correct-border); font-weight: 700; }
+  .flash-stat .fu { color: var(--seal); font-weight: 700; }
+  .flash-card-wrap { flex: 1; display: flex; align-items: center; justify-content: center; perspective: 1400px; min-height: 320px; }
+  .flash-card {
+    width: 100%; max-width: 460px; min-height: 300px; cursor: pointer; position: relative;
+    transform-style: preserve-3d; transition: transform 0.5s; }
+  .flash-card.flipped { transform: rotateY(180deg); }
+  .flash-face {
+    position: absolute; inset: 0; backface-visibility: hidden; -webkit-backface-visibility: hidden;
+    border: 1.5px solid var(--ink-soft); background: var(--paper-light); box-shadow: 5px 5px 0 var(--paper-dark);
+    padding: 1.6rem; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;
+  }
+  .flash-face.front { }
+  .flash-face.back { transform: rotateY(180deg); align-items: flex-start; justify-content: flex-start; text-align: left; overflow-y: auto; }
+  .flash-face .fc-year { font-family: 'Special Elite', monospace; color: var(--seal); font-size: 0.85rem; margin-bottom: 0.8rem; }
+  .flash-face .fc-name { font-family: 'Nanum Myeongjo', serif; font-weight: 800; font-size: 1.7rem; color: var(--ink); line-height: 1.3; }
+  .flash-face .fc-hint { margin-top: 1.2rem; font-size: 0.78rem; color: var(--ink-soft); font-style: italic; }
+  .flash-face.back h4 { font-family: 'Nanum Myeongjo', serif; font-size: 1.15rem; margin-bottom: 0.5rem; color: var(--seal-dark); }
+  .flash-face.back .fc-summary { font-size: 0.95rem; margin-bottom: 0.7rem; line-height: 1.6; }
+  .flash-face.back ul { margin-left: 1.1rem; }
+  .flash-face.back li { font-size: 0.88rem; line-height: 1.6; margin-bottom: 0.3rem; }
+  .flash-buttons { display: flex; gap: 0.7rem; margin-top: 1rem; }
+  .flash-btn { flex: 1; padding: 0.9rem; border: none; cursor: pointer; font-family: inherit; font-size: 0.95rem; font-weight: 700; color: #fff; }
+  .flash-btn.unknown { background: var(--seal); }
+  .flash-btn.known { background: var(--focus-correct-border); }
+  .flash-done { text-align: center; padding: 2.5rem 1rem; }
+  .flash-done .fd-seal { font-family: 'Nanum Myeongjo', serif; font-size: 1.4rem; font-weight: 800; color: var(--seal); margin-bottom: 0.6rem; }
+
+  /* 퀴즈 범위 - 소단원 칩 */
+  .subscope-row { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 0.6rem; }
+  .quiz-scope-context {
+    background: var(--hanji); border-left: 4px solid var(--seal); padding: 0.6rem 0.9rem;
+    margin-bottom: 1rem; font-size: 0.85rem; color: var(--ink-soft); display: none;
+  }
+  .quiz-scope-context.show { display: block; }
 </style>
 </head>
 <body>
@@ -2676,11 +2791,11 @@
     <div class="title-block">
       <div>
         <div class="title-hanja">한국사</div>
-        <div class="title-kor">일제 강점기 · 수능특강</div>
+        <div class="title-kor">전범위 · 수능특강</div>
       </div>
     </div>
     <div class="meta">
-      <span>VOL. III · 1910—1945</span>
+      <span>선사 ~ 현대 · 전 단원</span>
       <span id="today-date"></span>
       <a href="#" id="header-install-link" class="header-install">📱 앱으로 설치</a>
     </div>
@@ -2721,35 +2836,47 @@
 
 <!-- 사이드 드로어 메뉴 -->
 <nav id="main-nav" aria-label="주 메뉴">
-  <button class="nav-btn active" data-view="concepts" data-num="01" style="--ni:0">개념 정리</button>
-  <button class="nav-btn" data-view="roadmap" data-num="02" style="--ni:1">시대 로드맵</button>
+  <button class="nav-btn active" data-view="home" data-num="01" style="--ni:0">단원 학습</button>
+  <button class="nav-btn" data-view="quiz" data-num="02" style="--ni:1">모의시험</button>
   <button class="nav-btn" data-view="people" data-num="03" style="--ni:2">인물 사전</button>
-  <button class="nav-btn" data-view="quiz" data-num="04" style="--ni:3">실전 문제</button>
+  <button class="nav-btn" data-view="roadmap" data-num="04" style="--ni:3">시대 로드맵</button>
   <button class="nav-btn" data-view="keyterms" data-num="05" style="--ni:4">핵심 비교표</button>
-  <button class="nav-btn" data-view="ox" data-num="06" style="--ni:5">OX 퀴즈</button>
 </nav>
 
 <main>
 
 <!-- ============ VIEW: CONCEPTS ============ -->
-<section class="view active" id="view-concepts">
+<section class="view active" id="view-home">
   <div class="section-header">
-    <h2 class="section-title">개념 정리</h2>
-    <span class="section-subtitle">CORE CONCEPTS · 핵심 50선</span>
+    <h2 class="section-title">단원 학습</h2>
+    <span class="section-subtitle">CURRICULUM · 대단원 · 소단원</span>
   </div>
 
-  <input type="text" class="search-box" id="concept-search" placeholder="개념명 검색 (예: 신간회, 의열단)">
+  <p class="home-intro">수능특강 한국사 <strong>전 범위</strong>를 4개 대단원·15개 소단원으로 나누었습니다.<br>
+  소단원을 선택하면 그 단원의 <strong>개념 카드 학습 · 플래시카드 · OX · 객관식</strong>을 집중적으로 공부할 수 있어요.</p>
 
-  <div class="era-filter">
-    <button class="era-btn active" data-era="all">전체</button>
-    <button class="era-btn" data-era="1">무단 통치기 (1910s)</button>
-    <button class="era-btn" data-era="2">문화 통치기 (1920s)</button>
-    <button class="era-btn" data-era="3">민족 말살 통치기 (1930~45)</button>
+  <input type="text" class="search-box" id="concept-search" placeholder="개념 검색 (예: 광개토대왕, 갑신정변, 4·19 혁명)">
+  <div class="concept-grid" id="search-result-grid" style="display:none;margin-bottom:1.5rem;"></div>
+
+  <div id="home-units"></div>
+
+  <p class="hint">대단원을 눌러 펼치고, 소단원을 선택해 학습을 시작하세요</p>
+</section>
+
+<!-- ============ VIEW: CHAPTER DETAIL ============ -->
+<section class="view" id="view-chapter">
+  <div class="chapter-top">
+    <button class="chapter-back" id="chapter-back">← 단원 목록으로</button>
+    <div class="chapter-da-tag" id="chapter-da-tag"></div>
+    <div class="chapter-title" id="chapter-title"></div>
   </div>
 
-  <div class="concept-grid" id="concept-grid"></div>
+  <div class="chapter-actions" id="chapter-actions"></div>
 
-  <p class="hint">카드를 눌러 상세 내용을 펼쳐보세요</p>
+  <div class="chapter-section-label">📇 개념 카드 <span style="font-size:0.7rem;font-weight:400;color:var(--ink-soft)">(눌러서 펼치기)</span></div>
+  <div class="concept-grid" id="chapter-concept-grid"></div>
+
+  <div id="chapter-compare"></div>
 </section>
 
 <!-- ============ VIEW: ROADMAP ============ -->
@@ -2759,11 +2886,23 @@
     <span class="section-subtitle">TIMELINE · 인과 관계</span>
   </div>
 
+  <div class="era-filter" id="timeline-filter">
+    <button class="era-btn active" data-period="all">전체</button>
+    <button class="era-btn" data-period="고대">고대</button>
+    <button class="era-btn" data-period="고려">고려</button>
+    <button class="era-btn" data-period="조선">조선</button>
+    <button class="era-btn" data-period="근대">근대</button>
+    <button class="era-btn" data-period="일제">일제</button>
+    <button class="era-btn" data-period="현대">현대</button>
+  </div>
+
   <div class="timeline-legend">
-    <div class="legend-item"><span class="legend-dot" style="background:#8b2828"></span>무단 통치기</div>
-    <div class="legend-item"><span class="legend-dot" style="background:#b8862a"></span>문화 통치기</div>
-    <div class="legend-item"><span class="legend-dot" style="background:#2a5d3a"></span>민족 말살 통치기</div>
-    <div class="legend-item"><span style="color:var(--ink)">★</span>주요 사건</div>
+    <div class="legend-item"><span class="legend-dot" style="background:#6b8f3a"></span>고대</div>
+    <div class="legend-item"><span class="legend-dot" style="background:#3f7d4e"></span>고려</div>
+    <div class="legend-item"><span class="legend-dot" style="background:#2e7d6b"></span>조선</div>
+    <div class="legend-item"><span class="legend-dot" style="background:#b8862a"></span>근대</div>
+    <div class="legend-item"><span class="legend-dot" style="background:#a02828"></span>일제</div>
+    <div class="legend-item"><span class="legend-dot" style="background:#2a5d9e"></span>현대</div>
   </div>
 
   <div class="timeline" id="timeline"></div>
@@ -2776,27 +2915,32 @@
     <span class="section-subtitle">MOCK EXAM · 랜덤 출제</span>
   </div>
 
+  <div class="quiz-scope-context" id="quiz-scope-context"></div>
+
   <div class="quiz-intro" id="quiz-intro">
     <h3>수능 유형 실전 연습</h3>
-    <p>객관식과 서술형 두 가지 유형으로 풀어볼 수 있습니다.<br>유형 · 범위를 선택한 뒤 시작하세요.</p>
+    <p>범위를 <strong>대단원·소단원</strong>까지 세분화해 원하는 부분만 골라 풀 수 있습니다.</p>
 
     <div class="type-label">① 문제 유형</div>
     <div class="mode-selector">
-      <button class="mode-btn type-btn active" data-type="multiple">객관식 (총 125문항)</button>
-      <button class="mode-btn type-btn" data-type="short">서술형 (총 87문항)</button>
+      <button class="mode-btn type-btn active" data-type="multiple">객관식</button>
+      <button class="mode-btn type-btn" data-type="short">서술형 <small style="font-size:0.65rem">(일제~현대)</small></button>
       <button class="mode-btn type-btn" data-type="mixed">혼합 모의고사</button>
     </div>
 
-    <div class="type-label">② 출제 범위</div>
-    <div class="mode-selector">
-      <button class="mode-btn scope-btn active" data-mode="all">전체</button>
-      <button class="mode-btn scope-btn" data-mode="era1">1910년대</button>
-      <button class="mode-btn scope-btn" data-mode="era2">1920년대</button>
-      <button class="mode-btn scope-btn" data-mode="era3">1930~40년대</button>
-      <button class="mode-btn scope-btn" data-mode="hard">고난도 (객관식)</button>
+    <div class="type-label">② 대단원 선택</div>
+    <div class="mode-selector" id="da-selector">
+      <button class="mode-btn da-btn active" data-da="all">전체 범위</button>
     </div>
 
-    <div class="type-label">③ 문항 수</div>
+    <div class="type-label" id="subscope-label" style="display:none;">③ 소단원 선택</div>
+    <div class="subscope-row" id="subscope-row"></div>
+
+    <div class="type-label">④ 난이도 · 문항 수</div>
+    <div class="mode-selector">
+      <button class="mode-btn diff-btn active" data-diff="all">전체 난이도</button>
+      <button class="mode-btn diff-btn" data-diff="hard">고난도만</button>
+    </div>
     <div class="mode-selector">
       <button class="mode-btn count-btn" data-count="10">10문항</button>
       <button class="mode-btn count-btn active" data-count="20">20문항</button>
@@ -2870,11 +3014,13 @@
 
   <div class="people-filter">
     <button class="pfilter-btn active" data-filter="all">전체</button>
-    <button class="pfilter-btn" data-filter="다중">⚡ 다중 활동 인물</button>
-    <button class="pfilter-btn" data-filter="의열">의열 투쟁</button>
-    <button class="pfilter-btn" data-filter="무장">무장 투쟁</button>
-    <button class="pfilter-btn" data-filter="임정">임시 정부</button>
-    <button class="pfilter-btn" data-filter="학문">사학·국어</button>
+    <button class="pfilter-btn" data-filter="고대">고대</button>
+    <button class="pfilter-btn" data-filter="고려">고려</button>
+    <button class="pfilter-btn" data-filter="조선">조선</button>
+    <button class="pfilter-btn" data-filter="근대">근대</button>
+    <button class="pfilter-btn" data-filter="일제">일제 강점기</button>
+    <button class="pfilter-btn" data-filter="현대">현대</button>
+    <button class="pfilter-btn" data-filter="다중">⚡ 다중 활동</button>
   </div>
 
   <div class="people-grid" id="people-grid"></div>
@@ -2943,6 +3089,7 @@
     <div class="result-comment" id="ox-result-comment"></div>
     <div class="result-actions">
       <button class="start-btn" onclick="resetOX()">다시 풀기</button>
+      <button class="start-btn" style="background:var(--ink-soft)" onclick="backToChapterFromOX()">← 단원으로</button>
     </div>
   </div>
 </section>
@@ -2964,6 +3111,29 @@
   </div>
 </div>
 
+<!-- ============ 플래시카드 학습 오버레이 ============ -->
+<div class="flash-overlay" id="flash-overlay">
+  <div class="flash-bar">
+    <button class="flash-close" id="flash-close" aria-label="닫기">×</button>
+    <span class="flash-progress" id="flash-progress">1 / 10</span>
+    <span class="flash-stat"><span class="fk" id="flash-known">○ 0</span> &nbsp; <span class="fu" id="flash-unknown">△ 0</span></span>
+  </div>
+  <div class="flash-card-wrap" id="flash-card-wrap">
+    <div class="flash-card" id="flash-card">
+      <div class="flash-face front">
+        <div class="fc-year" id="flash-year"></div>
+        <div class="fc-name" id="flash-name"></div>
+        <div class="fc-hint">카드를 눌러 뜻을 확인하세요 ↻</div>
+      </div>
+      <div class="flash-face back" id="flash-back"></div>
+    </div>
+  </div>
+  <div class="flash-buttons">
+    <button class="flash-btn unknown" id="flash-btn-unknown">△ 아직 헷갈려요</button>
+    <button class="flash-btn known" id="flash-btn-known">○ 외웠어요</button>
+  </div>
+</div>
+
 <!-- ============ 앱 설치 안내 배너 ============ -->
 <div class="install-banner" id="install-banner">
   <div class="install-banner-inner">
@@ -2980,6 +3150,1284 @@
 <div class="divider">※</div>
 
 </main>
+
+<script>
+window.UNIT_DATA_I = {
+  concepts: [
+    // ===== 01 고대 국가 =====
+    { unit:"01", name:"고조선의 건국", year:"기원전 2333", summary:"단군왕검이 세운 우리 역사상 최초의 국가이다.", details:["<strong>단군왕검</strong>은 제정일치 사회의 군장을 의미한다.","청동기 문화를 바탕으로 건국되었다.","<strong>삼국유사</strong>, 동국통감 등에 건국 기록이 전한다.","비파형 동검과 탁자식(북방식) 고인돌이 세력 범위를 보여 준다."] },
+    { unit:"01", name:"위만 조선", year:"기원전 194", summary:"위만이 준왕을 몰아내고 집권한 이후의 고조선이다.", details:["<strong>철기 문화</strong>를 본격적으로 수용하였다.","중국과 한반도 남부 사이에서 <strong>중계 무역</strong>으로 이익을 얻었다.","기원전 108년 한 무제의 공격으로 멸망하였다.","멸망 후 한 군현(낙랑 등)이 설치되었다."] },
+    { unit:"01", name:"8조법(범금 8조)", year:"고조선", summary:"고조선 사회의 모습을 보여 주는 법으로 3개 조항만 전한다.", details:["살인자는 사형에 처하였다(생명 존중).","<strong>상해를 입힌 자는 곡물로 배상</strong>하게 하였다(사유 재산).","도둑질한 자는 노비로 삼았다(<strong>계급 사회</strong>).","한서 지리지에 일부 내용이 전한다."] },
+    { unit:"01", name:"부여", year:"기원전 2세기경", summary:"만주 쑹화강 유역에서 성장한 연맹 왕국이다.", details:["마가·우가·저가·구가의 <strong>사출도</strong>가 있었다.","12월에 <strong>영고</strong>라는 제천 행사를 열었다.","순장, 1책 12법, 형사취수제 풍습이 있었다.","왕이 죽으면 옥갑을 사용하기도 하였다."] },
+    { unit:"01", name:"고구려의 풍습", year:"기원전 37", summary:"부여에서 갈라져 나와 압록강 졸본 지역에서 건국되었다.", details:["<strong>제가 회의</strong>에서 국가 중대사를 결정하였다.","10월에 <strong>동맹</strong>이라는 제천 행사를 열었다.","혼인 풍습으로 <strong>서옥제(데릴사위제)</strong>가 있었다.","약탈 경제로 부경이라는 창고를 두었다."] },
+    { unit:"01", name:"옥저와 동예", year:"고대", summary:"왕이 없고 군장(읍군·삼로)이 다스린 동해안의 군장 국가이다.", details:["옥저에는 <strong>민며느리제</strong>와 가족 공동 무덤 풍습이 있었다.","동예는 <strong>책화</strong>와 족외혼 풍습이 있었다.","동예는 10월에 <strong>무천</strong>이라는 제천 행사를 열었다.","동예의 특산물로 단궁, 과하마, 반어피가 있었다."] },
+    { unit:"01", name:"삼한", year:"고대", summary:"마한·진한·변한으로 이루어진 한반도 남부의 연맹체이다.", details:["제사장인 <strong>천군</strong>과 신성 지역인 <strong>소도</strong>가 있었다(제정 분리).","5월 수릿날과 10월 계절제에 제천 행사를 열었다.","변한은 <strong>철</strong>이 풍부하여 낙랑·왜에 수출하였다.","마한 목지국의 지배자가 삼한을 대표하였다."] },
+    { unit:"01", name:"광개토 대왕과 장수왕", year:"4~5세기", summary:"고구려 전성기를 이끈 두 왕으로 영토를 크게 넓혔다.", details:["광개토 대왕은 <strong>영락</strong>이라는 연호를 사용하고 신라에 침입한 왜를 격퇴하였다.","장수왕은 <strong>평양 천도</strong>(427) 후 남진 정책을 추진하였다.","장수왕은 백제 한성을 함락하고 개로왕을 죽였다.","<strong>광개토 대왕릉비</strong>와 충주 고구려비가 세워졌다."] },
+    { unit:"01", name:"근초고왕", year:"4세기", summary:"백제의 전성기를 이끈 왕이다.", details:["마한을 정복하고 <strong>고구려 평양성을 공격</strong>해 고국원왕을 전사시켰다.","왕위의 부자 상속을 확립하였다.","<strong>요서·산둥·규슈</strong> 지역으로 진출하였다고 전한다.","왜에 칠지도를 하사한 것으로 알려져 있다."] },
+    { unit:"01", name:"성왕", year:"6세기", summary:"백제 중흥을 꾀한 왕이다.", details:["<strong>사비(부여) 천도</strong> 후 국호를 남부여로 바꾸었다.","중앙에 22부를 두고 통치 체제를 정비하였다.","신라 진흥왕과 연합해 한강 하류를 되찾았으나 다시 빼앗겼다.","<strong>관산성 전투</strong>에서 전사하였다."] },
+    { unit:"01", name:"신라의 발전(지증왕·법흥왕)", year:"6세기", summary:"신라가 중앙 집권 국가로 발전한 시기이다.", details:["지증왕은 국호를 <strong>신라</strong>, 왕호를 왕으로 정하고 우산국을 복속하였다.","법흥왕은 <strong>율령 반포</strong>, 병부 설치, 골품제 정비를 하였다.","법흥왕은 <strong>이차돈의 순교</strong>로 불교를 공인하였다.","법흥왕은 건원이라는 연호를 사용하였다."] },
+    { unit:"01", name:"진흥왕", year:"6세기", summary:"신라 전성기를 이룬 왕이다.", details:["<strong>한강 유역을 차지</strong>하여 중국과 직접 교류하였다.","대가야를 정복하고 함경도까지 진출하였다.","<strong>화랑도</strong>를 국가 조직으로 정비하였다.","북한산비·창녕비·황초령비·마운령비 등 순수비를 세웠다."] },
+    { unit:"01", name:"가야 연맹", year:"고대", summary:"낙동강 하류에서 성장한 연맹 왕국이다.", details:["전기 <strong>금관가야</strong>는 김해를 중심으로 발전하였다.","후기 <strong>대가야</strong>는 고령을 중심으로 발전하였다.","질 좋은 철 생산과 중계 무역으로 번성하였다.","중앙 집권 국가로 성장하지 못하고 신라에 흡수되었다."] },
+    { unit:"01", name:"신라의 삼국 통일 과정", year:"7세기", summary:"나당 연합 결성 후 백제·고구려를 멸하고 당을 몰아냈다.", details:["<strong>황산벌 전투</strong>(660) 후 백제가 멸망하였다.","고구려는 연개소문 사후 내분으로 668년 멸망하였다.","<strong>매소성·기벌포 전투</strong>로 당군을 격퇴하였다(676).","대동강~원산만 이남을 차지하는 데 그쳤다."] },
+    { unit:"01", name:"신문왕", year:"7세기 후반", summary:"통일 신라의 왕권을 강화한 왕이다.", details:["<strong>김흠돌의 난</strong>을 진압하고 진골 세력을 숙청하였다.","<strong>9주 5소경</strong>과 9서당 10정을 정비하였다.","관료전을 지급하고 <strong>녹읍을 폐지</strong>하였다.","국학을 설립해 유학 교육을 장려하였다."] },
+    { unit:"01", name:"독서삼품과", year:"통일 신라", summary:"원성왕이 설치한 관리 채용 제도이다.", details:["유교 경전 이해 수준을 <strong>3등급</strong>으로 평가하였다.","능력에 따른 관리 등용을 꾀하였다.","<strong>골품제의 한계</strong>로 제대로 시행되지 못하였다.","유학 보급에 기여하였다."] },
+    { unit:"01", name:"발해의 발전", year:"8세기", summary:"대조영이 세운 후 무왕·문왕·선왕 대에 발전하였다.", details:["<strong>무왕</strong>은 장문휴를 보내 당의 산둥(등주)을 공격하였다.","<strong>문왕</strong>은 상경 천도, 신라도 개설, 당과 친선을 도모하였다.","<strong>선왕</strong> 때 최대 영토를 이루어 <strong>해동성국</strong>이라 불렸다.","고구려 계승 의식을 분명히 하였다."] },
+    { unit:"01", name:"발해의 통치 체제", year:"발해", summary:"당 제도를 받아들이되 독자적으로 운영하였다.", details:["중앙은 <strong>3성 6부</strong>로 하되 정당성 중심으로 운영하였다.","6부의 명칭에 <strong>유교 덕목</strong>(충·인·의 등)을 사용하였다.","지방은 5경 15부 62주로 편성하였다.","감찰 기구로 중정대를 두었다."] },
+    { unit:"01", name:"신라 말의 사회 변동", year:"9세기", summary:"왕위 다툼과 농민 봉기로 사회가 동요하였다.", details:["<strong>호족</strong>이 지방에서 독자적 세력을 형성하였다.","<strong>6두품</strong> 지식인이 골품제를 비판하며 개혁을 주장하였다.","<strong>선종</strong>과 <strong>풍수지리설</strong>이 유행하였다.","원종·애노의 난 등 농민 봉기가 일어났다."] },
+    { unit:"01", name:"고대의 불교와 유학", year:"고대", summary:"삼국과 통일 신라의 사상이 발전하였다.", details:["원효는 <strong>일심 사상</strong>과 아미타 신앙으로 불교 대중화에 힘썼다.","의상은 <strong>화엄 사상</strong>을 정립하고 부석사를 세웠다.","혜초는 인도 등을 다녀와 <strong>왕오천축국전</strong>을 지었다.","강수·설총 등이 유학 발전에 기여하였다."] },
+    { unit:"01", name:"고대의 고분과 탑", year:"고대", summary:"삼국과 통일 신라의 무덤과 탑 양식이 발전하였다.", details:["고구려 굴식 돌방무덤에는 <strong>벽화</strong>가 그려졌다.","신라 <strong>돌무지덧널무덤</strong>은 도굴이 어려워 껴묻거리가 많이 남았다.","백제 무령왕릉은 중국 남조의 영향을 받은 벽돌무덤이다.","익산 미륵사지 석탑, <strong>불국사 3층 석탑(석가탑)</strong> 등이 유명하다."] },
+
+    // ===== 02 고려 =====
+    { unit:"02", name:"태조 왕건의 정책", year:"10세기", summary:"후삼국을 통일하고 호족을 통합하였다.", details:["혼인 정책과 사성 정책으로 호족을 포섭하였다.","<strong>사심관 제도</strong>와 <strong>기인 제도</strong>로 호족을 견제하였다.","<strong>훈요 10조</strong>를 남겨 후대 왕에게 통치 지침을 제시하였다.","북진 정책으로 영토를 청천강~영흥만까지 넓혔다."] },
+    { unit:"02", name:"광종의 개혁", year:"10세기", summary:"왕권 강화를 위한 개혁을 단행하였다.", details:["<strong>노비안검법</strong>으로 호족의 경제·군사 기반을 약화하였다.","<strong>과거제</strong>를 도입(쌍기 건의)해 신진 인사를 등용하였다.","백관의 공복을 제정하였다.","<strong>광덕·준풍</strong> 등 독자적 연호를 사용하였다."] },
+    { unit:"02", name:"성종의 체제 정비", year:"10세기 말", summary:"유교 정치 이념에 따라 통치 체제를 정비하였다.", details:["최승로의 <strong>시무 28조</strong>를 수용하였다.","중앙에 <strong>2성 6부</strong>를 두었다.","지방에 <strong>12목</strong>을 설치하고 지방관을 파견하였다.","국자감을 정비하여 유학 교육을 진흥하였다."] },
+    { unit:"02", name:"고려의 통치 체제", year:"고려", summary:"당·송 제도를 받아들이되 독자적으로 운영하였다.", details:["<strong>도병마사</strong>와 <strong>식목도감</strong>은 고려의 독자적 회의 기구이다.","중서문하성의 낭사와 어사대 관원을 <strong>대간</strong>이라 한다.","대간은 간쟁·봉박·서경권을 행사하였다.","군사 행정 구역으로 양계(북계·동계)를 두었다."] },
+    { unit:"02", name:"문벌 귀족 사회의 동요", year:"12세기", summary:"이자겸의 난과 묘청의 난이 일어났다.", details:["<strong>이자겸</strong>은 왕실과 거듭 혼인하며 권력을 독점하였다.","묘청 등 서경 세력이 <strong>서경 천도</strong>와 칭제건원을 주장하였다.","묘청은 국호를 대위, 연호를 천개로 하며 난을 일으켰다.","<strong>김부식</strong>이 묘청의 난을 진압하였다."] },
+    { unit:"02", name:"무신 정변과 최씨 정권", year:"12~13세기", summary:"무신들이 정권을 장악한 시기이다.", details:["1170년 정중부 등이 <strong>무신 정변</strong>을 일으켰다.","최충헌이 <strong>교정도감</strong>을 통해 권력을 행사하였다.","최우는 <strong>정방</strong>을 설치해 인사권을 장악하였다.","무신 집권기에 망이·망소이의 난, 만적의 난 등이 일어났다."] },
+    { unit:"02", name:"삼별초의 항쟁", year:"13세기", summary:"몽골에 맞서 끝까지 항전한 군대이다.", details:["최우가 조직한 야별초에서 비롯되었다.","개경 환도에 반발해 <strong>강화도 → 진도 → 제주도</strong>로 옮기며 항전하였다.","배중손, 김통정 등이 지휘하였다.","고려와 몽골 연합군에 의해 진압되었다."] },
+    { unit:"02", name:"거란의 침입과 격퇴", year:"10~11세기", summary:"세 차례 거란의 침입을 막아 냈다.", details:["1차 침입 때 <strong>서희</strong>가 외교 담판으로 <strong>강동 6주</strong>를 확보하였다.","2차 침입 때 양규 등이 활약하였다.","3차 침입 때 <strong>강감찬</strong>이 <strong>귀주 대첩</strong>에서 크게 승리하였다.","이후 개경에 나성을 쌓고 천리장성을 축조하였다."] },
+    { unit:"02", name:"여진 정벌과 별무반", year:"12세기", summary:"윤관이 여진을 정벌하고 동북 9성을 쌓았다.", details:["<strong>윤관</strong>의 건의로 <strong>별무반</strong>을 편성하였다.","별무반은 신기군·신보군·항마군으로 구성되었다.","여진을 정벌하고 <strong>동북 9성</strong>을 축조하였다.","이후 여진은 금을 세우고 고려에 군신 관계를 요구하였다."] },
+    { unit:"02", name:"공민왕의 개혁", year:"14세기", summary:"원·명 교체기에 반원 자주 정책과 개혁을 추진하였다.", details:["<strong>정동행성 이문소</strong>를 폐지하고 쌍성총관부를 공격해 영토를 회복하였다.","친원파인 <strong>기철 일파를 제거</strong>하였다.","<strong>신돈</strong>을 등용하고 <strong>전민변정도감</strong>을 설치하였다.","몽골풍을 금지하고 관제를 복구하였다."] },
+    { unit:"02", name:"전시과 제도", year:"고려", summary:"관리에게 토지의 수조권을 지급한 제도이다.", details:["전지와 시지에 대한 <strong>수조권</strong>을 지급하였다.","경종 때 시정 전시과로 처음 마련되었다.","목종 때 개정 전시과, 문종 때 <strong>경정 전시과</strong>로 정비되었다.","현직 관리 중심으로 지급 범위가 축소되었다."] },
+    { unit:"02", name:"고려의 대외 무역(벽란도)", year:"고려", summary:"국제 무역항 벽란도가 번성하였다.", details:["예성강 하구의 <strong>벽란도</strong>가 국제 무역항으로 번성하였다.","송과의 무역이 가장 활발하였다.","<strong>아라비아 상인</strong>의 왕래로 코리아라는 이름이 알려졌다.","주요 수출품으로 인삼·나전 칠기 등이 있었다."] },
+    { unit:"02", name:"고려의 불교(의천·지눌)", year:"고려", summary:"교종과 선종의 통합 운동이 전개되었다.", details:["<strong>의천</strong>은 천태종을 창시하고 <strong>교관겸수</strong>를 주장하였다.","<strong>지눌</strong>은 수선사 결사를 주도하고 <strong>정혜쌍수·돈오점수</strong>를 강조하였다.","혜심은 유불 일치설을 주장하였다.","결사 운동으로 불교계 개혁을 꾀하였다."] },
+    { unit:"02", name:"대장경 조판", year:"고려", summary:"불교의 힘으로 외적을 물리치려 대장경을 만들었다.", details:["초조대장경은 거란 침입 때 만들었으나 몽골 침입으로 소실되었다.","<strong>팔만대장경(재조대장경)</strong>은 몽골 침입 때 강화도에서 조판하였다.","현재 합천 <strong>해인사</strong>에 보관되어 있다.","의천은 교장도감을 두어 교장을 간행하였다."] },
+    { unit:"02", name:"고려의 역사서", year:"고려", summary:"여러 역사서가 편찬되었다.", details:["김부식의 <strong>삼국사기</strong>는 현존 최고(最古)의 역사서로 기전체이다.","일연의 <strong>삼국유사</strong>에는 단군 신화가 실려 있다.","이규보의 동명왕편은 고구려 계승 의식을 보여 준다.","이승휴의 제왕운기도 단군 조선을 서술하였다."] },
+    { unit:"02", name:"고려의 인쇄술과 청자", year:"고려", summary:"인쇄술과 공예가 발달하였다.", details:["<strong>직지심체요절</strong>(1377)은 현존 최고(最古)의 금속 활자본이다.","청주 흥덕사에서 인쇄되었다.","고려 후기 <strong>상감 청자</strong>가 독자적으로 발달하였다.","순청자에서 상감 청자로 변화하였다."] },
+
+    // ===== 03 조선 정치 =====
+    { unit:"03", name:"조선의 건국과 정도전", year:"14세기 말", summary:"신진 사대부가 조선을 건국하였다.", details:["1392년 이성계가 조선을 건국하였다.","<strong>정도전</strong>은 재상 중심의 정치를 주장하고 조선경국전을 편찬하였다.","한양을 도읍으로 정하였다.","성리학을 통치 이념으로 삼았다."] },
+    { unit:"03", name:"태종과 세종", year:"15세기", summary:"국가 기틀을 다지고 문물을 정비하였다.", details:["태종은 <strong>6조 직계제</strong>와 호패법을 실시하고 사병을 혁파하였다.","세종은 <strong>의정부 서사제</strong>를 시행하고 집현전을 설치하였다.","세종은 <strong>훈민정음</strong>을 창제하고 4군 6진을 개척하였다.","세종 때 칠정산, 측우기 등 과학 기술이 발달하였다."] },
+    { unit:"03", name:"조선의 통치 체제", year:"조선", summary:"중앙과 지방의 행정 조직을 정비하였다.", details:["국정 총괄 기구로 <strong>의정부</strong>와 집행 기구로 6조를 두었다.","<strong>3사</strong>(사헌부·사간원·홍문관)는 언론 기능을 담당하였다.","전국을 <strong>8도</strong>로 나누고 모든 군현에 수령을 파견하였다.","유향소를 두어 향촌 자치를 운영하였다."] },
+    { unit:"03", name:"사림의 대두", year:"15~16세기", summary:"성종 때부터 사림이 중앙 정계에 진출하였다.", details:["사림은 <strong>지방 사족</strong> 출신으로 성리학에 충실하였다.","성종이 훈구 견제를 위해 <strong>김종직</strong> 등을 등용하였다.","주로 <strong>3사 언관직</strong>에 진출하였다.","향촌에서 서원과 향약을 기반으로 성장하였다."] },
+    { unit:"03", name:"4대 사화", year:"16세기", summary:"훈구와 사림의 갈등으로 사림이 화를 입었다.", details:["<strong>무오사화</strong>는 김종직의 조의제문이 발단이 되었다.","갑자사화는 폐비 윤씨 사건과 관련이 있다.","<strong>기묘사화</strong>로 조광조 등이 제거되었다(위훈 삭제 등).","을사사화는 외척(대윤·소윤) 간 다툼에서 비롯되었다."] },
+    { unit:"03", name:"조광조의 개혁", year:"16세기", summary:"중종 때 급진적 개혁을 추진하였다.", details:["<strong>현량과</strong> 실시를 주장하여 사림을 등용하려 하였다.","소격서 폐지를 주장하였다.","<strong>위훈 삭제</strong>를 추진하다 훈구의 반발을 샀다.","기묘사화로 제거되었다."] },
+    { unit:"03", name:"임진왜란", year:"1592~1598", summary:"일본의 침략에 맞서 싸운 전쟁이다.", details:["<strong>이순신</strong>이 한산도 대첩 등에서 수군을 이끌고 승리하였다.","곽재우 등 <strong>의병</strong>이 각지에서 활약하였다.","권율의 행주 대첩, 김시민의 진주 대첩이 유명하다.","정유재란 후 일본군이 철수하며 전쟁이 끝났다."] },
+    { unit:"03", name:"광해군의 중립 외교", year:"17세기 초", summary:"명과 후금 사이에서 실리 외교를 펼쳤다.", details:["전후 복구 사업과 <strong>대동법</strong>을 일부 시행하였다.","명과 후금 사이에서 <strong>중립 외교</strong>를 추진하였다.","강홍립을 파견하되 상황에 따라 대처하게 하였다.","<strong>인조반정</strong>으로 폐위되었다."] },
+    { unit:"03", name:"호란과 북벌론", year:"17세기", summary:"청의 침입과 그에 대한 반발이 이어졌다.", details:["정묘호란 후 후금과 형제 관계를 맺었다.","<strong>병자호란</strong> 때 인조가 남한산성에서 항전하다 항복하였다.","청과 군신 관계를 맺었다(삼전도의 굴욕).","효종 때 <strong>북벌론</strong>이 제기되었다."] },
+    { unit:"03", name:"예송과 환국", year:"17세기", summary:"붕당 간 대립이 격화되었다.", details:["<strong>예송</strong>은 효종·효종비 사후 자의 대비의 복상 기간을 둘러싼 논쟁이다.","서인과 남인이 대립하였다.","<strong>환국</strong>으로 집권 붕당이 급격히 교체되었다.","경신환국·기사환국·갑술환국이 일어났다."] },
+    { unit:"03", name:"영조의 탕평 정치", year:"18세기", summary:"붕당의 폐단을 줄이려 탕평책을 시행하였다.", details:["<strong>탕평비</strong>를 세우고 탕평파를 중심으로 정국을 운영하였다.","서원을 정리하고 이조 전랑의 권한을 약화하였다.","<strong>균역법</strong>을 시행하고 신문고를 부활하였다.","속대전을 편찬하였다."] },
+    { unit:"03", name:"정조의 개혁", year:"18세기 후반", summary:"적극적인 탕평과 개혁을 추진하였다.", details:["<strong>규장각</strong>을 설치하고 초계문신제를 시행하였다.","친위 부대인 <strong>장용영</strong>을 설치하였다.","<strong>수원 화성</strong>을 건설하였다.","신해통공으로 시전 상인의 금난전권을 폐지하였다."] },
+    { unit:"03", name:"세도 정치", year:"19세기", summary:"특정 가문이 권력을 독점한 정치이다.", details:["순조·헌종·철종 3대에 걸쳐 전개되었다.","안동 김씨, 풍양 조씨 등 <strong>외척 가문</strong>이 권력을 독점하였다.","<strong>삼정(전정·군정·환곡)의 문란</strong>이 심해졌다.","매관매직이 성행하여 농민의 부담이 커졌다."] },
+    { unit:"03", name:"중화 의식의 변화와 북학", year:"조선 후기", summary:"청에 대한 인식이 점차 변화하였다.", details:["병자호란 후 <strong>조선 중화주의</strong>가 강조되었다.","청의 발전된 문물을 접하며 <strong>북학론</strong>이 대두하였다.","연행사를 통해 서양 문물도 소개되었다.","청을 배우자는 주장이 실학으로 이어졌다."] },
+
+    // ===== 04 조선 후기 사회·경제 =====
+    { unit:"04", name:"신분제의 동요", year:"조선 후기", summary:"양반 수가 늘고 신분제가 흔들렸다.", details:["부를 축적한 농민이 <strong>납속</strong>과 <strong>공명첩</strong>으로 신분을 상승시켰다.","족보를 위조하거나 매입하기도 하였다.","결과적으로 <strong>양반 수가 증가</strong>하고 상민·노비가 감소하였다.","정조 때 서얼의 규장각 등용이 이루어지기도 하였다."] },
+    { unit:"04", name:"영정법과 대동법", year:"17세기", summary:"전세와 공납의 수취 제도가 개편되었다.", details:["<strong>영정법</strong>은 풍흉에 관계없이 전세를 토지 1결당 4두로 고정하였다.","<strong>대동법</strong>은 공납을 토지 결수 기준 쌀·베·동전으로 거두었다.","대동법 시행으로 <strong>공인</strong>이 등장하였다.","대동법은 광해군 때 경기도에서 시작되었다."] },
+    { unit:"04", name:"균역법", year:"18세기(영조)", summary:"군포 부담을 줄여 준 제도이다.", details:["<strong>군포를 1년에 2필에서 1필로</strong> 줄였다.","부족분은 <strong>결작</strong>, 선무군관포, 어염세 등으로 보충하였다.","농민의 군역 부담을 줄이는 데 목적이 있었다.","영조 때 시행되었다."] },
+    { unit:"04", name:"농업의 변화(이앙법)", year:"조선 후기", summary:"이앙법 보급으로 농업 생산이 늘었다.", details:["<strong>이앙법(모내기법)</strong>이 전국으로 확대되었다.","이앙법으로 노동력이 절감되고 이모작이 가능해졌다.","적은 인원으로 넓은 땅을 경작하는 <strong>광작</strong>이 나타났다.","담배·인삼 등 <strong>상품 작물</strong> 재배가 늘었다."] },
+    { unit:"04", name:"상업의 발달과 사상", year:"조선 후기", summary:"장시와 사상이 성장하였다.", details:["전국에 <strong>장시</strong>가 발달하고 <strong>보부상</strong>이 유통을 담당하였다.","개성의 <strong>송상</strong>은 송방을 두고 인삼을 거래하였다.","의주의 <strong>만상</strong>은 대청 무역, 동래의 <strong>내상</strong>은 대일 무역을 하였다.","한강을 무대로 한 <strong>경강상인</strong>이 운송업으로 성장하였다."] },
+    { unit:"04", name:"객주와 여각, 공인", year:"조선 후기", summary:"상품 유통을 매개하는 상인이 등장하였다.", details:["<strong>객주·여각</strong>은 위탁 매매, 숙박, 금융 등을 담당하였다.","<strong>공인</strong>은 대동법 시행으로 관청 물품을 조달하였다.","공인의 활동은 상품 화폐 경제 발달을 촉진하였다.","일부 상인은 도고로 성장하였다."] },
+    { unit:"04", name:"수공업과 광업의 변화", year:"조선 후기", summary:"민영 수공업과 광업이 발달하였다.", details:["관영 수공업이 쇠퇴하고 <strong>민영 수공업</strong>이 발달하였다.","상인 자본에 의존하는 <strong>선대제</strong>가 나타났다.","광업에서 <strong>설점수세제</strong>가 시행되었다.","광산 경영 전문가인 덕대가 등장하였다."] },
+    { unit:"04", name:"상평통보의 유통", year:"조선 후기", summary:"화폐가 전국적으로 유통되었다.", details:["숙종 때 <strong>상평통보</strong>가 법화로 전국에 유통되었다.","상품 화폐 경제 발달을 보여 준다.","화폐 부족 현상인 <strong>전황</strong>이 나타나기도 하였다.","조세와 소작료의 금납화가 진전되었다."] },
+    { unit:"04", name:"향촌 질서의 변화(향전)", year:"조선 후기", summary:"새로운 부농층이 향촌 지배에 도전하였다.", details:["부를 축적한 <strong>부농층</strong>이 향안 등재 등을 통해 영향력을 키웠다.","기존 사족(구향)과 새로운 부농(신향) 사이에 <strong>향전</strong>이 일어났다.","수령권이 강화되고 향리의 영향력이 커졌다.","사족 중심의 향촌 지배 질서가 약화되었다."] },
+    { unit:"04", name:"새로운 사상의 등장", year:"조선 후기", summary:"천주교와 동학이 확산되었다.", details:["<strong>천주교</strong>는 서학으로 소개되어 평등 사상을 전파하였다.","제사 거부 등으로 여러 차례 박해를 받았다.","<strong>동학</strong>은 최제우가 창시하였고 인내천 사상을 강조하였다.","동학은 <strong>시천주</strong>와 후천 개벽을 내세웠다."] },
+    { unit:"04", name:"농민 봉기", year:"19세기", summary:"세도 정치기 농민 봉기가 일어났다.", details:["1811년 평안도에서 <strong>홍경래의 난</strong>이 일어났다(서북 차별 등).","1862년 <strong>임술 농민 봉기</strong>가 전국으로 확산되었다.","진주 농민 봉기가 발단이 되었다.","정부는 삼정이정청을 설치하였으나 큰 효과는 없었다."] },
+    { unit:"04", name:"중농학파 실학", year:"조선 후기", summary:"토지 제도 개혁을 통한 농업 진흥을 주장하였다.", details:["<strong>유형원</strong>은 균전론을 주장하였다.","<strong>이익</strong>은 한전론과 6가지 폐단(나라의 좀)을 지적하였다.","<strong>정약용</strong>은 여전론·정전론을 주장하였다.","정약용은 목민심서·경세유표 등을 저술하였다."] },
+    { unit:"04", name:"중상학파 실학", year:"조선 후기", summary:"상공업 진흥과 청 문물 수용을 주장하였다.", details:["<strong>유수원</strong>은 우서에서 사농공상의 직업적 평등을 주장하였다.","<strong>홍대용</strong>은 기술 혁신과 지전설을 주장하였다.","<strong>박지원</strong>은 수레·선박 이용과 화폐 유통을 강조하였다.","<strong>박제가</strong>는 북학의에서 소비를 우물에 비유하며 권장하였다."] },
+    { unit:"04", name:"국학 연구", year:"조선 후기", summary:"우리 역사·지리·언어 연구가 활발하였다.", details:["<strong>안정복</strong>은 동사강목에서 우리 역사의 정통을 세웠다.","<strong>유득공</strong>은 발해고에서 <strong>남북국 시대</strong>를 처음 제시하였다.","<strong>김정호</strong>는 대동여지도를 제작하였다.","이중환은 택리지를 저술하였다."] },
+    { unit:"04", name:"서민 문화의 발달", year:"조선 후기", summary:"서민이 문화의 주체로 등장하였다.", details:["<strong>판소리</strong>와 탈춤(탈놀이)이 유행하였다.","홍길동전·춘향전 등 <strong>한글 소설</strong>이 널리 읽혔다.","김홍도·신윤복의 <strong>풍속화</strong>가 유행하였다.","서민의 정서를 담은 <strong>민화</strong>가 그려졌다."] }
+  ],
+
+  ox: [
+    // 01
+    { unit:"01", statement:"고조선의 8조법에는 도둑질한 자를 노비로 삼는다는 조항이 있어 계급 사회였음을 보여 준다.", answer:true, explanation:"O. 8조법의 도둑질 관련 조항은 사유 재산과 노비(계급)의 존재를 보여 준다." },
+    { unit:"01", statement:"부여에는 영고, 동예에는 무천, 고구려에는 동맹이라는 제천 행사가 있었다.", answer:true, explanation:"O. 부여 영고(12월), 동예 무천(10월), 고구려 동맹(10월)이 대표적 제천 행사이다." },
+    { unit:"01", statement:"옥저에는 책화와 족외혼의 풍습이 있었다.", answer:false, explanation:"X. 책화와 족외혼은 동예의 풍습이다. 옥저에는 민며느리제와 가족 공동 무덤이 있었다." },
+    { unit:"01", statement:"백제 근초고왕은 고구려 평양성을 공격하여 고국원왕을 전사시켰다.", answer:true, explanation:"O. 근초고왕은 고구려를 공격해 고국원왕을 전사시키며 백제 전성기를 이끌었다." },
+    { unit:"01", statement:"신라 지증왕은 율령을 반포하고 불교를 공인하였다.", answer:false, explanation:"X. 율령 반포와 불교 공인은 법흥왕의 업적이다. 지증왕은 국호와 왕호를 정하였다." },
+    { unit:"01", statement:"신라 진흥왕은 한강 유역을 차지하고 대가야를 정복하였다.", answer:true, explanation:"O. 진흥왕은 한강 유역 확보와 대가야 정복 등으로 전성기를 이루고 순수비를 세웠다." },
+    { unit:"01", statement:"신라의 삼국 통일은 매소성·기벌포 전투에서 당군을 격퇴하며 완성되었다.", answer:true, explanation:"O. 매소성·기벌포 전투(676)에서 당을 몰아내며 삼국 통일을 완성하였다." },
+    { unit:"01", statement:"통일 신라 신문왕은 관료전을 폐지하고 녹읍을 부활시켰다.", answer:false, explanation:"X. 신문왕은 관료전을 지급하고 녹읍을 폐지하여 진골 귀족의 경제 기반을 약화하였다." },
+    { unit:"01", statement:"발해 선왕 때 전성기를 이루어 해동성국이라 불렸다.", answer:true, explanation:"O. 선왕 대에 최대 영토를 이루어 중국에서 발해를 해동성국이라 불렀다." },
+    { unit:"01", statement:"신라 말에는 호족과 6두품이 성장하고 선종과 풍수지리설이 유행하였다.", answer:true, explanation:"O. 신라 말 호족·6두품의 성장과 선종·풍수지리설 유행은 골품제 동요를 보여 준다." },
+    // 02
+    { unit:"02", statement:"고려 광종은 노비안검법과 과거제를 실시하여 왕권을 강화하였다.", answer:true, explanation:"O. 광종은 노비안검법과 과거제(쌍기 건의)로 호족을 누르고 왕권을 강화하였다." },
+    { unit:"02", statement:"고려 성종은 최승로의 시무 28조를 받아들여 통치 체제를 정비하였다.", answer:true, explanation:"O. 성종은 시무 28조를 수용해 2성 6부와 12목 설치 등 체제를 정비하였다." },
+    { unit:"02", statement:"도병마사와 식목도감은 고려의 독자적인 회의 기구이다.", answer:true, explanation:"O. 도병마사와 식목도감은 재신과 추밀이 모여 운영한 고려 독자 기구이다." },
+    { unit:"02", statement:"서희는 거란의 3차 침입 때 귀주 대첩에서 큰 승리를 거두었다.", answer:false, explanation:"X. 귀주 대첩의 주인공은 강감찬이다. 서희는 1차 침입 때 외교 담판으로 강동 6주를 얻었다." },
+    { unit:"02", statement:"윤관의 건의로 별무반을 편성하여 여진을 정벌하고 동북 9성을 쌓았다.", answer:true, explanation:"O. 윤관은 별무반(신기군·신보군·항마군)으로 여진을 정벌하고 동북 9성을 쌓았다." },
+    { unit:"02", statement:"공민왕은 전민변정도감을 설치하고 신돈을 등용하여 개혁을 추진하였다.", answer:true, explanation:"O. 공민왕은 신돈을 등용하고 전민변정도감을 두어 권문세족을 견제하였다." },
+    { unit:"02", statement:"의천은 정혜쌍수와 돈오점수를 내세워 수선사 결사를 주도하였다.", answer:false, explanation:"X. 정혜쌍수·돈오점수와 수선사 결사는 지눌의 활동이다. 의천은 천태종과 교관겸수를 주장하였다." },
+    { unit:"02", statement:"삼국사기는 김부식이 편찬한 현존 최고(最古)의 역사서이다.", answer:true, explanation:"O. 김부식의 삼국사기는 기전체로 쓰인 현존 가장 오래된 역사서이다." },
+    { unit:"02", statement:"직지심체요절은 현존하는 가장 오래된 금속 활자본이다.", answer:true, explanation:"O. 직지심체요절(1377)은 청주 흥덕사에서 인쇄된 현존 최고의 금속 활자본이다." },
+    { unit:"02", statement:"삼별초는 개경 환도에 협조하여 몽골과 끝까지 화친하였다.", answer:false, explanation:"X. 삼별초는 개경 환도에 반발해 강화도·진도·제주도로 옮기며 항전하였다." },
+    // 03
+    { unit:"03", statement:"태종은 6조 직계제를 시행하여 왕권을 강화하였다.", answer:true, explanation:"O. 태종은 6조 직계제와 호패법 등으로 왕권을 강화하였다." },
+    { unit:"03", statement:"세종은 의정부 서사제를 시행하고 훈민정음을 창제하였다.", answer:true, explanation:"O. 세종은 의정부 서사제로 재상을 활용하고 훈민정음을 창제하였다." },
+    { unit:"03", statement:"기묘사화로 조광조 등 개혁적 사림이 제거되었다.", answer:true, explanation:"O. 기묘사화는 조광조의 위훈 삭제 등 급진 개혁에 대한 반발로 일어났다." },
+    { unit:"03", statement:"조선의 3사는 의정부·6조·승정원을 가리킨다.", answer:false, explanation:"X. 3사는 사헌부·사간원·홍문관으로 언론과 감찰을 담당하는 기구이다." },
+    { unit:"03", statement:"이순신은 임진왜란 때 한산도 대첩 등에서 수군을 이끌고 승리하였다.", answer:true, explanation:"O. 이순신은 한산도 대첩 등에서 일본 수군을 격파하며 제해권을 장악하였다." },
+    { unit:"03", statement:"광해군은 명을 적극 지원하는 친명 배금 정책을 펼쳤다.", answer:false, explanation:"X. 광해군은 명과 후금 사이에서 중립 외교를 펼쳤다. 친명 배금은 인조 정권의 정책이다." },
+    { unit:"03", statement:"병자호란의 결과 조선은 청과 군신 관계를 맺었다.", answer:true, explanation:"O. 병자호란 후 인조가 항복하여 조선은 청과 군신 관계를 맺었다(삼전도의 굴욕)." },
+    { unit:"03", statement:"정조는 규장각과 장용영을 설치하고 수원 화성을 건설하였다.", answer:true, explanation:"O. 정조는 규장각·장용영을 두고 수원 화성을 건설하며 개혁을 추진하였다." },
+    { unit:"03", statement:"영조는 균역법을 시행하여 군포 부담을 1필로 줄였다.", answer:true, explanation:"O. 영조는 균역법으로 군포를 2필에서 1필로 줄여 농민 부담을 덜었다." },
+    { unit:"03", statement:"세도 정치는 영조와 정조 대에 절정에 달하였다.", answer:false, explanation:"X. 세도 정치는 순조·헌종·철종 3대에 걸쳐 전개되었다. 영조·정조는 탕평 정치를 폈다." },
+    // 04
+    { unit:"04", statement:"조선 후기에는 납속과 공명첩 등으로 신분 상승이 이루어졌다.", answer:true, explanation:"O. 부유한 농민이 납속·공명첩으로 신분을 상승시켜 양반 수가 늘었다." },
+    { unit:"04", statement:"대동법의 시행으로 공인이 등장하여 상품 화폐 경제가 발달하였다.", answer:true, explanation:"O. 대동법으로 관청에 물품을 조달하는 공인이 등장해 상업 발달을 촉진하였다." },
+    { unit:"04", statement:"영정법은 군포를 토지 1결당 2필로 고정한 제도이다.", answer:false, explanation:"X. 영정법은 전세를 1결당 4두로 고정한 제도이다. 군포 관련은 균역법이다." },
+    { unit:"04", statement:"이앙법의 보급으로 광작이 가능해지고 상품 작물 재배가 늘었다.", answer:true, explanation:"O. 이앙법 확대로 노동력이 절감되어 광작이 가능해지고 상품 작물 재배가 늘었다." },
+    { unit:"04", statement:"개성의 송상, 의주의 만상, 동래의 내상이 활동하였다.", answer:true, explanation:"O. 송상(개성), 만상(의주), 내상(동래)은 대표적인 조선 후기 사상이다." },
+    { unit:"04", statement:"숙종 때 상평통보가 법화로 전국에 유통되었다.", answer:true, explanation:"O. 숙종 대 상평통보가 전국적으로 유통되며 상품 화폐 경제가 진전되었다." },
+    { unit:"04", statement:"동학은 최제우가 창시하였으며 인내천 사상을 강조하였다.", answer:true, explanation:"O. 동학은 최제우가 창시하였고 인내천·시천주 등을 강조하였다." },
+    { unit:"04", statement:"홍경래의 난은 진주에서 시작되어 전국으로 확산된 1862년의 봉기이다.", answer:false, explanation:"X. 1862년 진주에서 시작된 것은 임술 농민 봉기이다. 홍경래의 난은 1811년 평안도에서 일어났다." },
+    { unit:"04", statement:"정약용은 여전론과 정전론을 주장한 중농학파 실학자이다.", answer:true, explanation:"O. 정약용은 여전론·정전론을 주장하고 목민심서 등을 저술하였다." },
+    { unit:"04", statement:"유득공은 발해고에서 남북국 시대라는 용어를 처음 사용하였다.", answer:true, explanation:"O. 유득공은 발해고에서 통일 신라와 발해를 남북국으로 보는 인식을 제시하였다." }
+  ],
+
+  mc: [
+    // 01
+    { unit:"01", difficulty:"normal", q:"고조선에 대한 설명으로 옳은 것은?", options:["영고라는 제천 행사를 열었다.","8조법을 통해 사회 모습을 알 수 있다.","사출도라는 행정 구역이 있었다.","책화라는 풍습이 있었다.","민며느리제 풍습이 있었다."], answer:1, explanation:"<strong>고조선</strong>의 사회 모습은 8조법(범금 8조)을 통해 알 수 있다. 영고·사출도는 부여, 책화는 동예, 민며느리제는 옥저이다." },
+    { unit:"01", difficulty:"normal", q:"다음 풍습을 가진 나라는? '제사장인 천군과 신성 지역인 소도가 있었다.'", options:["부여","고구려","옥저","동예","삼한"], answer:4, explanation:"천군과 소도는 <strong>삼한</strong>의 특징으로 제정 분리 사회였음을 보여 준다." },
+    { unit:"01", difficulty:"normal", q:"고구려 장수왕의 업적으로 옳은 것은?", options:["율령을 반포하였다.","평양으로 천도하고 한성을 함락하였다.","영락이라는 연호를 사용하였다.","우산국을 복속하였다.","독서삼품과를 실시하였다."], answer:1, explanation:"<strong>장수왕</strong>은 평양 천도(427) 후 남진하여 백제 한성을 함락하고 개로왕을 죽였다." },
+    { unit:"01", difficulty:"normal", q:"신라 법흥왕의 업적이 아닌 것은?", options:["병부 설치","율령 반포","불교 공인","건원 연호 사용","화랑도를 국가 조직으로 정비"], answer:4, explanation:"화랑도를 국가 조직으로 정비한 것은 <strong>진흥왕</strong>이다. 나머지는 법흥왕의 업적이다." },
+    { unit:"01", difficulty:"hard", q:"삼국 통일 과정의 사건을 순서대로 바르게 나열한 것은?", options:["황산벌 전투 - 고구려 멸망 - 기벌포 전투","고구려 멸망 - 황산벌 전투 - 기벌포 전투","기벌포 전투 - 황산벌 전투 - 고구려 멸망","황산벌 전투 - 기벌포 전투 - 고구려 멸망","고구려 멸망 - 기벌포 전투 - 황산벌 전투"], answer:0, explanation:"황산벌 전투·백제 멸망(660) → 고구려 멸망(668) → <strong>매소성·기벌포 전투</strong>(675~676) 순이다." },
+    { unit:"01", difficulty:"normal", q:"통일 신라 신문왕의 정책으로 옳은 것은?", options:["노비안검법 실시","9주 5소경 정비","12목 설치","사심관 제도 시행","상평통보 유통"], answer:1, explanation:"<strong>신문왕</strong>은 9주 5소경을 정비하고 관료전 지급·녹읍 폐지 등으로 왕권을 강화하였다." },
+    { unit:"01", difficulty:"normal", q:"발해에 대한 설명으로 옳은 것은?", options:["골품제라는 신분제가 있었다.","무왕 때 당의 산둥을 공격하였다.","독서삼품과를 실시하였다.","화랑도가 있었다.","사출도를 두었다."], answer:1, explanation:"<strong>발해 무왕</strong>은 장문휴를 보내 당의 산둥(등주)을 공격하였다. 골품제·독서삼품과·화랑도는 신라이다." },
+    { unit:"01", difficulty:"hard", q:"신라 말의 사회 상황으로 옳지 않은 것은?", options:["호족이 지방에서 성장하였다.","6두품이 골품제를 비판하였다.","선종과 풍수지리설이 유행하였다.","원종·애노의 난이 일어났다.","독서삼품과로 진골 귀족의 권한이 강화되었다."], answer:4, explanation:"독서삼품과는 골품제의 한계로 제대로 시행되지 못하였고, 진골 권한 강화와는 거리가 멀다. 나머지는 신라 말 상황이다." },
+    { unit:"01", difficulty:"normal", q:"다음 유물·유적과 나라의 연결로 옳은 것은?", options:["무령왕릉 - 고구려","돌무지덧널무덤 - 신라","왕오천축국전 - 백제","칠지도 - 신라","불국사 - 발해"], answer:1, explanation:"<strong>돌무지덧널무덤</strong>은 신라의 대표적 무덤 양식이다. 무령왕릉은 백제, 칠지도도 백제와 관련된다." },
+    { unit:"01", difficulty:"normal", q:"원효에 대한 설명으로 옳은 것은?", options:["화엄 사상을 정립하고 부석사를 세웠다.","일심 사상과 아미타 신앙으로 불교 대중화에 힘썼다.","왕오천축국전을 저술하였다.","천태종을 창시하였다.","수선사 결사를 주도하였다."], answer:1, explanation:"<strong>원효</strong>는 일심 사상과 아미타 신앙으로 불교 대중화에 기여하였다. 화엄·부석사는 의상이다." },
+    // 02
+    { unit:"02", difficulty:"normal", q:"고려 태조 왕건의 정책으로 옳은 것은?", options:["과거제 실시","노비안검법 시행","사심관·기인 제도 운영","시무 28조 수용","전민변정도감 설치"], answer:2, explanation:"<strong>태조</strong>는 사심관·기인 제도로 호족을 견제하고 훈요 10조를 남겼다. 과거제·노비안검법은 광종이다." },
+    { unit:"02", difficulty:"normal", q:"고려 광종의 업적으로 옳은 것은?", options:["12목 설치","노비안검법 시행","훈요 10조 작성","별무반 편성","현량과 실시"], answer:1, explanation:"<strong>광종</strong>은 노비안검법과 과거제를 실시하여 왕권을 강화하였다." },
+    { unit:"02", difficulty:"hard", q:"고려의 정치 기구에 대한 설명으로 옳지 않은 것은?", options:["도병마사는 국방 문제를 논의하였다.","식목도감은 법제를 다루었다.","중서문하성은 최고 정무 기구였다.","대간은 간쟁·봉박·서경권을 행사하였다.","집사부가 국정을 총괄하였다."], answer:4, explanation:"집사부는 신라의 기구이다. 고려에서는 <strong>중서문하성</strong>이 최고 정무 기구였다." },
+    { unit:"02", difficulty:"normal", q:"거란의 침입과 관련된 인물의 연결로 옳은 것은?", options:["서희 - 귀주 대첩","강감찬 - 강동 6주 획득","서희 - 외교 담판으로 강동 6주 확보","윤관 - 강동 6주 획득","김부식 - 귀주 대첩"], answer:2, explanation:"<strong>서희</strong>는 거란 1차 침입 때 외교 담판으로 강동 6주를 확보하였고, 귀주 대첩은 강감찬의 업적이다." },
+    { unit:"02", difficulty:"normal", q:"무신 집권기에 대한 설명으로 옳은 것은?", options:["최충헌이 교정도감을 통해 권력을 행사하였다.","광종이 노비안검법을 실시하였다.","서희가 강동 6주를 확보하였다.","공민왕이 쌍성총관부를 수복하였다.","최승로가 시무 28조를 올렸다."], answer:0, explanation:"무신 집권기에 <strong>최충헌</strong>은 교정도감, 최우는 정방을 통해 권력을 행사하였다." },
+    { unit:"02", difficulty:"normal", q:"공민왕의 반원 자주 정책으로 옳지 않은 것은?", options:["정동행성 이문소 폐지","쌍성총관부 공격","기철 등 친원파 제거","전민변정도감 설치","과거제 처음 도입"], answer:4, explanation:"과거제는 광종 때 처음 도입되었다. 나머지는 <strong>공민왕</strong>의 반원 자주 정책이다." },
+    { unit:"02", difficulty:"hard", q:"고려의 토지 제도인 전시과에 대한 설명으로 옳은 것은?", options:["토지의 소유권을 지급하였다.","전지와 시지의 수조권을 지급하였다.","현직 관리에게만 처음부터 지급되었다.","대동법 시행으로 폐지되었다.","수신전과 휼양전은 세습되지 않았다."], answer:1, explanation:"<strong>전시과</strong>는 관리에게 전지와 시지에 대한 수조권을 지급한 제도이다." },
+    { unit:"02", difficulty:"normal", q:"고려의 승려와 활동의 연결로 옳은 것은?", options:["의천 - 정혜쌍수","지눌 - 천태종 창시","의천 - 교관겸수","지눌 - 교장 간행","혜심 - 화엄 사상 정립"], answer:2, explanation:"<strong>의천</strong>은 천태종을 창시하고 교관겸수를 주장하였다. 정혜쌍수는 지눌이다." },
+    { unit:"02", difficulty:"normal", q:"다음 설명에 해당하는 문화유산은? '현존하는 가장 오래된 금속 활자본이다.'", options:["팔만대장경","초조대장경","직지심체요절","삼국사기","무구정광대다라니경"], answer:2, explanation:"<strong>직지심체요절</strong>(1377)은 현존 최고의 금속 활자본으로 청주 흥덕사에서 간행되었다." },
+    { unit:"02", difficulty:"normal", q:"고려의 역사서에 대한 설명으로 옳은 것은?", options:["삼국유사에는 단군 신화가 실려 있다.","삼국사기는 일연이 편찬하였다.","동명왕편은 김부식이 지었다.","삼국사기는 편년체로 쓰였다.","발해고는 고려 시대 역사서이다."], answer:0, explanation:"일연의 <strong>삼국유사</strong>에는 단군 신화가 실려 있다. 삼국사기는 김부식이 기전체로 편찬하였다." },
+    // 03
+    { unit:"03", difficulty:"normal", q:"조선 태종의 정책으로 옳은 것은?", options:["훈민정음 창제","6조 직계제 시행","집현전 설치","4군 6진 개척","의정부 서사제 시행"], answer:1, explanation:"<strong>태종</strong>은 6조 직계제와 호패법을 시행하고 사병을 혁파하였다. 나머지는 세종의 업적이다." },
+    { unit:"03", difficulty:"normal", q:"조선의 3사에 해당하지 않는 것은?", options:["사헌부","사간원","홍문관","승정원","(3사는 위 셋이다)"], answer:3, explanation:"<strong>3사</strong>는 사헌부·사간원·홍문관이다. 승정원은 왕의 비서 기구이다." },
+    { unit:"03", difficulty:"hard", q:"4대 사화를 일어난 순서대로 바르게 나열한 것은?", options:["무오 - 갑자 - 기묘 - 을사","갑자 - 무오 - 을사 - 기묘","무오 - 기묘 - 갑자 - 을사","을사 - 기묘 - 갑자 - 무오","기묘 - 무오 - 갑자 - 을사"], answer:0, explanation:"4대 사화는 <strong>무오(1498) - 갑자(1504) - 기묘(1519) - 을사(1545)</strong> 순으로 일어났다." },
+    { unit:"03", difficulty:"normal", q:"조광조의 개혁 정치로 옳지 않은 것은?", options:["현량과 실시 주장","소격서 폐지 주장","위훈 삭제 추진","규장각 설치","급진적 개혁 추진"], answer:3, explanation:"규장각 설치는 <strong>정조</strong>의 업적이다. 나머지는 조광조의 개혁이다." },
+    { unit:"03", difficulty:"normal", q:"임진왜란에 대한 설명으로 옳은 것은?", options:["이순신이 한산도 대첩에서 승리하였다.","서희가 외교 담판을 벌였다.","윤관이 별무반을 이끌었다.","강감찬이 귀주에서 승리하였다.","최영이 요동 정벌을 추진하였다."], answer:0, explanation:"<strong>임진왜란</strong> 때 이순신은 한산도 대첩 등에서 일본 수군을 격파하였다." },
+    { unit:"03", difficulty:"hard", q:"다음 사건을 순서대로 바르게 나열한 것은?", options:["임진왜란 - 인조반정 - 병자호란","인조반정 - 임진왜란 - 병자호란","병자호란 - 임진왜란 - 인조반정","임진왜란 - 병자호란 - 인조반정","인조반정 - 병자호란 - 임진왜란"], answer:0, explanation:"<strong>임진왜란(1592)</strong> → 인조반정(1623) → 병자호란(1636) 순으로 전개되었다." },
+    { unit:"03", difficulty:"normal", q:"영조의 정책으로 옳은 것은?", options:["규장각 설치","장용영 설치","균역법 시행","수원 화성 건설","신해통공 실시"], answer:2, explanation:"<strong>영조</strong>는 균역법을 시행하고 탕평비를 세웠다. 규장각·장용영·화성·신해통공은 정조이다." },
+    { unit:"03", difficulty:"normal", q:"정조의 개혁으로 옳지 않은 것은?", options:["규장각 설치","초계문신제 시행","장용영 설치","수원 화성 건설","6조 직계제 시행"], answer:4, explanation:"6조 직계제는 <strong>태종</strong>과 세조의 정책이다. 나머지는 정조의 개혁이다." },
+    { unit:"03", difficulty:"normal", q:"광해군의 정책으로 옳은 것은?", options:["북벌 추진","친명 배금 정책","명과 후금 사이의 중립 외교","4군 6진 개척","훈민정음 창제"], answer:2, explanation:"<strong>광해군</strong>은 명과 후금 사이에서 중립 외교를 펼쳤다." },
+    { unit:"03", difficulty:"normal", q:"세도 정치 시기의 특징으로 옳은 것은?", options:["탕평비를 세웠다.","삼정의 문란이 심해졌다.","규장각을 설치하였다.","훈요 10조를 남겼다.","노비안검법을 시행하였다."], answer:1, explanation:"<strong>세도 정치</strong>기에는 외척 가문의 권력 독점으로 삼정의 문란이 심해졌다." },
+    // 04
+    { unit:"04", difficulty:"normal", q:"조선 후기 신분제 동요의 배경으로 옳은 것은?", options:["골품제 강화","납속과 공명첩을 통한 신분 상승","과거제 폐지","음서제 확대","향리의 지위 상승만 발생"], answer:1, explanation:"조선 후기에는 <strong>납속과 공명첩</strong> 등으로 신분 상승이 일어나 양반 수가 증가하였다." },
+    { unit:"04", difficulty:"normal", q:"대동법에 대한 설명으로 옳은 것은?", options:["전세를 1결당 4두로 고정하였다.","군포를 1필로 줄였다.","공납을 토지 결수 기준으로 거두고 공인이 등장하였다.","상평통보를 유통시켰다.","호패법을 시행하였다."], answer:2, explanation:"<strong>대동법</strong>은 공납을 토지 결수 기준으로 부과하였고 그 결과 공인이 등장하였다." },
+    { unit:"04", difficulty:"normal", q:"균역법에 대한 설명으로 옳은 것은?", options:["전세를 4두로 고정하였다.","군포를 2필에서 1필로 줄였다.","공납을 쌀로 거두었다.","상평통보를 발행하였다.","과거제를 정비하였다."], answer:1, explanation:"<strong>균역법</strong>은 군포를 2필에서 1필로 줄이고 결작 등으로 부족분을 보충하였다." },
+    { unit:"04", difficulty:"hard", q:"조선 후기 농업의 변화로 옳지 않은 것은?", options:["이앙법의 전국적 확대","광작의 출현","상품 작물 재배 증가","이모작 가능","녹읍의 부활"], answer:4, explanation:"녹읍은 통일 신라의 토지 제도이다. 나머지는 조선 후기 농업 변화이다. 이앙법 확대가 핵심이다." },
+    { unit:"04", difficulty:"normal", q:"조선 후기 사상(私商)의 연결로 옳은 것은?", options:["송상 - 동래","만상 - 개성","내상 - 의주","경강상인 - 한강","객주 - 대청 무역 전담"], answer:3, explanation:"<strong>경강상인</strong>은 한강을 무대로 운송업에 종사하였다. 송상은 개성, 만상은 의주, 내상은 동래이다." },
+    { unit:"04", difficulty:"normal", q:"조선 후기 광업의 변화와 관련 있는 것은?", options:["전시과","설점수세제","독서삼품과","사출도","녹읍"], answer:1, explanation:"조선 후기 광업에서는 <strong>설점수세제</strong>가 시행되고 덕대가 광산을 경영하였다." },
+    { unit:"04", difficulty:"normal", q:"조선 후기 새로운 사상에 대한 설명으로 옳은 것은?", options:["천주교는 제사를 적극 권장하였다.","동학은 최제우가 창시하였다.","동학은 서학으로 소개되었다.","천주교는 인내천을 강조하였다.","동학은 평등을 부정하였다."], answer:1, explanation:"<strong>동학</strong>은 최제우가 창시하였고 인내천·시천주를 강조하였다. 천주교는 제사를 거부하였다." },
+    { unit:"04", difficulty:"hard", q:"실학자와 주장의 연결로 옳은 것은?", options:["유형원 - 북학의","박제가 - 균전론","정약용 - 여전론","이익 - 우물론","박지원 - 발해고"], answer:2, explanation:"<strong>정약용</strong>은 여전론·정전론을 주장하였다. 북학의는 박제가, 균전론은 유형원이다." },
+    { unit:"04", difficulty:"normal", q:"중상학파 실학자에 해당하는 인물은?", options:["유형원","이익","박지원","안정복","김정호"], answer:2, explanation:"<strong>박지원</strong>은 수레·선박·화폐 유통을 강조한 중상학파(이용후생) 실학자이다." },
+    { unit:"04", difficulty:"normal", q:"조선 후기 서민 문화에 해당하지 않는 것은?", options:["판소리","탈춤","한글 소설","풍속화","고려청자"], answer:4, explanation:"고려청자는 <strong>고려</strong> 시대의 공예품이다. 나머지는 조선 후기 서민 문화이다." }
+  ],
+
+  people: [
+    { name:"광개토 대왕", hanja:"廣開土大王", years:"재위 391~412", title:"고구려 제19대 왕", period:"고대", categories:["정치","군사"], tags:["영토 확장","영락 연호"], intro:"고구려의 전성기를 연 정복 군주로 만주와 한반도 일대로 영토를 크게 넓혔다.", activities:[
+      { year:"391", title:"즉위와 연호 사용", desc:"<strong>영락</strong>이라는 독자적 연호를 사용하며 자주 의식을 드러냈다." },
+      { year:"400", title:"신라 구원", desc:"신라에 침입한 <strong>왜</strong>를 격퇴하며 한반도 남부까지 영향력을 미쳤다." },
+      { year:"4세기 말~5세기 초", title:"영토 확장", desc:"백제를 압박하고 <strong>요동</strong> 등으로 진출하여 대제국의 기틀을 닦았다." }
+    ], tip:"<strong>영락 연호</strong>와 광개토 대왕릉비를 함께 기억하자." },
+    { name:"진흥왕", hanja:"眞興王", years:"재위 540~576", title:"신라 제24대 왕", period:"고대", categories:["정치","군사"], tags:["한강 유역","순수비"], intro:"신라의 전성기를 이끈 왕으로 영토를 크게 넓히고 화랑도를 정비하였다.", activities:[
+      { year:"553", title:"한강 유역 확보", desc:"백제와의 동맹을 깨고 <strong>한강 유역</strong>을 차지해 중국과 직접 교류하였다." },
+      { year:"562", title:"대가야 정복", desc:"<strong>대가야</strong>를 정복하여 낙동강 유역을 장악하였다." },
+      { year:"6세기", title:"순수비 건립", desc:"북한산비 등 <strong>순수비</strong>를 세워 영토 확장을 기념하였다." }
+    ], tip:"진흥왕 하면 <strong>한강 유역 + 순수비 + 화랑도</strong>를 떠올리자." },
+    { name:"왕건", hanja:"王建", years:"재위 918~943", title:"고려 태조", period:"고려", categories:["정치"], tags:["후삼국 통일","호족 통합"], intro:"후삼국을 통일하고 고려를 건국한 군주로 호족 통합과 북진 정책을 추진하였다.", activities:[
+      { year:"918", title:"고려 건국", desc:"궁예를 몰아내고 고려를 세워 송악(개경)을 도읍으로 삼았다." },
+      { year:"936", title:"후삼국 통일", desc:"신라의 항복과 후백제 정벌로 <strong>후삼국을 통일</strong>하였다." },
+      { year:"943", title:"훈요 10조", desc:"후대 왕에게 <strong>훈요 10조</strong>를 남겨 통치 지침을 제시하였다." }
+    ], tip:"태조의 호족 견제책은 <strong>사심관·기인 제도</strong>로 외운다." },
+    { name:"공민왕", hanja:"恭愍王", years:"재위 1351~1374", title:"고려 제31대 왕", period:"고려", categories:["정치"], tags:["반원 자주","개혁"], intro:"원·명 교체기에 반원 자주 정책과 내정 개혁을 추진한 개혁 군주이다.", activities:[
+      { year:"1356", title:"반원 정책", desc:"<strong>정동행성 이문소를 폐지</strong>하고 쌍성총관부를 공격해 영토를 회복하였다." },
+      { year:"1356", title:"친원파 제거", desc:"<strong>기철</strong> 등 친원 세력을 숙청하였다." },
+      { year:"1366", title:"전민변정도감", desc:"<strong>신돈</strong>을 등용하고 전민변정도감을 두어 권문세족을 견제하였다." }
+    ], tip:"공민왕은 <strong>반원 자주 + 전민변정도감</strong>이 핵심이다." },
+    { name:"세종", hanja:"世宗", years:"재위 1418~1450", title:"조선 제4대 왕", period:"조선", categories:["정치","문화"], tags:["훈민정음","집현전"], intro:"조선의 문물 제도를 정비하고 민족 문화를 꽃피운 군주이다.", activities:[
+      { year:"1420", title:"집현전 설치", desc:"<strong>집현전</strong>을 두어 학문 연구와 정책 자문을 맡겼다." },
+      { year:"1443", title:"훈민정음 창제", desc:"백성을 위해 <strong>훈민정음</strong>을 창제하였다(1446년 반포)." },
+      { year:"1433~1437", title:"4군 6진 개척", desc:"북방의 여진을 정벌하고 <strong>4군 6진</strong>을 개척하였다." }
+    ], tip:"세종은 <strong>의정부 서사제 + 훈민정음 + 4군 6진</strong>으로 정리하자." },
+    { name:"정조", hanja:"正祖", years:"재위 1776~1800", title:"조선 제22대 왕", period:"조선", categories:["정치"], tags:["탕평","규장각"], intro:"적극적인 탕평책과 개혁 정치로 왕권을 강화한 군주이다.", activities:[
+      { year:"1776", title:"규장각 설치", desc:"<strong>규장각</strong>을 두고 초계문신제로 인재를 양성하였다." },
+      { year:"1793", title:"장용영 설치", desc:"친위 부대인 <strong>장용영</strong>을 설치하였다." },
+      { year:"1796", title:"수원 화성 완공", desc:"개혁의 상징인 <strong>수원 화성</strong>을 건설하였다." }
+    ], tip:"정조는 <strong>규장각·장용영·수원 화성·신해통공</strong>으로 묶어 외운다." },
+    { name:"정약용", hanja:"丁若鏞", years:"1762~1836", title:"조선 후기 실학자", period:"조선", categories:["사상","문화"], tags:["중농학파","실학 집대성"], intro:"실학을 집대성한 학자로 토지 제도 개혁과 다양한 저술을 남겼다.", activities:[
+      { year:"조선 후기", title:"토지 개혁론", desc:"<strong>여전론</strong>과 정전론을 주장하여 농민 중심의 토지 개혁을 구상하였다." },
+      { year:"1818", title:"목민심서 저술", desc:"지방관의 도리를 담은 <strong>목민심서</strong>를 저술하였다." },
+      { year:"조선 후기", title:"기술 연구", desc:"<strong>거중기</strong>를 고안해 수원 화성 축조에 기여하였다." }
+    ], tip:"정약용은 <strong>여전론 + 목민심서·경세유표 + 거중기</strong>가 빈출이다." }
+  ],
+
+  comparisons: [
+    { unit:"01", title:"여러 나라의 제천 행사", cols:["나라","제천 행사","특징"], rows:[
+      ["부여","영고(12월)","사출도, 순장, 1책 12법"],
+      ["고구려","동맹(10월)","서옥제, 제가 회의"],
+      ["동예","무천(10월)","책화, 족외혼, 단궁·과하마"],
+      ["삼한","수릿날·계절제(5월·10월)","천군과 소도(제정 분리)"]
+    ] },
+    { unit:"03", title:"훈구파 vs 사림파", cols:["구분","훈구파","사림파"], rows:[
+      ["출신","공신·대지주","지방 사족"],
+      ["사상","사장(문장) 중시","경학(성리학) 중시"],
+      ["진출 시기","조선 건국·세조 집권에 기여","성종 때 본격 진출"],
+      ["기반","대농장","서원·향약"]
+    ] },
+    { unit:"04", title:"중농학파 vs 중상학파", cols:["구분","중농학파","중상학파"], rows:[
+      ["관심","토지 제도 개혁","상공업 진흥"],
+      ["다른 이름","경세치용 학파","이용후생(북학) 학파"],
+      ["대표 인물","유형원·이익·정약용","유수원·홍대용·박지원·박제가"],
+      ["주장","균전론·한전론·여전론","수레·선박·화폐 이용, 청 문물 수용"]
+    ] }
+  ],
+
+  timeline: [
+    { year:"기원전 2333", period:"고대", title:"고조선 건국", desc:"<strong>단군왕검</strong>이 우리 역사상 최초의 국가를 세웠다.", major:true },
+    { year:"기원전 108", period:"고대", title:"고조선 멸망", desc:"<strong>한 무제</strong>의 공격으로 위만 조선이 멸망하였다.", major:false },
+    { year:"427", period:"고대", title:"고구려 평양 천도", desc:"<strong>장수왕</strong>이 평양으로 천도하고 남진 정책을 폈다.", major:true },
+    { year:"676", period:"고대", title:"신라의 삼국 통일", desc:"<strong>매소성·기벌포</strong> 전투로 당군을 격퇴하며 통일을 완성하였다.", major:true },
+    { year:"698", period:"고대", title:"발해 건국", desc:"<strong>대조영</strong>이 동모산 일대에서 발해를 세웠다.", major:true },
+    { year:"936", period:"고려", title:"고려의 후삼국 통일", desc:"<strong>왕건</strong>이 후백제를 정벌하고 후삼국을 통일하였다.", major:true },
+    { year:"1019", period:"고려", title:"귀주 대첩", desc:"<strong>강감찬</strong>이 거란의 3차 침입을 귀주에서 크게 물리쳤다.", major:true },
+    { year:"1170", period:"고려", title:"무신 정변", desc:"<strong>정중부</strong> 등이 정변을 일으켜 무신 정권이 시작되었다.", major:true },
+    { year:"1392", period:"조선", title:"조선 건국", desc:"<strong>이성계</strong>가 조선을 건국하고 성리학을 통치 이념으로 삼았다.", major:true },
+    { year:"1592", period:"조선", title:"임진왜란", desc:"일본의 침략에 맞서 <strong>이순신</strong>과 의병이 활약하였다.", major:true },
+    { year:"1636", period:"조선", title:"병자호란", desc:"청의 침입으로 인조가 항복하고 <strong>군신 관계</strong>를 맺었다.", major:true },
+    { year:"1862", period:"조선", title:"임술 농민 봉기", desc:"진주에서 시작된 <strong>삼정의 문란</strong>에 항거한 봉기가 전국으로 확산되었다.", major:false }
+  ]
+};
+</script>
+<script>
+window.UNIT_DATA_II = {
+  concepts: [
+    // ===== 05 흥선 대원군 ~ 갑신정변 =====
+    { unit: "05", name: "흥선 대원군의 내정 개혁", year: "1863~1873", summary: "왕권 강화를 위해 세도 정치를 타파하고 통치 체제를 정비하였다.", details: ["<strong>비변사 축소</strong>·의정부와 삼군부 기능 부활", "<strong>대전회통</strong>·육전조례 등 법전 정비", "세도 가문을 누르고 능력에 따른 인재 등용"] },
+    { unit: "05", name: "경복궁 중건", year: "1865~1868", summary: "왕실의 권위를 높이려 임진왜란 때 불탄 경복궁을 다시 지었다.", details: ["공사비 마련 위해 <strong>당백전</strong> 발행→물가 폭등", "원납전 강제 징수·양반 묘지림 벌목", "백성 부역 동원으로 원성을 샀다"] },
+    { unit: "05", name: "서원 철폐", year: "1871", summary: "붕당의 근거지이자 면세 특권을 누리던 서원을 47개소만 남기고 철폐하였다.", details: ["국가 재정 확충과 민생 안정 도모", "<strong>만동묘 철폐</strong>로 양반 유생 반발", "왕권 강화 정책의 일환"] },
+    { unit: "05", name: "삼정의 개혁", year: "1860년대", summary: "전정·군정·환곡의 문란을 바로잡아 농민 부담을 줄이려 하였다.", details: ["<strong>호포제</strong> 실시·양반에게도 군포 징수", "<strong>사창제</strong> 실시로 환곡의 폐단 시정", "양전 사업으로 은결 색출"] },
+    { unit: "05", name: "병인양요", year: "1866", summary: "병인박해를 구실로 프랑스 함대가 강화도를 침략한 사건이다.", details: ["프랑스군이 <strong>강화도</strong> 점령", "<strong>한성근</strong>(문수산성)·<strong>양헌수</strong>(정족산성) 항전", "외규장각 의궤 등 문화재 약탈"] },
+    { unit: "05", name: "오페르트 도굴 사건", year: "1868", summary: "독일 상인 오페르트가 남연군 묘를 도굴하려다 실패한 사건이다.", details: ["흥선 대원군 아버지 <strong>남연군</strong>의 묘 도굴 시도", "통상 거부 의지와 척화 분위기 강화", "서양에 대한 적대감 고조"] },
+    { unit: "05", name: "신미양요", year: "1871", summary: "제너럴 셔먼호 사건을 구실로 미국 함대가 강화도를 침략하였다.", details: ["미군이 초지진·덕진진 점령", "<strong>어재연</strong> 장군이 광성보에서 항전", "이후 전국에 <strong>척화비</strong> 건립"] },
+    { unit: "05", name: "강화도 조약", year: "1876", summary: "운요호 사건을 빌미로 체결된 우리나라 최초의 근대적 조약이자 불평등 조약이다.", details: ["<strong>최초의 근대적·불평등 조약</strong>", "부산·원산·인천 3개 항구 개항", "<strong>해안 측량권·치외 법권(영사 재판권)</strong> 허용"] },
+    { unit: "05", name: "개화 정책 추진 기구", year: "1880~1881", summary: "개항 이후 근대화를 위해 새로운 행정·군사 기구를 설치하였다.", details: ["<strong>통리기무아문</strong> 설치·그 아래 12사", "신식 군대 <strong>별기군</strong> 창설", "수신사·조사 시찰단·영선사 파견"] },
+    { unit: "05", name: "외국에 파견한 사절단", year: "1880년대", summary: "개화 정책을 위해 일본·청·미국에 시찰단과 사절을 보냈다.", details: ["일본에 <strong>수신사</strong>(김기수·김홍집)·조사 시찰단(1881)", "청에 <strong>영선사</strong>(1881)→기기창 설립", "미국에 <strong>보빙사</strong>(1883) 파견"] },
+    { unit: "05", name: "임오군란", year: "1882", summary: "구식 군인에 대한 차별과 도시 하층민의 불만이 폭발한 사건이다.", details: ["별기군 우대·구식 군인 13개월 봉급 체불", "민씨 정권 공격, 흥선 대원군 일시 재집권", "청군 개입·진압→<strong>제물포 조약</strong>·청 내정 간섭 심화"] },
+    { unit: "05", name: "갑신정변", year: "1884", summary: "급진 개화파가 일본의 지원을 받아 일으킨 근대적 정치 개혁 운동이다.", details: ["<strong>김옥균·박영효</strong> 등 급진 개화파 주도", "우정총국 개국 축하연을 이용해 정변", "<strong>14개조 정강</strong> 발표→청군 개입으로 3일 천하"] },
+
+    // ===== 06 근대 국가 수립 노력 =====
+    { unit: "06", name: "동학 농민 운동의 배경", year: "1894", summary: "고부 군수 조병갑의 학정과 외세 침탈에 맞서 일어난 농민 봉기이다.", details: ["고부 군수 <strong>조병갑</strong>의 만석보 수탈", "<strong>전봉준</strong>이 고부에서 봉기", "반봉건·반외세 성격"] },
+    { unit: "06", name: "전주 화약과 집강소", year: "1894", summary: "정부와 농민군이 화약을 맺고 농민 자치 기구를 설치하였다.", details: ["황토현·황룡촌 전투 승리 후 <strong>전주성</strong> 점령", "정부와 <strong>전주 화약</strong> 체결", "전라도 일대에 <strong>집강소</strong> 설치·폐정 개혁 실천"] },
+    { unit: "06", name: "폐정 개혁안", year: "1894", summary: "동학 농민군이 제시한 반봉건적 사회 개혁 요구안이다.", details: ["<strong>탐관오리·횡포한 부호 징벌</strong>", "노비 문서 소각·천인 차별 개선", "<strong>토지의 평균 분작</strong> 요구"] },
+    { unit: "06", name: "우금치 전투", year: "1894", summary: "일본군 출병에 맞서 농민군이 재봉기하였으나 패배한 전투이다.", details: ["일본의 경복궁 점령에 반발해 <strong>2차 봉기</strong>", "남접·북접 연합군 형성", "공주 <strong>우금치</strong>에서 일본군에 패배"] },
+    { unit: "06", name: "갑오개혁", year: "1894", summary: "군국기무처를 중심으로 추진된 근대적 개혁이다.", details: ["<strong>군국기무처</strong> 설치(제1차)", "신분제·과거제 폐지, 공사 노비제 혁파", "<strong>홍범 14조</strong> 반포(제2차)·재정 일원화"] },
+    { unit: "06", name: "을미개혁", year: "1895", summary: "을미사변 이후 추진된 개혁으로 단발령이 대표적이다.", details: ["<strong>단발령</strong> 실시·태양력 채택", "<strong>건양</strong> 연호 사용·종두법 시행", "단발령 반발로 을미의병 발생"] },
+    { unit: "06", name: "독립 협회", year: "1896~1898", summary: "서재필 등이 창립한 근대적 사회 정치 단체이다.", details: ["<strong>독립문</strong> 건립·독립신문 발간", "<strong>만민 공동회</strong>로 자주 국권 운동", "러시아의 절영도 조차 요구 저지"] },
+    { unit: "06", name: "관민 공동회와 헌의 6조", year: "1898", summary: "관리와 민중이 함께 모여 국정 개혁안을 결의하였다.", details: ["관민이 함께한 <strong>관민 공동회</strong> 개최", "<strong>헌의 6조</strong> 결의·고종 재가", "이권 침탈 반대·의회 설립(중추원 관제) 추진"] },
+    { unit: "06", name: "대한 제국 수립", year: "1897", summary: "아관 파천 후 환궁한 고종이 황제로 즉위하고 제국을 선포하였다.", details: ["<strong>환구단</strong>에서 황제 즉위", "연호 <strong>광무</strong>·국호 대한 제국", "자주 독립 국가임을 대내외에 선포"] },
+    { unit: "06", name: "광무개혁", year: "1897~1904", summary: "구본신참을 원칙으로 추진한 대한 제국의 근대화 개혁이다.", details: ["원칙은 <strong>구본신참</strong>(옛 제도 근본·새것 참작)", "<strong>대한국 국제</strong> 반포·황제권 강화", "양전 사업·<strong>지계</strong> 발급으로 근대적 토지 소유권 확립"] },
+    { unit: "06", name: "식산흥업 정책", year: "1897~1904", summary: "근대적 산업을 육성하기 위한 대한 제국의 경제 정책이다.", details: ["<strong>식산흥업</strong>으로 상공업 진흥", "근대적 회사·은행·공장 설립", "실업 학교·기술 교육 기관 설립"] },
+    { unit: "06", name: "을미사변", year: "1895", summary: "일본이 명성 황후를 시해한 사건이다.", details: ["삼국 간섭 후 친러 경향에 일본이 위기감", "일본 낭인이 경복궁에서 <strong>명성 황후 시해</strong>", "을미개혁 추진과 을미의병의 배경"] },
+
+    // ===== 07 일본의 침략 확대와 국권 수호 =====
+    { unit: "07", name: "러일 전쟁과 한일 의정서", year: "1904", summary: "러일 전쟁 발발 직후 일본이 한국의 군사 요지를 점령하고자 강요한 협정이다.", details: ["일본이 한반도 <strong>군사 요지 사용권</strong> 확보", "대한 제국의 국외 중립 선언 무시", "이후 침략 본격화의 발판"] },
+    { unit: "07", name: "제1차 한일 협약", year: "1904", summary: "일본이 한국에 고문을 두어 내정을 간섭하기 시작한 협약이다.", details: ["<strong>고문 정치</strong> 시작", "재정 고문 <strong>메가타</strong>·외교 고문 <strong>스티븐스</strong>", "메가타의 화폐 정리 사업 추진"] },
+    { unit: "07", name: "을사늑약", year: "1905", summary: "대한 제국의 외교권을 빼앗고 통감부를 설치한 조약이다.", details: ["<strong>외교권 박탈</strong>·통감부 설치", "초대 통감 <strong>이토 히로부미</strong>", "고종 서명 없이 강제 체결→무효 주장"] },
+    { unit: "07", name: "을사늑약에 대한 저항", year: "1905", summary: "을사늑약의 부당함에 맞서 다양한 저항 운동이 일어났다.", details: ["<strong>장지연</strong> '시일야방성대곡' 황성신문 게재", "<strong>민영환</strong> 자결로 항거", "을사 5적 처단 시도(나철·오기호)"] },
+    { unit: "07", name: "헤이그 특사와 고종 강제 퇴위", year: "1907", summary: "고종이 만국 평화 회의에 특사를 보내자 일본이 고종을 퇴위시켰다.", details: ["<strong>이준·이상설·이위종</strong>을 헤이그에 파견", "을사늑약의 부당함을 세계에 호소", "이를 구실로 일본이 <strong>고종을 강제 퇴위</strong>"] },
+    { unit: "07", name: "한일 신협약(정미 7조약)", year: "1907", summary: "통감의 권한을 강화하고 대한 제국 군대를 해산시킨 조약이다.", details: ["차관 정치로 행정 각부 장악", "부속 밀약으로 <strong>군대 해산</strong>", "해산 군인의 의병 합류→정미의병 확산"] },
+    { unit: "07", name: "국권 피탈(한일 병합)", year: "1910", summary: "일본이 대한 제국의 국권을 완전히 빼앗아 식민지로 삼았다.", details: ["1909년 기유각서로 사법권 박탈", "1910년 <strong>한일 병합 조약</strong> 강제 체결", "조선 총독부 설치·식민 통치 시작"] },
+    { unit: "07", name: "을미·을사의병", year: "1895·1905", summary: "을미사변·단발령과 을사늑약에 반발해 일어난 의병이다.", details: ["을미의병: 유인석·이소응 등 <strong>유생</strong> 주도", "을사의병: <strong>최익현</strong>(쓰시마 순국)·<strong>신돌석</strong>(평민 의병장) 활약", "반일·국권 회복 투쟁"] },
+    { unit: "07", name: "정미의병과 서울 진공 작전", year: "1907~1908", summary: "군대 해산 후 의병이 연합 부대를 결성해 서울 탈환을 시도하였다.", details: ["해산 군인 합류로 전투력 강화", "<strong>13도 창의군</strong> 결성(총대장 이인영)", "<strong>서울 진공 작전</strong> 전개→실패"] },
+    { unit: "07", name: "안중근의 의거", year: "1909", summary: "안중근이 하얼빈에서 이토 히로부미를 처단하였다.", details: ["하얼빈 역에서 <strong>이토 히로부미 처단</strong>", "뤼순 감옥에서 <strong>'동양 평화론'</strong> 저술", "의병 참모중장 자격으로 거사"] },
+    { unit: "07", name: "신민회", year: "1907~1911", summary: "안창호·양기탁 등이 결성한 비밀 결사 애국 계몽 단체이다.", details: ["<strong>안창호·양기탁</strong> 등이 조직", "대성 학교·오산 학교 설립, 자기 회사·태극 서관 운영", "공화정 지향·국외 독립운동 기지 건설→<strong>105인 사건</strong>으로 해체"] },
+    { unit: "07", name: "애국 계몽 운동 단체", year: "1904~1910", summary: "교육과 산업 진흥을 통해 국권을 회복하려 한 단체들이다.", details: ["<strong>보안회</strong>: 일본의 황무지 개간권 요구 저지", "<strong>헌정 연구회·대한 자강회</strong>: 입헌 군주제·고종 퇴위 반대", "실력 양성을 통한 국권 회복 추구"] },
+
+    // ===== 08 경제·사회·문화의 변화 =====
+    { unit: "08", name: "열강의 이권 침탈", year: "1890년대", summary: "아관 파천 이후 최혜국 대우를 이용한 열강의 이권 침탈이 심화되었다.", details: ["러시아: 광산·삼림 채벌권", "미국: 운산 금광·전등·전차 부설권", "일본: 경인선·경부선 <strong>철도 부설권</strong>"] },
+    { unit: "08", name: "일본의 금융·차관 침탈", year: "1900년대", summary: "메가타의 화폐 정리 사업과 차관 제공으로 경제 예속을 강화하였다.", details: ["<strong>화폐 정리 사업</strong>(1905)으로 백동화 정리", "국내 상공업자·은행 큰 타격", "차관 강요로 재정 예속화"] },
+    { unit: "08", name: "방곡령", year: "1889~1890", summary: "곡물 유출을 막기 위해 지방관이 내린 곡물 수출 금지 명령이다.", details: ["일본으로의 곡물 유출과 흉년이 배경", "함경도(조병식)·황해도 등에서 시행", "조일 통상 장정의 통고 규정 위반 빌미로 일본이 배상 요구"] },
+    { unit: "08", name: "상권 수호 운동", year: "1890년대", summary: "외국 상인의 상권 침탈에 맞선 국내 상인들의 저항 운동이다.", details: ["서울 시전 상인 철시 투쟁", "<strong>황국 중앙 총상회</strong> 조직", "상권 수호와 독립 협회 운동에 동참"] },
+    { unit: "08", name: "국채 보상 운동", year: "1907", summary: "일본에 진 국채를 국민 모금으로 갚으려 한 경제적 구국 운동이다.", details: ["<strong>대구</strong>에서 <strong>서상돈·김광제</strong> 주도로 시작", "<strong>대한매일신보</strong> 등 언론의 후원", "통감부의 방해로 중단"] },
+    { unit: "08", name: "근대 시설의 도입", year: "1880~1900년대", summary: "개항 이후 통신·교통·의료 등 근대 시설이 들어왔다.", details: ["<strong>전신</strong>·전화·전차 도입", "최초의 철도 <strong>경인선</strong>(1899)·경부선(1905)", "근대 병원 <strong>광혜원</strong>(제중원)·우정총국(우편)"] },
+    { unit: "08", name: "근대 교육 기관", year: "1880~1890년대", summary: "근대적 학교가 설립되고 교육 입국 조서가 반포되었다.", details: ["최초의 근대 사립 학교 <strong>원산 학사</strong>(1883)", "관립 <strong>육영 공원</strong>(1886)·외국어 등 교육", "갑오개혁기 <strong>교육 입국 조서</strong>(1895) 반포"] },
+    { unit: "08", name: "근대 언론", year: "1880~1900년대", summary: "다양한 신문이 발간되어 근대 의식 보급에 기여하였다.", details: ["최초의 신문 <strong>한성순보</strong>(1883·박문국)", "<strong>독립신문</strong>(한글·영문)·황성순보가 아닌 황성신문(장지연)", "<strong>대한매일신보</strong>(영국인 베델·항일)·제국신문"] },
+    { unit: "08", name: "국문 연구소", year: "1907", summary: "국문 정리와 표기법 통일을 위해 설립된 연구 기관이다.", details: ["학부 아래에 설치", "<strong>주시경·지석영</strong> 등이 활동", "국문 표기법 연구·정리"] },
+    { unit: "08", name: "국학 연구", year: "1900년대", summary: "민족의식 고취를 위해 국사와 국어 연구가 활발히 이루어졌다.", details: ["<strong>신채호</strong> '독사신론'으로 민족주의 사학 기틀", "<strong>주시경</strong>의 국어 연구('국어문법')", "을지문덕전 등 위인전 간행"] },
+    { unit: "08", name: "종교의 변화", year: "1880~1900년대", summary: "개항 이후 새로운 종교가 들어오고 민족 종교가 발전하였다.", details: ["동학을 계승한 <strong>천도교</strong>(손병희)", "단군 신앙의 <strong>대종교</strong>(나철)·항일 운동", "천주교·개신교의 교육·의료 활동"] },
+    { unit: "08", name: "의식주 생활의 변화", year: "1890~1900년대", summary: "서양 문물의 유입으로 의식주 생활에 변화가 나타났다.", details: ["양복·단발 보급, 마고자·조끼 등장", "커피·과자 등 서양 음식 유입", "<strong>명동 성당</strong>·정동 교회 등 서양식 건축물 등장"] }
+  ],
+
+  ox: [
+    // 05
+    { unit: "05", statement: "흥선 대원군은 비변사의 기능을 강화하여 왕권을 안정시켰다.", answer: false, explanation: "X. 흥선 대원군은 비변사를 <strong>축소·폐지</strong>하고 의정부와 삼군부의 기능을 부활시켰다." },
+    { unit: "05", statement: "경복궁 중건 비용을 마련하기 위해 당백전을 발행하였다.", answer: true, explanation: "O. <strong>당백전</strong> 남발로 물가가 크게 올라 경제 혼란을 초래하였다." },
+    { unit: "05", statement: "호포제는 양반에게도 군포를 부과한 제도이다.", answer: true, explanation: "O. <strong>호포제</strong>로 양반에게도 군포를 징수하여 농민 부담을 줄였다." },
+    { unit: "05", statement: "병인양요 때 미국 함대가 강화도를 침략하였다.", answer: false, explanation: "X. 병인양요는 <strong>프랑스</strong> 함대의 침략이며, 미국의 침략은 신미양요(1871)이다." },
+    { unit: "05", statement: "신미양요 이후 흥선 대원군은 전국에 척화비를 세웠다.", answer: true, explanation: "O. 신미양요 후 <strong>척화비</strong>를 세워 통상 수교 거부 의지를 널리 알렸다." },
+    { unit: "05", statement: "강화도 조약은 조선이 외국과 맺은 최초의 평등한 근대 조약이다.", answer: false, explanation: "X. 강화도 조약은 최초의 근대적 조약이나 치외 법권 등을 포함한 <strong>불평등 조약</strong>이다." },
+    { unit: "05", statement: "별기군은 개항 이후 창설된 신식 군대이다.", answer: true, explanation: "O. <strong>별기군</strong>은 일본인 교관이 훈련한 신식 군대로 구식 군인과 차별이 있었다." },
+    { unit: "05", statement: "영선사는 미국에 파견되어 근대 시설을 시찰하였다.", answer: false, explanation: "X. <strong>영선사</strong>는 청에 파견되었으며, 미국에 파견된 것은 보빙사이다." },
+    { unit: "05", statement: "임오군란의 결과 청의 내정 간섭이 심화되었다.", answer: true, explanation: "O. 임오군란을 청군이 진압하면서 <strong>청의 내정 간섭</strong>이 강화되었다." },
+    { unit: "05", statement: "갑신정변은 온건 개화파가 청의 지원을 받아 일으킨 정변이다.", answer: false, explanation: "X. 갑신정변은 <strong>급진 개화파</strong>가 <strong>일본</strong>의 지원을 받아 일으켰다." },
+
+    // 06
+    { unit: "06", statement: "동학 농민 운동은 고부 군수 조병갑의 학정이 직접적 계기였다.", answer: true, explanation: "O. 고부 군수 <strong>조병갑</strong>의 수탈에 맞서 전봉준이 봉기하였다." },
+    { unit: "06", statement: "전주 화약 이후 농민군은 집강소를 설치해 폐정 개혁을 추진하였다.", answer: true, explanation: "O. 전라도 일대에 <strong>집강소</strong>를 두고 폐정 개혁을 실천하였다." },
+    { unit: "06", statement: "동학 농민군은 우금치 전투에서 일본군에 승리하였다.", answer: false, explanation: "X. 농민군은 공주 <strong>우금치 전투</strong>에서 일본군과 관군에 패배하였다." },
+    { unit: "06", statement: "제1차 갑오개혁은 군국기무처를 중심으로 추진되었다.", answer: true, explanation: "O. <strong>군국기무처</strong>를 설치하여 신분제 폐지 등 개혁을 추진하였다." },
+    { unit: "06", statement: "을미개혁 때 단발령과 태양력이 시행되었다.", answer: true, explanation: "O. <strong>을미개혁</strong>으로 단발령·태양력·건양 연호가 도입되었다." },
+    { unit: "06", statement: "독립 협회는 만민 공동회를 열어 자주 국권 운동을 전개하였다.", answer: true, explanation: "O. <strong>만민 공동회</strong>를 통해 러시아의 이권 침탈을 저지하였다." },
+    { unit: "06", statement: "헌의 6조는 관민 공동회에서 결의되었다.", answer: true, explanation: "O. 관민 공동회에서 <strong>헌의 6조</strong>를 결의하고 고종이 재가하였다." },
+    { unit: "06", statement: "대한 제국은 고종이 환구단에서 황제로 즉위하며 선포되었다.", answer: true, explanation: "O. 고종은 <strong>환구단</strong>에서 황제로 즉위하고 연호를 광무로 정하였다." },
+    { unit: "06", statement: "광무개혁의 기본 원칙은 급진적 서구화인 동도서기였다.", answer: false, explanation: "X. 광무개혁의 원칙은 옛 제도를 근본으로 하는 <strong>구본신참</strong>이다." },
+    { unit: "06", statement: "광무개혁 때 양전 사업을 실시하고 지계를 발급하였다.", answer: true, explanation: "O. 토지 소유권을 증명하는 <strong>지계</strong>를 발급하였다." },
+
+    // 07
+    { unit: "07", statement: "을사늑약으로 대한 제국의 외교권이 박탈되고 통감부가 설치되었다.", answer: true, explanation: "O. <strong>을사늑약</strong>으로 외교권을 빼앗기고 통감부가 설치되었다." },
+    { unit: "07", statement: "제1차 한일 협약으로 외교 고문에 메가타가 임명되었다.", answer: false, explanation: "X. 메가타는 <strong>재정 고문</strong>, 외교 고문은 <strong>스티븐스</strong>였다." },
+    { unit: "07", statement: "헤이그 특사 파견을 구실로 일본은 고종을 강제 퇴위시켰다.", answer: true, explanation: "O. 헤이그 특사 사건을 빌미로 일본이 <strong>고종을 강제 퇴위</strong>시켰다." },
+    { unit: "07", statement: "한일 신협약(정미 7조약)으로 대한 제국 군대가 해산되었다.", answer: true, explanation: "O. 정미 7조약의 부속 밀약에 따라 <strong>군대가 해산</strong>되었다." },
+    { unit: "07", statement: "최익현은 평민 출신 의병장으로 신출귀몰한 활약을 펼쳤다.", answer: false, explanation: "X. 평민 의병장은 <strong>신돌석</strong>이며, 최익현은 유생 의병장으로 쓰시마에서 순국하였다." },
+    { unit: "07", statement: "정미의병 때 13도 창의군이 서울 진공 작전을 전개하였다.", answer: true, explanation: "O. <strong>13도 창의군</strong>이 서울 진공 작전을 시도하였으나 실패하였다." },
+    { unit: "07", statement: "안중근은 하얼빈에서 이토 히로부미를 처단하였다.", answer: true, explanation: "O. <strong>안중근</strong>이 하얼빈 역에서 이토 히로부미를 사살하였다." },
+    { unit: "07", statement: "신민회는 공화정 수립을 목표로 한 비밀 결사였다.", answer: true, explanation: "O. <strong>신민회</strong>는 공화정을 지향한 비밀 결사로 105인 사건으로 해체되었다." },
+    { unit: "07", statement: "보안회는 일본의 황무지 개간권 요구를 저지하였다.", answer: true, explanation: "O. <strong>보안회</strong>는 일본의 황무지 개간권 요구를 막아냈다." },
+    { unit: "07", statement: "이재명은 명성 황후를 시해한 일본 낭인을 처단하였다.", answer: false, explanation: "X. 이재명은 <strong>이완용</strong>을 습격하여 중상을 입혔다." },
+
+    // 08
+    { unit: "08", statement: "국채 보상 운동은 대구에서 서상돈 등의 주도로 시작되었다.", answer: true, explanation: "O. <strong>대구</strong>에서 서상돈·김광제가 시작하고 대한매일신보가 후원하였다." },
+    { unit: "08", statement: "방곡령은 일본으로의 곡물 유출을 막기 위해 내린 명령이다.", answer: true, explanation: "O. <strong>방곡령</strong>은 곡물 유출과 흉년에 대응한 수출 금지령이다." },
+    { unit: "08", statement: "우리나라 최초의 철도는 경부선이다.", answer: false, explanation: "X. 최초의 철도는 <strong>경인선</strong>(1899)이며, 경부선은 1905년에 개통되었다." },
+    { unit: "08", statement: "원산 학사는 우리나라 최초의 근대적 사립 학교이다.", answer: true, explanation: "O. <strong>원산 학사</strong>(1883)는 최초의 근대적 사립 학교이다." },
+    { unit: "08", statement: "한성순보는 순 한글로 발간된 우리나라 최초의 신문이다.", answer: false, explanation: "X. <strong>한성순보</strong>는 최초의 신문이나 순 한문으로 발간되었다." },
+    { unit: "08", statement: "대한매일신보는 영국인 베델이 발행하여 항일 논조가 강하였다.", answer: true, explanation: "O. <strong>대한매일신보</strong>는 베델이 발행해 통감부 검열을 피하며 항일 운동을 전개하였다." },
+    { unit: "08", statement: "국문 연구소에서 주시경 등이 국문 표기법을 연구하였다.", answer: true, explanation: "O. <strong>국문 연구소</strong>(1907)에서 주시경·지석영 등이 활동하였다." },
+    { unit: "08", statement: "광혜원은 우리나라 최초의 근대식 병원이다.", answer: true, explanation: "O. <strong>광혜원</strong>(제중원)은 최초의 근대식 병원이다." },
+    { unit: "08", statement: "화폐 정리 사업은 메가타의 주도로 추진되었다.", answer: true, explanation: "O. 재정 고문 <strong>메가타</strong>가 백동화를 정리하는 화폐 정리 사업을 추진하였다." },
+    { unit: "08", statement: "대종교는 동학을 계승하여 손병희가 창시하였다.", answer: false, explanation: "X. 동학을 계승한 것은 <strong>천도교</strong>(손병희)이며, 대종교는 단군 신앙을 바탕으로 나철이 창시하였다." }
+  ],
+
+  mc: [
+    // 05
+    { unit: "05", difficulty: "normal", q: "흥선 대원군의 정책으로 옳은 것은?", options: ["비변사 기능 강화", "서원 대폭 증설", "호포제 실시", "과거제 폐지", "단발령 시행"], answer: 2, explanation: "<strong>호포제</strong>로 양반에게도 군포를 징수하였다. 비변사는 축소, 서원은 철폐하였다." },
+    { unit: "05", difficulty: "normal", q: "다음 사건들을 순서대로 바르게 나열한 것은? (가)병인양요 (나)신미양요 (다)오페르트 도굴 사건", options: ["(가)-(다)-(나)", "(가)-(나)-(다)", "(다)-(가)-(나)", "(나)-(가)-(다)", "(다)-(나)-(가)"], answer: 0, explanation: "<strong>병인양요(1866)-오페르트 도굴(1868)-신미양요(1871)</strong> 순이다." },
+    { unit: "05", difficulty: "normal", q: "강화도 조약(1876)에 대한 설명으로 옳지 않은 것은?", options: ["우리나라 최초의 근대적 조약이다", "부산·원산·인천을 개항하였다", "해안 측량권을 허용하였다", "치외 법권을 인정하였다", "최혜국 대우를 처음 규정하였다"], answer: 4, explanation: "<strong>최혜국 대우</strong>는 조미 수호 통상 조약(1882)에서 처음 규정되었다." },
+    { unit: "05", difficulty: "hard", q: "운요호 사건과 직접 관련된 조약은?", options: ["조미 수호 통상 조약", "강화도 조약", "제물포 조약", "한성 조약", "톈진 조약"], answer: 1, explanation: "일본은 <strong>운요호 사건</strong>을 빌미로 강화도 조약 체결을 강요하였다." },
+    { unit: "05", difficulty: "normal", q: "개항 이후 청에 파견되어 무기 제조 기술을 배운 사절단은?", options: ["수신사", "조사 시찰단", "영선사", "보빙사", "통신사"], answer: 2, explanation: "<strong>영선사</strong>는 청에 파견되어 기술을 배웠고 귀국 후 기기창 설립으로 이어졌다." },
+    { unit: "05", difficulty: "normal", q: "임오군란(1882)의 결과로 옳은 것은?", options: ["갑신정변 발생", "통리기무아문 설치", "제물포 조약 체결", "강화도 조약 체결", "별기군 창설"], answer: 2, explanation: "임오군란 결과 일본과 <strong>제물포 조약</strong>을 맺고 청의 간섭이 심해졌다." },
+    { unit: "05", difficulty: "normal", q: "갑신정변을 주도한 세력과 14개조 정강의 성격으로 옳은 것은?", options: ["위정척사파 - 통상 반대", "온건 개화파 - 점진 개혁", "급진 개화파 - 근대 국가 수립", "동학 농민군 - 신분제 폐지", "독립 협회 - 의회 설립"], answer: 2, explanation: "<strong>급진 개화파</strong>가 근대 국가 수립을 목표로 14개조 정강을 발표하였다." },
+    { unit: "05", difficulty: "hard", q: "갑신정변 14개조 정강에 포함된 내용으로 옳은 것은?", options: ["토지의 평균 분작", "단발령 실시", "청에 대한 조공 허례 폐지", "노비 문서 소각", "지계 발급"], answer: 2, explanation: "14개조 정강에는 <strong>청에 대한 조공 허례 폐지</strong>, 인민 평등권, 재정 일원화(호조) 등이 있었다." },
+    { unit: "05", difficulty: "normal", q: "병인양요 때 정족산성에서 프랑스군을 격퇴한 인물은?", options: ["어재연", "양헌수", "한성근", "신헌", "최익현"], answer: 1, explanation: "<strong>양헌수</strong>는 정족산성에서, 한성근은 문수산성에서 프랑스군에 맞섰다." },
+    { unit: "05", difficulty: "hard", q: "위정척사 운동의 흐름에 대한 설명으로 옳은 것은?", options: ["개항에 찬성하였다", "1880년대 개화 정책에 동조하였다", "통상 반대 운동으로 전개되었다", "갑신정변을 주도하였다", "신민회를 조직하였다"], answer: 2, explanation: "위정척사 운동은 통상 반대, 개항 반대, 개화 반대로 이어진 <strong>반외세 운동</strong>이다." },
+
+    // 06
+    { unit: "06", difficulty: "normal", q: "동학 농민 운동의 전개 과정에서 농민군이 정부와 맺은 협약은?", options: ["전주 화약", "제물포 조약", "한성 조약", "톈진 조약", "헌의 6조"], answer: 0, explanation: "전주성 점령 후 정부와 <strong>전주 화약</strong>을 맺고 집강소를 설치하였다." },
+    { unit: "06", difficulty: "normal", q: "폐정 개혁안에 담긴 요구로 옳은 것은?", options: ["황제권 강화", "토지의 평균 분작", "단발령 실시", "외교권 회복", "철도 부설"], answer: 1, explanation: "폐정 개혁안에는 <strong>토지의 평균 분작</strong>, 탐관오리 징벌, 노비 문서 소각 등이 있었다." },
+    { unit: "06", difficulty: "hard", q: "동학 농민군의 2차 봉기의 직접적 배경은?", options: ["고부 군수의 학정", "일본의 경복궁 점령", "단발령 시행", "을사늑약 체결", "삼국 간섭"], answer: 1, explanation: "<strong>일본의 경복궁 점령</strong>과 내정 간섭에 반발해 반외세 성격의 2차 봉기가 일어났다." },
+    { unit: "06", difficulty: "normal", q: "제1차 갑오개혁의 중심 기구는?", options: ["통리기무아문", "군국기무처", "교정청", "중추원", "원수부"], answer: 1, explanation: "<strong>군국기무처</strong>를 중심으로 제1차 갑오개혁이 추진되었다." },
+    { unit: "06", difficulty: "normal", q: "을미개혁의 내용으로 옳은 것은?", options: ["과거제 폐지", "단발령 실시", "신분제 폐지", "지계 발급", "외교권 회복"], answer: 1, explanation: "<strong>을미개혁</strong>에서 단발령, 태양력, 건양 연호, 종두법이 시행되었다." },
+    { unit: "06", difficulty: "normal", q: "독립 협회의 활동으로 옳지 않은 것은?", options: ["독립문 건립", "만민 공동회 개최", "헌의 6조 결의", "대한국 국제 반포", "러시아 이권 침탈 저지"], answer: 3, explanation: "<strong>대한국 국제</strong>는 대한 제국이 황제권 강화를 위해 반포한 것으로 독립 협회와 무관하다." },
+    { unit: "06", difficulty: "normal", q: "대한 제국 시기 광무개혁의 원칙은?", options: ["동도서기", "구본신참", "위정척사", "중체서용", "급진 개화"], answer: 1, explanation: "광무개혁은 옛 제도를 근본으로 새것을 참작하는 <strong>구본신참</strong>을 원칙으로 하였다." },
+    { unit: "06", difficulty: "hard", q: "광무개혁 시기에 추진된 정책으로 옳은 것은?", options: ["군국기무처 설치", "지계 발급", "단발령 시행", "별기군 창설", "통리기무아문 설치"], answer: 1, explanation: "광무개혁 때 양전 사업을 실시하고 토지 소유권 증명서인 <strong>지계</strong>를 발급하였다." },
+    { unit: "06", difficulty: "normal", q: "고종이 황제로 즉위한 장소와 연호로 옳은 것은?", options: ["경복궁 - 건양", "환구단 - 광무", "경운궁 - 융희", "덕수궁 - 건양", "환구단 - 융희"], answer: 1, explanation: "고종은 <strong>환구단</strong>에서 황제로 즉위하고 연호를 <strong>광무</strong>로 정하였다." },
+    { unit: "06", difficulty: "hard", q: "동학 농민 운동의 성격으로 가장 적절한 것은?", options: ["반봉건·반외세", "친일·개화", "위정척사", "복벽주의", "공화주의"], answer: 0, explanation: "동학 농민 운동은 탐관오리 척결의 <strong>반봉건</strong>과 일본 배격의 <strong>반외세</strong> 성격을 띠었다." },
+
+    // 07
+    { unit: "07", difficulty: "normal", q: "을사늑약(1905)의 핵심 내용은?", options: ["군대 해산", "외교권 박탈", "사법권 박탈", "재정권 박탈", "경찰권 박탈"], answer: 1, explanation: "을사늑약으로 <strong>외교권</strong>을 빼앗기고 통감부가 설치되었다." },
+    { unit: "07", difficulty: "normal", q: "헤이그 특사로 파견된 인물이 아닌 것은?", options: ["이준", "이상설", "이위종", "이완용", "(없음, 셋 다 특사)"], answer: 3, explanation: "헤이그 특사는 <strong>이준·이상설·이위종</strong>이며, 이완용은 친일파이다." },
+    { unit: "07", difficulty: "normal", q: "한일 신협약(정미 7조약)의 결과로 옳은 것은?", options: ["외교권 박탈", "대한 제국 군대 해산", "사법권 박탈", "통감부 설치", "황제 즉위"], answer: 1, explanation: "정미 7조약의 부속 밀약으로 <strong>군대가 해산</strong>되어 정미의병으로 이어졌다." },
+    { unit: "07", difficulty: "hard", q: "다음 조약을 체결된 순서대로 나열한 것은? (가)을사늑약 (나)한일 신협약 (다)제1차 한일 협약", options: ["(다)-(가)-(나)", "(가)-(다)-(나)", "(다)-(나)-(가)", "(가)-(나)-(다)", "(나)-(다)-(가)"], answer: 0, explanation: "<strong>제1차 한일 협약(1904)-을사늑약(1905)-한일 신협약(1907)</strong> 순이다." },
+    { unit: "07", difficulty: "normal", q: "을사의병에서 활약한 평민 출신 의병장은?", options: ["유인석", "최익현", "신돌석", "이인영", "허위"], answer: 2, explanation: "<strong>신돌석</strong>은 평민 출신 의병장으로 태백산 일대에서 활약하였다." },
+    { unit: "07", difficulty: "normal", q: "13도 창의군이 전개한 작전은?", options: ["서울 진공 작전", "청산리 전투", "봉오동 전투", "쌍성보 전투", "대전자령 전투"], answer: 0, explanation: "<strong>13도 창의군</strong>은 서울 진공 작전을 시도하였으나 실패하였다." },
+    { unit: "07", difficulty: "normal", q: "하얼빈에서 이토 히로부미를 처단한 인물은?", options: ["안중근", "이재명", "장인환", "전명운", "나철"], answer: 0, explanation: "<strong>안중근</strong>이 하얼빈에서 이토 히로부미를 처단하고 동양 평화론을 저술하였다." },
+    { unit: "07", difficulty: "hard", q: "샌프란시스코에서 친일 외교 고문 스티븐스를 저격한 인물은?", options: ["안중근", "이재명", "장인환·전명운", "나철·오기호", "민영환"], answer: 2, explanation: "<strong>장인환·전명운</strong>이 샌프란시스코에서 스티븐스를 저격하였다." },
+    { unit: "07", difficulty: "normal", q: "신민회에 대한 설명으로 옳지 않은 것은?", options: ["안창호·양기탁이 조직", "대성·오산 학교 설립", "공화정 지향", "105인 사건으로 해체", "황무지 개간권 저지"], answer: 4, explanation: "황무지 개간권 요구를 저지한 것은 <strong>보안회</strong>이다." },
+    { unit: "07", difficulty: "hard", q: "애국 계몽 운동 단체와 활동이 바르게 연결된 것은?", options: ["보안회 - 만민 공동회", "헌정 연구회 - 입헌 군주제 주장", "대한 자강회 - 외교권 회복", "신민회 - 황무지 개간권 저지", "독립 협회 - 105인 사건"], answer: 1, explanation: "<strong>헌정 연구회</strong>는 입헌 군주제 수립을 주장하였다." },
+
+    // 08
+    { unit: "08", difficulty: "normal", q: "1907년 대구에서 시작된 경제적 구국 운동은?", options: ["방곡령", "국채 보상 운동", "물산 장려 운동", "상권 수호 운동", "농촌 계몽 운동"], answer: 1, explanation: "<strong>국채 보상 운동</strong>은 대구에서 서상돈 등이 시작하고 대한매일신보가 후원하였다." },
+    { unit: "08", difficulty: "normal", q: "우리나라 최초의 철도는?", options: ["경부선", "경의선", "경인선", "경원선", "호남선"], answer: 2, explanation: "최초의 철도는 <strong>경인선</strong>(1899)이며 경부선은 1905년 개통되었다." },
+    { unit: "08", difficulty: "normal", q: "우리나라 최초의 근대적 사립 학교는?", options: ["육영 공원", "원산 학사", "배재 학당", "이화 학당", "대성 학교"], answer: 1, explanation: "<strong>원산 학사</strong>(1883)는 최초의 근대적 사립 학교이다." },
+    { unit: "08", difficulty: "hard", q: "영국인 베델이 발행하여 항일 논조가 강했던 신문은?", options: ["한성순보", "독립신문", "황성신문", "대한매일신보", "제국신문"], answer: 3, explanation: "<strong>대한매일신보</strong>는 베델이 발행해 통감부 검열을 피하며 국채 보상 운동을 후원하였다." },
+    { unit: "08", difficulty: "normal", q: "1905년 메가타가 주도한 경제 침탈 정책은?", options: ["화폐 정리 사업", "토지 조사 사업", "산미 증식 계획", "방곡령", "회사령"], answer: 0, explanation: "재정 고문 <strong>메가타</strong>가 백동화를 정리하는 화폐 정리 사업을 추진하였다." },
+    { unit: "08", difficulty: "normal", q: "1907년 설립되어 주시경 등이 국문을 연구한 기관은?", options: ["박문국", "기기창", "국문 연구소", "전환국", "원각사"], answer: 2, explanation: "<strong>국문 연구소</strong>에서 주시경·지석영이 국문 표기법을 연구하였다." },
+    { unit: "08", difficulty: "hard", q: "다음 신문 중 발간 시기가 가장 이른 것은?", options: ["독립신문", "황성신문", "한성순보", "대한매일신보", "제국신문"], answer: 2, explanation: "<strong>한성순보</strong>(1883)가 가장 이르며 우리나라 최초의 신문이다." },
+    { unit: "08", difficulty: "normal", q: "단군 신앙을 바탕으로 나철이 창시한 민족 종교는?", options: ["천도교", "대종교", "원불교", "천주교", "동학"], answer: 1, explanation: "<strong>대종교</strong>는 나철이 창시한 단군 신앙 종교로 항일 운동에 적극 참여하였다." },
+    { unit: "08", difficulty: "normal", q: "1880년대 곡물 유출을 막기 위해 함경도·황해도에서 시행된 것은?", options: ["방곡령", "단발령", "교육 입국 조서", "지계", "척화비"], answer: 0, explanation: "<strong>방곡령</strong>은 일본으로의 곡물 유출을 막기 위한 수출 금지령이다." },
+    { unit: "08", difficulty: "hard", q: "갑오개혁기에 반포되어 근대 교육의 이념을 밝힌 것은?", options: ["교육 입국 조서", "홍범 14조", "대한국 국제", "헌의 6조", "독립 선언서"], answer: 0, explanation: "1895년 <strong>교육 입국 조서</strong>가 반포되어 근대 학교 설립의 근거가 되었다." }
+  ],
+
+  people: [
+    { name: "흥선 대원군", hanja: "興宣大院君", years: "1820~1898", title: "고종의 아버지·섭정", period: "근대", categories: ["정치"], tags: ["경복궁 중건", "척화비", "호포제"], intro: "고종을 대신해 정치를 주도하며 왕권 강화와 통상 수교 거부 정책을 펼친 인물이다.", activities: [{ year: "1865", title: "경복궁 중건", desc: "<strong>당백전</strong> 발행과 원납전 징수로 왕실 권위를 높이려 하였다." }, { year: "1871", title: "서원 철폐·신미양요", desc: "서원을 47개소만 남기고 철폐하였고, 신미양요 후 <strong>척화비</strong>를 세웠다." }], tip: "<strong>경복궁·당백전·서원 철폐·호포제·척화비</strong>를 묶어 기억하라." },
+    { name: "김옥균", hanja: "金玉均", years: "1851~1894", title: "급진 개화파 지도자", period: "근대", categories: ["정치"], tags: ["갑신정변", "급진 개화파"], intro: "일본의 메이지 유신을 본받아 근대 국가를 세우려 한 급진 개화파의 핵심 인물이다.", activities: [{ year: "1884", title: "갑신정변 주도", desc: "박영효 등과 함께 <strong>14개조 정강</strong>을 발표하였으나 3일 만에 실패하였다." }, { year: "1894", title: "상하이에서 피살", desc: "정변 실패 후 망명 생활을 하다 상하이에서 <strong>홍종우</strong>에게 살해되었다." }], tip: "<strong>갑신정변=급진 개화파=일본 지원=14개조</strong>로 연결하라." },
+    { name: "전봉준", hanja: "全琫準", years: "1855~1895", title: "동학 농민군 지도자", period: "근대", categories: ["사회"], tags: ["동학 농민 운동", "고부 봉기", "우금치"], intro: "고부 봉기를 이끌고 동학 농민 운동을 지도한 반봉건·반외세 운동의 상징적 인물이다.", activities: [{ year: "1894", title: "고부 봉기와 전주 화약", desc: "조병갑의 학정에 맞서 봉기하고 정부와 <strong>전주 화약</strong>을 맺었다." }, { year: "1894", title: "우금치 전투", desc: "일본의 침략에 맞서 2차 봉기하였으나 공주 <strong>우금치</strong>에서 패배하였다." }], tip: "<strong>고부-전주 화약-집강소-우금치</strong> 흐름으로 기억하라." },
+    { name: "서재필", hanja: "徐載弼", years: "1864~1951", title: "독립 협회 창립자", period: "근대", categories: ["정치", "문화"], tags: ["독립 협회", "독립신문", "만민 공동회"], intro: "독립신문을 창간하고 독립 협회를 세워 근대적 민권·국권 운동을 이끈 인물이다.", activities: [{ year: "1896", title: "독립신문·독립 협회", desc: "<strong>독립신문</strong>을 발간하고 독립 협회를 창립해 독립문을 세웠다." }, { year: "1898", title: "만민 공동회", desc: "<strong>만민 공동회</strong>를 통해 자주 국권과 자유 민권 운동을 전개하였다." }], tip: "<strong>독립신문·독립문·만민 공동회</strong>를 서재필과 연결하라." },
+    { name: "고종", hanja: "高宗", years: "1852~1919", title: "조선 26대 왕·대한 제국 황제", period: "근대", categories: ["정치"], tags: ["대한 제국", "광무개혁", "헤이그 특사"], intro: "대한 제국을 선포하고 광무개혁을 추진하였으며 국권 수호를 위해 노력한 황제이다.", activities: [{ year: "1897", title: "대한 제국 선포", desc: "환구단에서 황제로 즉위하고 연호를 <strong>광무</strong>로 정하였다." }, { year: "1907", title: "헤이그 특사 파견", desc: "을사늑약의 부당함을 알리려 <strong>헤이그 특사</strong>를 보냈다가 강제 퇴위되었다." }], tip: "<strong>아관 파천-대한 제국-광무개혁-헤이그 특사-강제 퇴위</strong> 순." },
+    { name: "안중근", hanja: "安重根", years: "1879~1910", title: "독립운동가·의병장", period: "근대", categories: ["독립운동"], tags: ["이토 히로부미", "하얼빈", "동양 평화론"], intro: "하얼빈에서 이토 히로부미를 처단하고 동양 평화론을 주창한 의병 투쟁의 상징이다.", activities: [{ year: "1909", title: "이토 히로부미 처단", desc: "하얼빈 역에서 <strong>이토 히로부미</strong>를 사살하였다." }, { year: "1910", title: "동양 평화론 저술", desc: "뤼순 감옥에서 <strong>동양 평화론</strong>을 집필하다 순국하였다." }], tip: "<strong>하얼빈·이토 히로부미·동양 평화론</strong>을 안중근과 연결하라." },
+    { name: "안창호", hanja: "安昌浩", years: "1878~1938", title: "독립운동가·신민회 조직", period: "근대", categories: ["독립운동", "교육"], tags: ["신민회", "대성 학교", "흥사단"], intro: "신민회를 조직하고 교육·실력 양성을 통한 국권 회복 운동을 이끈 애국 계몽 운동가이다.", activities: [{ year: "1907", title: "신민회 조직", desc: "양기탁 등과 비밀 결사 <strong>신민회</strong>를 조직하였다." }, { year: "1908", title: "대성 학교 설립", desc: "평양에 <strong>대성 학교</strong>를 세워 인재 양성에 힘썼다." }], tip: "<strong>신민회·대성 학교·공화정·105인 사건</strong>을 함께 기억하라." }
+  ],
+
+  comparisons: [
+    { unit: "05", title: "갑신정변 vs 동학 농민 운동", cols: ["구분", "갑신정변(1884)", "동학 농민 운동(1894)"], rows: [["주도 세력", "급진 개화파", "농민·동학교도"], ["성격", "위로부터의 개혁", "아래로부터의 개혁"], ["외세", "일본 의존", "반외세(반일)"]] },
+    { unit: "06", title: "갑오개혁 vs 광무개혁", cols: ["구분", "갑오개혁(1894)", "광무개혁(1897~)"], rows: [["원칙", "급진적 근대화", "구본신참"], ["중심 기구", "군국기무처", "황제 직속(원수부 등)"], ["토지 정책", "재정 일원화", "양전·지계 발급"]] },
+    { unit: "07", title: "을사늑약 vs 한일 신협약", cols: ["구분", "을사늑약(1905)", "한일 신협약(1907)"], rows: [["핵심", "외교권 박탈", "차관 정치·군대 해산"], ["설치 기구", "통감부", "통감 권한 강화"], ["결과", "을사의병", "정미의병"]] }
+  ],
+
+  timeline: [
+    { year: "1865", period: "근대", title: "경복궁 중건 시작", desc: "흥선 대원군이 왕실 권위를 위해 <strong>경복궁 중건</strong>을 시작하였다", major: false },
+    { year: "1871", period: "근대", title: "신미양요·척화비 건립", desc: "미국 함대 침략을 격퇴하고 <strong>척화비</strong>를 세웠다", major: true },
+    { year: "1876", period: "근대", title: "강화도 조약 체결", desc: "<strong>운요호 사건</strong>을 빌미로 최초의 근대적 불평등 조약을 맺었다", major: true },
+    { year: "1882", period: "근대", title: "임오군란", desc: "구식 군인 차별로 일어나 <strong>청의 내정 간섭</strong>이 심화되었다", major: false },
+    { year: "1884", period: "근대", title: "갑신정변", desc: "급진 개화파가 <strong>14개조 정강</strong>을 발표했으나 3일 천하로 끝났다", major: true },
+    { year: "1894", period: "근대", title: "동학 농민 운동·갑오개혁", desc: "<strong>동학 농민 운동</strong>이 일어나고 군국기무처가 개혁을 추진하였다", major: true },
+    { year: "1895", period: "근대", title: "을미사변·을미개혁", desc: "명성 황후 시해 후 <strong>단발령</strong> 등 을미개혁이 추진되었다", major: false },
+    { year: "1897", period: "근대", title: "대한 제국 수립", desc: "고종이 환구단에서 황제로 즉위하고 <strong>대한 제국</strong>을 선포하였다", major: true },
+    { year: "1905", period: "근대", title: "을사늑약", desc: "<strong>외교권 박탈</strong>과 통감부 설치로 사실상 보호국이 되었다", major: true },
+    { year: "1907", period: "근대", title: "헤이그 특사·군대 해산", desc: "헤이그 특사 파견 후 고종이 퇴위되고 <strong>군대가 해산</strong>되었다", major: true },
+    { year: "1907", period: "근대", title: "국채 보상 운동", desc: "대구에서 시작된 <strong>국채 보상 운동</strong>이 전국으로 확산되었다", major: false },
+    { year: "1910", period: "근대", title: "국권 피탈", desc: "<strong>한일 병합 조약</strong>으로 국권을 빼앗기고 식민 통치가 시작되었다", major: true }
+  ]
+};
+</script>
+<script>
+window.UNIT_DATA_IV = {
+  concepts: [
+    // ===== unit 13 =====
+    {
+      unit: "13",
+      name: "8·15 광복",
+      year: "1945",
+      summary: "1945년 8월 15일 일본의 무조건 항복으로 우리 민족이 광복을 맞이하였다.",
+      details: [
+        "<strong>연합국의 승리</strong>와 우리 민족의 독립운동이 결합된 결과",
+        "카이로 회담(1943)에서 한국의 독립이 최초로 국제적으로 약속됨",
+        "광복 직후 여운형 등이 <strong>조선 건국 준비 위원회</strong>를 조직"
+      ]
+    },
+    {
+      unit: "13",
+      name: "38도선과 미소 군정",
+      year: "1945",
+      summary: "광복 후 38도선을 경계로 남에는 미군, 북에는 소련군이 진주하였다.",
+      details: [
+        "<strong>38도선</strong>을 경계로 남북에 미군과 소련군이 분할 점령",
+        "남한에는 <strong>미군정</strong>이 실시되어 직접 통치",
+        "미군정은 대한민국 임시 정부와 조선 건국 준비 위원회를 인정하지 않음"
+      ]
+    },
+    {
+      unit: "13",
+      name: "모스크바 3국 외상 회의",
+      year: "1945.12",
+      summary: "미·영·소 외상이 한반도 임시 민주 정부 수립과 최고 5년간 신탁 통치 등을 결정하였다.",
+      details: [
+        "<strong>임시 민주 정부 수립</strong>, 미소 공동 위원회 설치, 최고 5년 신탁 통치 결정",
+        "신탁 통치를 둘러싸고 <strong>좌익(찬탁)과 우익(반탁)</strong>의 대립 격화",
+        "좌우 대립이 심화되어 분단의 한 원인이 됨"
+      ]
+    },
+    {
+      unit: "13",
+      name: "미소 공동 위원회",
+      year: "1946~47",
+      summary: "임시 정부 수립을 협의하기 위해 두 차례 열렸으나 협의 대상 문제로 결렬되었다.",
+      details: [
+        "1차(1946)·2차(1947) 두 차례 개최",
+        "참여 정당·단체의 범위를 두고 <strong>미국과 소련이 대립</strong>",
+        "결국 결렬되어 미국이 한국 문제를 <strong>유엔에 이관</strong>"
+      ]
+    },
+    {
+      unit: "13",
+      name: "이승만 정읍 발언",
+      year: "1946",
+      summary: "1946년 6월 이승만이 정읍에서 남한만의 단독 정부 수립을 처음으로 주장하였다.",
+      details: [
+        "1차 미소 공동 위원회 결렬 후 제기",
+        "<strong>남한만의 단독 정부 수립</strong>을 공개적으로 주장",
+        "이를 계기로 좌우 합작 운동이 추진됨"
+      ]
+    },
+    {
+      unit: "13",
+      name: "좌우 합작 운동",
+      year: "1946~47",
+      summary: "여운형·김규식 등 중도 세력이 좌우 합작을 통해 통일 정부 수립을 추진하였다.",
+      details: [
+        "중도 우파 <strong>김규식</strong>과 중도 좌파 <strong>여운형</strong>이 주도",
+        "좌우 합작 7원칙 발표",
+        "미군정의 지원 철회와 여운형 암살(1947)로 실패"
+      ]
+    },
+    {
+      unit: "13",
+      name: "유엔 한국 임시 위원단",
+      year: "1948",
+      summary: "유엔 총회 결정에 따라 남북한 총선거를 감시하기 위해 파견되었다.",
+      details: [
+        "유엔 총회가 <strong>인구 비례 남북한 총선거</strong>를 결정",
+        "<strong>소련</strong>이 입북을 거부하여 38도선 이북 활동 불가",
+        "유엔 소총회가 <strong>가능한 지역(남한)만의 총선거</strong>를 결정"
+      ]
+    },
+    {
+      unit: "13",
+      name: "남북 협상",
+      year: "1948",
+      summary: "단독 선거에 반대한 김구·김규식이 평양에서 북측 지도자와 회담하였다.",
+      details: [
+        "<strong>김구·김규식</strong>이 단독 정부 수립에 반대하며 추진",
+        "평양에서 남북 제정당 사회 단체 연석회의 개최",
+        "성과 없이 끝났고 5·10 총선거는 예정대로 실시됨"
+      ]
+    },
+    {
+      unit: "13",
+      name: "5·10 총선거",
+      year: "1948",
+      summary: "우리나라 최초의 보통 선거로 제헌 국회 의원을 선출하였다.",
+      details: [
+        "<strong>우리나라 최초의 민주적 보통 선거</strong>",
+        "21세 이상 모든 국민에게 투표권 부여",
+        "임기 2년의 <strong>제헌 국회 의원</strong> 선출"
+      ]
+    },
+    {
+      unit: "13",
+      name: "대한민국 정부 수립",
+      year: "1948",
+      summary: "1948년 8월 15일 이승만을 초대 대통령으로 하는 대한민국 정부가 수립되었다.",
+      details: [
+        "제헌 국회가 <strong>제헌 헌법</strong> 제정(대통령 간선제)",
+        "<strong>이승만</strong>을 초대 대통령으로 선출",
+        "유엔 총회에서 한반도 유일 합법 정부로 승인받음"
+      ]
+    },
+    {
+      unit: "13",
+      name: "반민족 행위 처벌법",
+      year: "1948",
+      summary: "친일파 청산을 위해 제정되어 반민족 행위 특별 조사 위원회가 활동하였다.",
+      details: [
+        "제헌 국회가 친일파 청산을 위해 제정",
+        "<strong>반민특위</strong>가 친일 인사를 조사·체포",
+        "이승만 정부의 비협조와 국회 프락치 사건 등으로 성과 미흡"
+      ]
+    },
+    {
+      unit: "13",
+      name: "농지 개혁법",
+      year: "1949",
+      summary: "유상 매수·유상 분배 방식의 농지 개혁으로 지주제가 사실상 해체되었다.",
+      details: [
+        "1949년 제정, 1950년부터 시행",
+        "<strong>유상 매수·유상 분배</strong> 방식, 1가구 3정보 상한",
+        "지주제가 폐지되고 자영농이 증가"
+      ]
+    },
+    {
+      unit: "13",
+      name: "6·25 전쟁",
+      year: "1950~53",
+      summary: "북한의 남침으로 시작되어 정전 협정으로 마무리된 동족상잔의 전쟁이다.",
+      details: [
+        "1950년 6월 25일 <strong>북한의 남침</strong>으로 발발",
+        "낙동강 전선 → <strong>인천 상륙 작전</strong> → 중국군 개입 → 1·4 후퇴",
+        "1953년 <strong>정전 협정</strong> 체결, 한미 상호 방위 조약 체결"
+      ]
+    },
+    // ===== unit 14 =====
+    {
+      unit: "14",
+      name: "발췌 개헌",
+      year: "1952",
+      summary: "이승만이 재선을 위해 대통령 직선제로 헌법을 강제로 개정하였다.",
+      details: [
+        "6·25 전쟁 중 임시 수도 부산에서 강행",
+        "<strong>대통령 직선제</strong>로 개헌",
+        "이승만의 장기 집권 기반 마련"
+      ]
+    },
+    {
+      unit: "14",
+      name: "사사오입 개헌",
+      year: "1954",
+      summary: "초대 대통령의 중임 제한을 철폐하기 위해 사사오입 논리로 개헌을 통과시켰다.",
+      details: [
+        "<strong>초대 대통령에 한해 중임 제한 철폐</strong>",
+        "정족수 미달을 <strong>사사오입(반올림)</strong> 논리로 강변하여 통과",
+        "이승만의 3선 가도를 열어줌"
+      ]
+    },
+    {
+      unit: "14",
+      name: "3·15 부정 선거",
+      year: "1960",
+      summary: "이승만 정부와 자유당이 정·부통령 선거에서 대규모 부정을 저질렀다.",
+      details: [
+        "<strong>이기붕</strong>을 부통령으로 당선시키기 위한 대대적 부정",
+        "사전 투표, 3인조·9인조 공개 투표 등 자행",
+        "<strong>4·19 혁명</strong>의 직접적 원인이 됨"
+      ]
+    },
+    {
+      unit: "14",
+      name: "4·19 혁명",
+      year: "1960",
+      summary: "3·15 부정 선거에 항거하여 이승만 정권을 무너뜨린 민주 혁명이다.",
+      details: [
+        "마산에서 <strong>김주열</strong> 시신 발견이 도화선",
+        "학생·시민의 시위로 확산, 대학교수단 시국 선언",
+        "<strong>이승만 하야</strong>와 자유당 정권 붕괴"
+      ]
+    },
+    {
+      unit: "14",
+      name: "장면 내각",
+      year: "1960~61",
+      summary: "4·19 혁명 후 개정 헌법에 따라 수립된 내각 책임제 정부이다.",
+      details: [
+        "<strong>내각 책임제와 양원제</strong> 국회로 개헌",
+        "대통령 윤보선, 국무총리 <strong>장면</strong>",
+        "5·16 군사 정변으로 9개월 만에 붕괴"
+      ]
+    },
+    {
+      unit: "14",
+      name: "5·16 군사 정변",
+      year: "1961",
+      summary: "박정희를 중심으로 한 군부 세력이 정변을 일으켜 정권을 장악하였다.",
+      details: [
+        "<strong>박정희</strong> 중심의 군부 세력이 주도",
+        "국가 재건 최고 회의를 통해 군정 실시",
+        "이후 대통령 중심제로 개헌하여 박정희 집권"
+      ]
+    },
+    {
+      unit: "14",
+      name: "한일 협정",
+      year: "1965",
+      summary: "한일 국교 정상화를 위해 체결되었으나 굴욕 외교 논란을 빚었다.",
+      details: [
+        "경제 개발 자금 확보를 위해 추진",
+        "<strong>6·3 시위</strong> 등 굴욕 외교 반대 운동 발생",
+        "식민 지배 사죄·배상 문제가 명확히 매듭지어지지 않음"
+      ]
+    },
+    {
+      unit: "14",
+      name: "베트남 파병",
+      year: "1964~73",
+      summary: "미국의 요청으로 베트남 전쟁에 국군을 파병하였다.",
+      details: [
+        "<strong>브라운 각서</strong>로 경제·군사 원조 약속받음",
+        "건설 사업 수주 등으로 경제 성장에 기여",
+        "고엽제 피해, 민간인 희생 등 부작용도 발생"
+      ]
+    },
+    {
+      unit: "14",
+      name: "유신 체제",
+      year: "1972",
+      summary: "박정희가 10월 유신을 단행하여 영구 집권을 꾀한 권위주의 체제이다.",
+      details: [
+        "<strong>대통령 간선제(통일 주체 국민 회의)</strong>로 선출",
+        "대통령에게 <strong>긴급 조치권·국회 해산권</strong> 등 막강한 권한 부여",
+        "대통령 중임 제한 철폐로 영구 집권 가능"
+      ]
+    },
+    {
+      unit: "14",
+      name: "부마 민주 항쟁",
+      year: "1979",
+      summary: "유신 체제에 반대하여 부산과 마산에서 일어난 민주화 운동이다.",
+      details: [
+        "YH 무역 사건, 신민당 총재 김영삼 제명이 배경",
+        "<strong>부산·마산</strong> 지역에서 대규모 시위 전개",
+        "유신 체제 붕괴와 <strong>10·26 사태</strong>의 한 배경이 됨"
+      ]
+    },
+    {
+      unit: "14",
+      name: "5·18 민주화 운동",
+      year: "1980",
+      summary: "신군부의 권력 장악에 맞서 광주에서 일어난 민주화 운동이다.",
+      details: [
+        "<strong>전두환 등 신군부</strong>의 12·12 사태와 비상계엄 확대가 배경",
+        "광주에서 시민군이 계엄군에 저항",
+        "관련 기록물이 <strong>유네스코 세계 기록 유산</strong>에 등재"
+      ]
+    },
+    {
+      unit: "14",
+      name: "경제 개발 5개년 계획",
+      year: "1962~",
+      summary: "정부 주도로 추진된 경제 성장 계획으로 고도성장을 이끌었다.",
+      details: [
+        "1·2차는 경공업·수출 산업, 3·4차는 <strong>중화학 공업</strong> 중심",
+        "<strong>수출 주도형</strong> 성장 전략 추진",
+        "한강의 기적이라 불리는 고도성장 달성"
+      ]
+    },
+    {
+      unit: "14",
+      name: "새마을 운동",
+      year: "1970",
+      summary: "근면·자조·협동을 내세운 정부 주도의 농촌 근대화 운동이다.",
+      details: [
+        "<strong>근면·자조·협동</strong>을 기본 정신으로 함",
+        "농촌 환경 개선에서 도시·공장으로 확산",
+        "관련 기록물이 유네스코 세계 기록 유산에 등재"
+      ]
+    },
+    // ===== unit 15 =====
+    {
+      unit: "15",
+      name: "6월 민주 항쟁",
+      year: "1987",
+      summary: "대통령 직선제 개헌을 요구하며 전국적으로 일어난 민주화 운동이다.",
+      details: [
+        "<strong>박종철 고문치사 사건</strong>과 4·13 호헌 조치가 배경",
+        "<strong>이한열</strong>이 시위 중 최루탄에 맞아 쓰러짐",
+        "<strong>6·29 선언</strong>으로 대통령 직선제 개헌 수용"
+      ]
+    },
+    {
+      unit: "15",
+      name: "6·29 선언",
+      year: "1987",
+      summary: "여당 대표 노태우가 대통령 직선제 개헌 등을 수용한 선언이다.",
+      details: [
+        "6월 민주 항쟁의 결과로 발표",
+        "<strong>대통령 직선제 개헌</strong> 수용",
+        "이후 5년 단임 대통령 직선제로 개헌(현행 헌법)"
+      ]
+    },
+    {
+      unit: "15",
+      name: "노태우 정부",
+      year: "1988~93",
+      summary: "서울 올림픽 개최와 북방 외교를 추진한 정부이다.",
+      details: [
+        "1988년 <strong>서울 올림픽</strong> 개최",
+        "소련·중국 등 사회주의 국가와 수교하는 <strong>북방 외교</strong> 추진",
+        "남북한 유엔 동시 가입(1991)"
+      ]
+    },
+    {
+      unit: "15",
+      name: "김영삼 정부",
+      year: "1993~98",
+      summary: "금융 실명제와 지방 자치제를 시행한 문민정부이다.",
+      details: [
+        "<strong>금융 실명제</strong> 전격 실시",
+        "지방 자치제 전면 실시, <strong>OECD 가입</strong>",
+        "임기 말 <strong>외환 위기</strong>로 IMF 구제 금융 신청"
+      ]
+    },
+    {
+      unit: "15",
+      name: "김대중 정부",
+      year: "1998~2003",
+      summary: "외환 위기를 극복하고 최초의 남북 정상 회담을 개최한 정부이다.",
+      details: [
+        "<strong>외환 위기</strong> 극복을 위한 금 모으기 운동 등 추진",
+        "대북 화해 협력 정책(햇볕 정책) 추진",
+        "<strong>제1차 남북 정상 회담(2000)</strong> 개최, 6·15 남북 공동 선언"
+      ]
+    },
+    {
+      unit: "15",
+      name: "7·4 남북 공동 성명",
+      year: "1972",
+      summary: "분단 후 처음으로 남북이 통일 원칙에 합의한 성명이다.",
+      details: [
+        "<strong>자주·평화·민족 대단결</strong>의 3대 통일 원칙 합의",
+        "남북 조절 위원회 설치",
+        "남북 모두 독재 체제 강화에 이용한 한계"
+      ]
+    },
+    {
+      unit: "15",
+      name: "남북 기본 합의서",
+      year: "1991",
+      summary: "남북이 상호 체제를 인정하고 화해·협력하기로 한 합의서이다.",
+      details: [
+        "노태우 정부 시기 채택",
+        "남북 관계를 <strong>잠정적 특수 관계</strong>로 규정",
+        "상호 불가침과 화해·교류 협력에 합의"
+      ]
+    },
+    {
+      unit: "15",
+      name: "6·15 남북 공동 선언",
+      year: "2000",
+      summary: "제1차 남북 정상 회담에서 채택된 공동 선언이다.",
+      details: [
+        "<strong>김대중·김정일</strong> 정상 회담의 결과",
+        "통일 방안의 공통성 인정, 이산가족 방문 합의",
+        "<strong>개성 공단</strong>, 경의선 복원 등 교류 협력 확대"
+      ]
+    },
+    {
+      unit: "15",
+      name: "10·4 남북 공동 선언",
+      year: "2007",
+      summary: "노무현 정부 시기 제2차 남북 정상 회담에서 채택되었다.",
+      details: [
+        "<strong>노무현·김정일</strong> 제2차 정상 회담",
+        "6·15 선언의 정신을 계승·발전",
+        "서해 평화 협력 특별 지대 등 경제 협력 합의"
+      ]
+    },
+    {
+      unit: "15",
+      name: "외환 위기",
+      year: "1997",
+      summary: "외환 부족으로 IMF에 구제 금융을 신청한 경제 위기이다.",
+      details: [
+        "<strong>김영삼 정부 말기</strong>에 발생",
+        "IMF 구제 금융 지원과 강도 높은 구조 조정",
+        "김대중 정부 시기 금 모으기 운동 등으로 조기 극복"
+      ]
+    },
+    {
+      unit: "15",
+      name: "중국의 동북공정",
+      year: "2002~",
+      summary: "고구려·발해 역사를 중국사로 편입하려는 역사 왜곡 연구이다.",
+      details: [
+        "<strong>고구려·발해</strong>를 중국 지방 정권으로 왜곡",
+        "한반도 통일 이후를 대비한 영토 논리로 해석",
+        "우리 고대사에 대한 심각한 역사 왜곡"
+      ]
+    },
+    {
+      unit: "15",
+      name: "일본의 역사 왜곡과 독도",
+      year: "현대",
+      summary: "일본은 역사 교과서 왜곡과 독도 영유권 주장 등으로 갈등을 빚고 있다.",
+      details: [
+        "역사 교과서에서 식민 지배·침략을 미화",
+        "<strong>독도</strong>를 자국 영토로 부당하게 주장",
+        "<strong>야스쿠니 신사</strong> 참배로 주변국과 갈등"
+      ]
+    }
+  ],
+  ox: [
+    // unit 13
+    { unit: "13", statement: "8·15 광복은 1945년 8월 15일에 이루어졌다.", answer: true, explanation: "O. 1945년 8월 15일 일본의 무조건 항복으로 광복을 맞이하였다." },
+    { unit: "13", statement: "모스크바 3국 외상 회의에서 최고 5년간의 신탁 통치가 결정되었다.", answer: true, explanation: "O. 임시 민주 정부 수립과 함께 최고 5년간 신탁 통치 등이 결정되었다." },
+    { unit: "13", statement: "이승만은 정읍 발언에서 좌우 합작에 의한 통일 정부 수립을 주장하였다.", answer: false, explanation: "X. 이승만은 정읍 발언에서 <strong>남한만의 단독 정부 수립</strong>을 주장하였다." },
+    { unit: "13", statement: "좌우 합작 운동은 여운형과 김규식이 주도하였다.", answer: true, explanation: "O. 중도 좌파 여운형과 중도 우파 김규식이 좌우 합작 운동을 주도하였다." },
+    { unit: "13", statement: "유엔 한국 임시 위원단은 북한 지역에서도 자유롭게 활동하였다.", answer: false, explanation: "X. <strong>소련의 거부</strong>로 위원단은 북한 지역에 들어갈 수 없었다." },
+    { unit: "13", statement: "5·10 총선거는 우리나라 최초의 보통 선거였다.", answer: true, explanation: "O. 21세 이상 모든 국민이 참여한 최초의 민주적 보통 선거였다." },
+    { unit: "13", statement: "남북 협상은 김구와 김규식이 단독 선거에 반대하며 추진하였다.", answer: true, explanation: "O. 김구·김규식은 단독 정부 수립에 반대하며 평양에서 남북 협상을 추진하였다." },
+    { unit: "13", statement: "농지 개혁법은 무상 몰수·무상 분배 방식으로 시행되었다.", answer: false, explanation: "X. 남한의 농지 개혁은 <strong>유상 매수·유상 분배</strong> 방식이었다." },
+    { unit: "13", statement: "6·25 전쟁 중 인천 상륙 작전으로 전세가 역전되었다.", answer: true, explanation: "O. 1950년 9월 인천 상륙 작전 성공으로 국군과 유엔군이 반격에 나섰다." },
+    { unit: "13", statement: "6·25 전쟁은 정전 협정이 아니라 평화 조약으로 종결되었다.", answer: false, explanation: "X. 6·25 전쟁은 1953년 <strong>정전(휴전) 협정</strong>으로 마무리되었다." },
+    // unit 14
+    { unit: "14", statement: "발췌 개헌은 대통령 직선제를 골자로 한 개헌이었다.", answer: true, explanation: "O. 이승만은 재선을 위해 대통령 직선제로 발췌 개헌을 강행하였다." },
+    { unit: "14", statement: "사사오입 개헌으로 초대 대통령의 중임 제한이 철폐되었다.", answer: true, explanation: "O. 초대 대통령에 한해 중임 제한을 없애 이승만의 장기 집권을 가능케 하였다." },
+    { unit: "14", statement: "4·19 혁명의 직접적 계기는 3·15 부정 선거였다.", answer: true, explanation: "O. 3·15 부정 선거에 항거하여 4·19 혁명이 일어나 이승만이 하야하였다." },
+    { unit: "14", statement: "장면 내각은 대통령 중심제 헌법에 따라 수립되었다.", answer: false, explanation: "X. 장면 내각은 <strong>내각 책임제</strong> 개헌에 따라 수립되었다." },
+    { unit: "14", statement: "5·16 군사 정변은 박정희를 중심으로 한 군부 세력이 일으켰다.", answer: true, explanation: "O. 박정희 중심의 군부가 정변을 일으켜 정권을 장악하였다." },
+    { unit: "14", statement: "한일 협정 체결에 반대하여 6·3 시위가 일어났다.", answer: true, explanation: "O. 굴욕적인 한일 회담에 반대하여 1964년 6·3 시위가 전개되었다." },
+    { unit: "14", statement: "유신 헌법은 대통령 직선제를 규정하였다.", answer: false, explanation: "X. 유신 헌법은 <strong>통일 주체 국민 회의에 의한 간선제</strong>로 대통령을 선출하였다." },
+    { unit: "14", statement: "부마 민주 항쟁은 유신 체제에 반대하여 일어났다.", answer: true, explanation: "O. 부산·마산에서 유신 체제에 반대하는 항쟁이 일어났다." },
+    { unit: "14", statement: "5·18 민주화 운동은 광주에서 신군부에 맞서 일어났다.", answer: true, explanation: "O. 신군부의 권력 장악에 맞서 광주에서 5·18 민주화 운동이 전개되었다." },
+    { unit: "14", statement: "새마을 운동의 기본 정신은 자유·평등·박애였다.", answer: false, explanation: "X. 새마을 운동의 기본 정신은 <strong>근면·자조·협동</strong>이었다." },
+    // unit 15
+    { unit: "15", statement: "6월 민주 항쟁의 배경에는 박종철 고문치사 사건이 있었다.", answer: true, explanation: "O. 박종철 고문치사 사건과 4·13 호헌 조치가 6월 민주 항쟁의 배경이 되었다." },
+    { unit: "15", statement: "6·29 선언으로 대통령 직선제 개헌이 수용되었다.", answer: true, explanation: "O. 6월 민주 항쟁의 결과 6·29 선언으로 대통령 직선제 개헌이 이루어졌다." },
+    { unit: "15", statement: "서울 올림픽은 김영삼 정부 시기에 개최되었다.", answer: false, explanation: "X. 서울 올림픽은 <strong>노태우 정부</strong> 시기인 1988년에 개최되었다." },
+    { unit: "15", statement: "김영삼 정부는 금융 실명제를 실시하였다.", answer: true, explanation: "O. 김영삼 정부는 금융 실명제와 지방 자치제 전면 실시 등을 추진하였다." },
+    { unit: "15", statement: "제1차 남북 정상 회담은 김대중 정부 시기에 개최되었다.", answer: true, explanation: "O. 2000년 김대중 정부 시기 제1차 남북 정상 회담이 열려 6·15 선언이 채택되었다." },
+    { unit: "15", statement: "7·4 남북 공동 성명에서 자주·평화·민족 대단결의 통일 원칙이 합의되었다.", answer: true, explanation: "O. 7·4 남북 공동 성명은 자주·평화·민족 대단결의 3대 통일 원칙을 천명하였다." },
+    { unit: "15", statement: "6·15 남북 공동 선언은 노무현 정부 시기에 채택되었다.", answer: false, explanation: "X. 6·15 남북 공동 선언은 <strong>김대중 정부(2000)</strong> 시기에 채택되었다." },
+    { unit: "15", statement: "외환 위기는 김영삼 정부 말기에 발생하였다.", answer: true, explanation: "O. 1997년 김영삼 정부 말기에 외환 위기가 발생해 IMF 구제 금융을 신청하였다." },
+    { unit: "15", statement: "중국의 동북공정은 고구려와 발해의 역사를 한국사로 인정하는 연구이다.", answer: false, explanation: "X. 동북공정은 고구려·발해를 <strong>중국사로 편입</strong>하려는 역사 왜곡이다." },
+    { unit: "15", statement: "일본은 독도를 자국 영토라고 부당하게 주장하고 있다.", answer: true, explanation: "O. 일본은 역사적·국제법적으로 명백한 우리 영토인 독도를 부당하게 주장하고 있다." }
+  ],
+  mc: [
+    // unit 13
+    {
+      unit: "13", difficulty: "normal",
+      q: "모스크바 3국 외상 회의에서 결정된 내용으로 옳은 것은?",
+      options: ["남한만의 단독 정부 수립", "임시 민주 정부 수립과 최고 5년간 신탁 통치", "즉각적인 한반도 통일 정부 수립", "유엔 감시하 총선거 실시", "미군정의 영구 통치"],
+      answer: 1,
+      explanation: "<strong>임시 민주 정부 수립</strong>, 미소 공동 위원회 설치, 최고 5년간 신탁 통치 등이 결정되었다."
+    },
+    {
+      unit: "13", difficulty: "normal",
+      q: "다음 발언을 한 인물에 대한 설명으로 옳은 것은? '이제 우리는 남방만이라도 임시 정부 혹은 위원회 같은 것을 조직하여...'",
+      options: ["북한과의 남북 협상을 주도하였다.", "좌우 합작 7원칙을 발표하였다.", "남한만의 단독 정부 수립을 주장하였다.", "조선 건국 준비 위원회를 조직하였다.", "신탁 통치를 적극 찬성하였다."],
+      answer: 2,
+      explanation: "정읍 발언은 <strong>이승만</strong>의 발언으로, 남한만의 단독 정부 수립을 주장한 것이다."
+    },
+    {
+      unit: "13", difficulty: "normal",
+      q: "5·10 총선거에 대한 설명으로 옳은 것은?",
+      options: ["북한 지역에서도 동시에 실시되었다.", "우리나라 최초의 보통 선거였다.", "장면 내각을 구성하였다.", "내각 책임제 국회를 선출하였다.", "임기 4년의 의원을 선출하였다."],
+      answer: 1,
+      explanation: "5·10 총선거는 <strong>우리나라 최초의 민주적 보통 선거</strong>로 제헌 국회 의원(임기 2년)을 선출하였다."
+    },
+    {
+      unit: "13", difficulty: "hard",
+      q: "다음 사건을 순서대로 바르게 나열한 것은? (가) 5·10 총선거 (나) 모스크바 3국 외상 회의 (다) 좌우 합작 운동 (라) 남북 협상",
+      options: ["(나)-(다)-(라)-(가)", "(나)-(다)-(가)-(라)", "(다)-(나)-(라)-(가)", "(나)-(라)-(다)-(가)", "(다)-(나)-(가)-(라)"],
+      answer: 0,
+      explanation: "<strong>모스크바 3국 외상 회의(1945.12) → 좌우 합작 운동(1946~47) → 남북 협상(1948.4) → 5·10 총선거(1948.5)</strong> 순이다."
+    },
+    {
+      unit: "13", difficulty: "normal",
+      q: "제헌 국회의 활동으로 옳은 것을 모두 고른 것은? (가) 반민족 행위 처벌법 제정 (나) 농지 개혁법 제정 (다) 발췌 개헌 (라) 새마을 운동 전개",
+      options: ["(가), (나)", "(가), (다)", "(나), (다)", "(다), (라)", "(가), (라)"],
+      answer: 0,
+      explanation: "제헌 국회는 <strong>반민족 행위 처벌법</strong>과 <strong>농지 개혁법</strong>을 제정하였다. 발췌 개헌과 새마을 운동은 이후의 일이다."
+    },
+    {
+      unit: "13", difficulty: "hard",
+      q: "6·25 전쟁의 전개 과정을 순서대로 바르게 나열한 것은? (가) 인천 상륙 작전 (나) 북한의 남침 (다) 1·4 후퇴 (라) 정전 협정 체결",
+      options: ["(나)-(가)-(다)-(라)", "(나)-(다)-(가)-(라)", "(가)-(나)-(다)-(라)", "(나)-(가)-(라)-(다)", "(나)-(다)-(라)-(가)"],
+      answer: 0,
+      explanation: "<strong>남침(1950.6) → 인천 상륙 작전(1950.9) → 1·4 후퇴(1951.1) → 정전 협정(1953.7)</strong> 순이다."
+    },
+    {
+      unit: "13", difficulty: "normal",
+      q: "6·25 전쟁의 결과로 옳은 것은?",
+      options: ["한미 상호 방위 조약이 체결되었다.", "남북 협상이 시작되었다.", "신탁 통치가 실시되었다.", "미군정이 시작되었다.", "남북한이 유엔에 동시 가입하였다."],
+      answer: 0,
+      explanation: "정전 협정 체결 후 1953년 <strong>한미 상호 방위 조약</strong>이 체결되어 한미 동맹이 강화되었다."
+    },
+    {
+      unit: "13", difficulty: "normal",
+      q: "다음 설명에 해당하는 단체는? 유엔 총회의 결정으로 남북한 총선거를 감시하기 위해 파견되었으나 소련의 거부로 북한에 들어가지 못하였다.",
+      options: ["미소 공동 위원회", "남북 조절 위원회", "유엔 한국 임시 위원단", "반민족 행위 특별 조사 위원회", "국가 재건 최고 회의"],
+      answer: 2,
+      explanation: "<strong>유엔 한국 임시 위원단</strong>은 소련의 거부로 북한에 들어가지 못하였고, 유엔 소총회가 남한만의 총선거를 결정하였다."
+    },
+    {
+      unit: "13", difficulty: "hard",
+      q: "남한의 농지 개혁에 대한 설명으로 옳은 것은?",
+      options: ["무상 몰수·무상 분배 방식이었다.", "북한보다 먼저 실시되었다.", "유상 매수·유상 분배 방식이었다.", "지주제를 강화하였다.", "소작농을 확대시켰다."],
+      answer: 2,
+      explanation: "남한의 농지 개혁은 <strong>유상 매수·유상 분배</strong> 방식으로, 지주제가 해체되고 자영농이 늘어났다."
+    },
+    {
+      unit: "13", difficulty: "normal",
+      q: "광복 직후 여운형이 조직한 단체로, 치안과 행정을 담당하고자 한 것은?",
+      options: ["조선 건국 준비 위원회", "신간회", "독립 협회", "한국 광복군", "남북 조절 위원회"],
+      answer: 0,
+      explanation: "광복 직후 여운형 등이 <strong>조선 건국 준비 위원회</strong>를 조직하여 치안과 행정을 담당하려 하였다."
+    },
+    // unit 14
+    {
+      unit: "14", difficulty: "normal",
+      q: "사사오입 개헌의 핵심 내용으로 옳은 것은?",
+      options: ["대통령 직선제 도입", "내각 책임제 도입", "초대 대통령의 중임 제한 철폐", "통일 주체 국민 회의 설치", "지방 자치제 실시"],
+      answer: 2,
+      explanation: "사사오입 개헌은 <strong>초대 대통령에 한해 중임 제한을 철폐</strong>하여 이승만의 장기 집권을 가능케 하였다."
+    },
+    {
+      unit: "14", difficulty: "normal",
+      q: "4·19 혁명에 대한 설명으로 옳은 것은?",
+      options: ["유신 체제를 무너뜨렸다.", "3·15 부정 선거가 직접적 원인이었다.", "신군부의 등장 배경이 되었다.", "대통령 직선제 개헌을 이끌어냈다.", "5·16 군사 정변으로 이어졌다."],
+      answer: 1,
+      explanation: "4·19 혁명은 <strong>3·15 부정 선거</strong>에 항거하여 일어났고, 이승만이 하야하였다."
+    },
+    {
+      unit: "14", difficulty: "normal",
+      q: "장면 내각에 대한 설명으로 옳은 것은?",
+      options: ["유신 헌법에 따라 수립되었다.", "내각 책임제 개헌으로 수립되었다.", "발췌 개헌으로 출범하였다.", "5·16 군사 정변으로 수립되었다.", "대통령 직선제로 선출되었다."],
+      answer: 1,
+      explanation: "4·19 혁명 후 <strong>내각 책임제·양원제</strong> 개헌에 따라 윤보선 대통령, 장면 국무총리의 장면 내각이 수립되었다."
+    },
+    {
+      unit: "14", difficulty: "hard",
+      q: "다음 사건을 시기 순으로 바르게 나열한 것은? (가) 5·16 군사 정변 (나) 유신 체제 성립 (다) 한일 협정 체결 (라) 부마 민주 항쟁",
+      options: ["(가)-(다)-(나)-(라)", "(가)-(나)-(다)-(라)", "(다)-(가)-(나)-(라)", "(가)-(다)-(라)-(나)", "(다)-(가)-(라)-(나)"],
+      answer: 0,
+      explanation: "<strong>5·16 정변(1961) → 한일 협정(1965) → 유신 체제(1972) → 부마 항쟁(1979)</strong> 순이다."
+    },
+    {
+      unit: "14", difficulty: "normal",
+      q: "유신 체제(1972)에 대한 설명으로 옳은 것은?",
+      options: ["대통령을 직선제로 선출하였다.", "통일 주체 국민 회의에서 대통령을 선출하였다.", "대통령 임기를 4년으로 제한하였다.", "내각 책임제를 도입하였다.", "지방 자치제를 전면 실시하였다."],
+      answer: 1,
+      explanation: "유신 헌법은 <strong>통일 주체 국민 회의</strong>의 간선제로 대통령을 선출하고, 대통령에게 긴급 조치권 등 막강한 권한을 부여하였다."
+    },
+    {
+      unit: "14", difficulty: "normal",
+      q: "베트남 파병과 관련하여 미국이 경제·군사 원조를 약속한 문서는?",
+      options: ["브라운 각서", "남북 기본 합의서", "한미 상호 방위 조약", "정전 협정", "6·29 선언"],
+      answer: 0,
+      explanation: "베트남 파병의 대가로 미국은 <strong>브라운 각서</strong>를 통해 경제·군사적 지원을 약속하였다."
+    },
+    {
+      unit: "14", difficulty: "normal",
+      q: "5·18 민주화 운동에 대한 설명으로 옳은 것은?",
+      options: ["3·15 부정 선거가 원인이었다.", "신군부의 권력 장악에 맞서 광주에서 일어났다.", "유신 헌법 제정의 계기가 되었다.", "이승만 정권을 무너뜨렸다.", "금융 실명제 실시로 이어졌다."],
+      answer: 1,
+      explanation: "5·18 민주화 운동은 <strong>전두환 등 신군부</strong>의 권력 장악에 맞서 광주에서 일어났으며, 관련 기록물이 유네스코 세계 기록 유산에 등재되었다."
+    },
+    {
+      unit: "14", difficulty: "hard",
+      q: "박정희 정부 시기의 경제 정책으로 옳은 것을 모두 고른 것은? (가) 경제 개발 5개년 계획 (나) 새마을 운동 (다) 금융 실명제 (라) OECD 가입",
+      options: ["(가), (나)", "(가), (다)", "(나), (라)", "(다), (라)", "(가), (라)"],
+      answer: 0,
+      explanation: "<strong>경제 개발 5개년 계획</strong>과 <strong>새마을 운동</strong>은 박정희 정부 시기, 금융 실명제와 OECD 가입은 김영삼 정부 시기이다."
+    },
+    {
+      unit: "14", difficulty: "normal",
+      q: "부마 민주 항쟁의 배경으로 옳은 것은?",
+      options: ["3·15 부정 선거", "유신 체제에 대한 반발", "12·12 사태", "외환 위기", "한일 협정 체결"],
+      answer: 1,
+      explanation: "부마 민주 항쟁은 <strong>유신 체제</strong>에 대한 반발로 부산·마산에서 일어났으며, 유신 체제 붕괴의 한 배경이 되었다."
+    },
+    {
+      unit: "14", difficulty: "normal",
+      q: "박정희 정부의 경제 성장 전략에 대한 설명으로 옳은 것은?",
+      options: ["내수 중심의 자급자족 경제", "수출 주도형 성장 전략", "농업 중심의 1차 산업 육성", "무상 복지 확대 정책", "사회주의 계획 경제"],
+      answer: 1,
+      explanation: "박정희 정부는 <strong>수출 주도형</strong> 성장 전략으로 경공업에서 중화학 공업으로 산업 구조를 고도화하였다."
+    },
+    // unit 15
+    {
+      unit: "15", difficulty: "normal",
+      q: "6월 민주 항쟁의 결과로 옳은 것은?",
+      options: ["유신 헌법이 제정되었다.", "6·29 선언으로 대통령 직선제 개헌이 이루어졌다.", "내각 책임제가 도입되었다.", "이승만이 하야하였다.", "신군부가 정권을 장악하였다."],
+      answer: 1,
+      explanation: "6월 민주 항쟁의 결과 <strong>6·29 선언</strong>이 발표되어 5년 단임 대통령 직선제 개헌이 이루어졌다."
+    },
+    {
+      unit: "15", difficulty: "normal",
+      q: "6월 민주 항쟁의 배경으로 옳은 것을 모두 고른 것은? (가) 박종철 고문치사 사건 (나) 4·13 호헌 조치 (다) 3·15 부정 선거 (라) 12·12 사태",
+      options: ["(가), (나)", "(가), (다)", "(나), (다)", "(다), (라)", "(가), (라)"],
+      answer: 0,
+      explanation: "<strong>박종철 고문치사 사건</strong>과 <strong>4·13 호헌 조치</strong>가 6월 민주 항쟁의 직접적 배경이 되었다."
+    },
+    {
+      unit: "15", difficulty: "normal",
+      q: "노태우 정부 시기의 사실로 옳은 것은?",
+      options: ["금융 실명제 실시", "서울 올림픽 개최와 북방 외교", "제1차 남북 정상 회담", "외환 위기 발생", "유신 체제 성립"],
+      answer: 1,
+      explanation: "노태우 정부는 <strong>서울 올림픽</strong> 개최, <strong>북방 외교</strong> 추진, 남북한 유엔 동시 가입(1991) 등을 이루었다."
+    },
+    {
+      unit: "15", difficulty: "normal",
+      q: "다음 업적을 남긴 정부는? 금융 실명제 실시, 지방 자치제 전면 실시, OECD 가입",
+      options: ["노태우 정부", "김영삼 정부", "김대중 정부", "노무현 정부", "박정희 정부"],
+      answer: 1,
+      explanation: "<strong>김영삼 정부</strong>는 금융 실명제, 지방 자치제 전면 실시, OECD 가입 등을 이루었으나 임기 말 외환 위기를 맞았다."
+    },
+    {
+      unit: "15", difficulty: "hard",
+      q: "통일 관련 합의를 시기 순으로 바르게 나열한 것은? (가) 7·4 남북 공동 성명 (나) 남북 기본 합의서 (다) 6·15 남북 공동 선언 (라) 10·4 남북 공동 선언",
+      options: ["(가)-(나)-(다)-(라)", "(가)-(다)-(나)-(라)", "(나)-(가)-(다)-(라)", "(가)-(나)-(라)-(다)", "(나)-(가)-(라)-(다)"],
+      answer: 0,
+      explanation: "<strong>7·4 남북 공동 성명(1972) → 남북 기본 합의서(1991) → 6·15 선언(2000) → 10·4 선언(2007)</strong> 순이다."
+    },
+    {
+      unit: "15", difficulty: "normal",
+      q: "7·4 남북 공동 성명에서 합의된 통일 원칙으로 옳은 것은?",
+      options: ["자주·평화·민족 대단결", "근면·자조·협동", "자유·평등·박애", "민주·인권·복지", "개방·교류·협력"],
+      answer: 0,
+      explanation: "7·4 남북 공동 성명은 <strong>자주·평화·민족 대단결</strong>의 3대 통일 원칙을 천명하였다."
+    },
+    {
+      unit: "15", difficulty: "normal",
+      q: "제1차 남북 정상 회담(2000)에서 채택된 것은?",
+      options: ["7·4 남북 공동 성명", "남북 기본 합의서", "6·15 남북 공동 선언", "10·4 남북 공동 선언", "6·23 평화 통일 선언"],
+      answer: 2,
+      explanation: "<strong>김대중 정부</strong> 시기 제1차 남북 정상 회담에서 <strong>6·15 남북 공동 선언</strong>이 채택되었다."
+    },
+    {
+      unit: "15", difficulty: "normal",
+      q: "중국의 동북공정에 대한 설명으로 옳은 것은?",
+      options: ["고구려·발해를 중국사로 편입하려는 역사 왜곡이다.", "독도를 일본 영토로 주장하는 것이다.", "야스쿠니 신사 참배 문제이다.", "임진왜란을 왜곡하는 것이다.", "위안부 문제를 다룬 것이다."],
+      answer: 0,
+      explanation: "<strong>동북공정</strong>은 고구려·발해 등 우리 고대사를 중국사로 편입하려는 역사 왜곡 작업이다."
+    },
+    {
+      unit: "15", difficulty: "hard",
+      q: "외환 위기와 그 극복에 대한 설명으로 옳은 것은?",
+      options: ["노태우 정부 시기에 발생하였다.", "김영삼 정부 말기에 발생하여 김대중 정부 때 극복되었다.", "박정희 정부 시기에 발생하였다.", "외환 위기로 OECD에 가입하였다.", "5·16 군사 정변의 원인이 되었다."],
+      answer: 1,
+      explanation: "외환 위기는 <strong>김영삼 정부 말기(1997)</strong>에 발생하여, <strong>김대중 정부</strong> 시기 금 모으기 운동 등으로 조기에 극복되었다."
+    },
+    {
+      unit: "15", difficulty: "normal",
+      q: "일본과의 역사 갈등 사안으로 옳지 않은 것은?",
+      options: ["독도 영유권 주장", "역사 교과서 왜곡", "야스쿠니 신사 참배", "동북공정", "일본군 위안부 문제"],
+      answer: 3,
+      explanation: "<strong>동북공정</strong>은 일본이 아니라 <strong>중국</strong>의 역사 왜곡이다. 나머지는 모두 일본과의 역사 갈등 사안이다."
+    }
+  ],
+  short: [
+    // unit 13
+    { unit: "13", q: "1945년 12월 미·영·소 외상이 모여 한반도 임시 정부 수립과 신탁 통치 등을 결정한 회의는?", acceptableAnswers: ["모스크바 3국 외상 회의", "모스크바 삼국 외상 회의", "모스크바 3상 회의"], keywords: ["모스크바", "외상"], explanation: "<strong>모스크바 3국 외상 회의</strong>에서 임시 민주 정부 수립과 최고 5년간 신탁 통치 등이 결정되었다." },
+    { unit: "13", q: "1946년 정읍에서 남한만의 단독 정부 수립을 처음 주장한 인물은?", acceptableAnswers: ["이승만", "이 승만"], keywords: ["이승만"], explanation: "<strong>이승만</strong>은 정읍 발언에서 남한만의 단독 정부 수립을 주장하였다." },
+    { unit: "13", q: "여운형과 김규식이 중심이 되어 통일 정부 수립을 위해 전개한 운동은?", acceptableAnswers: ["좌우 합작 운동", "좌우합작 운동", "좌우 합작운동"], keywords: ["좌우", "합작"], explanation: "<strong>좌우 합작 운동</strong>은 중도 세력인 여운형·김규식이 주도하였다." },
+    { unit: "13", q: "단독 선거에 반대하여 김구와 김규식이 평양에서 북측과 회담한 일을 무엇이라 하는가?", acceptableAnswers: ["남북 협상", "남북협상"], keywords: ["남북", "협상"], explanation: "<strong>남북 협상</strong>은 김구·김규식이 단독 정부 수립에 반대하며 추진하였다." },
+    { unit: "13", q: "1948년 5월 10일에 실시된 우리나라 최초의 보통 선거는?", acceptableAnswers: ["5·10 총선거", "5.10 총선거", "오일공 총선거", "5·10총선거"], keywords: ["총선거"], explanation: "<strong>5·10 총선거</strong>는 우리나라 최초의 보통 선거로 제헌 국회 의원을 선출하였다." },
+    { unit: "13", q: "제헌 국회가 친일파 청산을 위해 제정한 법은?", acceptableAnswers: ["반민족 행위 처벌법", "반민족행위처벌법", "반민법"], keywords: ["반민족", "처벌법"], explanation: "제헌 국회는 <strong>반민족 행위 처벌법</strong>을 제정하고 반민특위를 통해 친일파를 조사하였다." },
+    { unit: "13", q: "1950년 9월 국군과 유엔군이 전세를 역전시킨 작전은?", acceptableAnswers: ["인천 상륙 작전", "인천상륙작전"], keywords: ["인천", "상륙"], explanation: "<strong>인천 상륙 작전</strong> 성공으로 국군과 유엔군이 반격에 나서 서울을 수복하였다." },
+    { unit: "13", q: "6·25 전쟁 정전 직후 한국과 미국이 동맹을 강화하기 위해 체결한 조약은?", acceptableAnswers: ["한미 상호 방위 조약", "한미상호방위조약"], keywords: ["상호", "방위"], explanation: "1953년 <strong>한미 상호 방위 조약</strong>이 체결되어 주한 미군 주둔의 근거가 마련되었다." },
+    // unit 14
+    { unit: "14", q: "1954년 초대 대통령의 중임 제한을 철폐한 개헌은?", acceptableAnswers: ["사사오입 개헌", "사사오입개헌"], keywords: ["사사오입"], explanation: "<strong>사사오입 개헌</strong>은 반올림 논리로 정족수 미달 개헌안을 통과시킨 것이다." },
+    { unit: "14", q: "3·15 부정 선거에 항거하여 이승만을 하야시킨 1960년의 민주 혁명은?", acceptableAnswers: ["4·19 혁명", "4.19 혁명", "사일구 혁명", "4·19혁명"], keywords: ["혁명"], explanation: "<strong>4·19 혁명</strong>으로 이승만이 하야하고 자유당 정권이 무너졌다." },
+    { unit: "14", q: "1961년 박정희를 중심으로 군부가 일으킨 정변은?", acceptableAnswers: ["5·16 군사 정변", "5.16 군사 정변", "오일륙 군사 정변", "5·16군사정변"], keywords: ["군사", "정변"], explanation: "<strong>5·16 군사 정변</strong>으로 박정희 중심의 군부가 정권을 장악하였다." },
+    { unit: "14", q: "1965년 한일 국교 정상화를 위해 체결되었으나 굴욕 외교 논란을 빚은 협정은?", acceptableAnswers: ["한일 협정", "한일협정", "한일 기본 조약"], keywords: ["한일"], explanation: "<strong>한일 협정</strong> 체결 과정에서 6·3 시위 등 반대 운동이 일어났다." },
+    { unit: "14", q: "1972년 박정희가 영구 집권을 위해 수립한 권위주의 체제는?", acceptableAnswers: ["유신 체제", "유신체제", "10월 유신", "유신 헌법"], keywords: ["유신"], explanation: "<strong>유신 체제</strong>는 통일 주체 국민 회의의 간선제와 긴급 조치권 등을 특징으로 한다." },
+    { unit: "14", q: "1979년 유신 체제에 반대하여 부산과 마산에서 일어난 민주화 운동은?", acceptableAnswers: ["부마 민주 항쟁", "부마민주항쟁", "부마 항쟁"], keywords: ["부마"], explanation: "<strong>부마 민주 항쟁</strong>은 유신 체제 붕괴의 한 배경이 되었다." },
+    { unit: "14", q: "1980년 광주에서 신군부에 맞서 일어난 민주화 운동은?", acceptableAnswers: ["5·18 민주화 운동", "5.18 민주화 운동", "오일팔 민주화 운동", "5·18민주화운동", "광주 민주화 운동"], keywords: ["민주화", "운동"], explanation: "<strong>5·18 민주화 운동</strong> 관련 기록물은 유네스코 세계 기록 유산에 등재되었다." },
+    { unit: "14", q: "근면·자조·협동을 기본 정신으로 한 박정희 정부의 농촌 근대화 운동은?", acceptableAnswers: ["새마을 운동", "새마을운동"], keywords: ["새마을"], explanation: "<strong>새마을 운동</strong>은 근면·자조·협동을 내세운 정부 주도의 운동이었다." },
+    // unit 15
+    { unit: "15", q: "1987년 대통령 직선제 개헌을 요구하며 일어난 민주화 운동은?", acceptableAnswers: ["6월 민주 항쟁", "6월민주항쟁", "유월 민주 항쟁", "6월 항쟁"], keywords: ["민주", "항쟁"], explanation: "<strong>6월 민주 항쟁</strong>의 결과 6·29 선언으로 대통령 직선제 개헌이 이루어졌다." },
+    { unit: "15", q: "6월 민주 항쟁의 결과로 여당 대표가 대통령 직선제를 수용한 선언은?", acceptableAnswers: ["6·29 선언", "6.29 선언", "유이구 선언", "6·29선언"], keywords: ["선언"], explanation: "<strong>6·29 선언</strong>으로 5년 단임 대통령 직선제 개헌이 수용되었다." },
+    { unit: "15", q: "1972년 분단 후 처음으로 남북이 자주·평화·민족 대단결의 통일 원칙에 합의한 성명은?", acceptableAnswers: ["7·4 남북 공동 성명", "7.4 남북 공동 성명", "7·4남북공동성명"], keywords: ["남북", "공동", "성명"], explanation: "<strong>7·4 남북 공동 성명</strong>은 자주·평화·민족 대단결의 3대 통일 원칙을 천명하였다." },
+    { unit: "15", q: "2000년 제1차 남북 정상 회담에서 채택된 공동 선언은?", acceptableAnswers: ["6·15 남북 공동 선언", "6.15 남북 공동 선언", "6·15 공동 선언", "6·15남북공동선언"], keywords: ["6·15", "선언"], explanation: "<strong>6·15 남북 공동 선언</strong>은 김대중·김정일의 제1차 남북 정상 회담 결과 채택되었다." },
+    { unit: "15", q: "1997년 외환 부족으로 IMF에 구제 금융을 신청한 경제 위기는?", acceptableAnswers: ["외환 위기", "외환위기", "IMF 외환 위기", "아이엠에프 외환 위기"], keywords: ["외환", "위기"], explanation: "<strong>외환 위기</strong>는 김영삼 정부 말기에 발생하여 김대중 정부 때 극복되었다." },
+    { unit: "15", q: "김영삼 정부가 검은 돈의 거래를 막기 위해 전격 실시한 제도는?", acceptableAnswers: ["금융 실명제", "금융실명제"], keywords: ["금융", "실명제"], explanation: "<strong>금융 실명제</strong>는 김영삼 정부 시기 실시된 대표적 개혁 정책이다." },
+    { unit: "15", q: "고구려·발해의 역사를 중국사로 편입하려는 중국의 역사 왜곡 연구는?", acceptableAnswers: ["동북공정", "동북 공정"], keywords: ["동북공정"], explanation: "<strong>동북공정</strong>은 고구려·발해를 중국 지방 정권으로 왜곡하는 역사 왜곡이다." },
+    { unit: "15", q: "노태우 정부가 사회주의 국가들과 수교하며 추진한 외교 정책은?", acceptableAnswers: ["북방 외교", "북방외교"], keywords: ["북방", "외교"], explanation: "<strong>북방 외교</strong>로 노태우 정부는 소련·중국 등과 수교하고 남북한 유엔 동시 가입을 이루었다." }
+  ],
+  people: [
+    {
+      name: "박정희", hanja: "朴正熙", years: "1917~1979", title: "대한민국 제5~9대 대통령", period: "현대",
+      categories: ["정치"], tags: ["5·16", "유신 체제", "경제 개발"],
+      intro: "5·16 군사 정변으로 집권하여 경제 개발을 주도하였으나 유신 체제로 장기 독재를 한 인물이다.",
+      activities: [
+        { year: "1961", title: "5·16 군사 정변", desc: "<strong>군부 세력을 이끌고 정변을 일으켜</strong> 정권을 장악하였다." },
+        { year: "1962", title: "경제 개발 5개년 계획 추진", desc: "<strong>수출 주도형 경제 성장</strong>을 이끌어 고도성장을 달성하였다." },
+        { year: "1972", title: "10월 유신 단행", desc: "<strong>유신 헌법을 제정</strong>하여 영구 집권 체제를 구축하였다." },
+        { year: "1979", title: "10·26 사태로 사망", desc: "부마 항쟁 직후 <strong>중앙정보부장에게 피살</strong>되어 유신 체제가 막을 내렸다." }
+      ],
+      tip: "<strong>5·16 정변 → 경제 개발 → 유신 체제 → 10·26</strong>의 흐름으로 기억하자."
+    },
+    {
+      name: "전두환", hanja: "全斗煥", years: "1931~2021", title: "대한민국 제11~12대 대통령", period: "현대",
+      categories: ["정치"], tags: ["신군부", "12·12", "5·18"],
+      intro: "12·12 사태로 권력을 장악한 신군부의 핵심으로, 5·18 민주화 운동을 무력 진압한 인물이다.",
+      activities: [
+        { year: "1979", title: "12·12 사태", desc: "<strong>신군부 세력을 이끌고 군권을 장악</strong>하였다." },
+        { year: "1980", title: "5·18 민주화 운동 진압", desc: "비상계엄 확대 후 <strong>광주의 민주화 운동을 무력 진압</strong>하였다." },
+        { year: "1981", title: "제12대 대통령 취임", desc: "<strong>대통령 간선제</strong>로 선출되어 권위주의 통치를 이어갔다." },
+        { year: "1987", title: "6월 민주 항쟁 직면", desc: "4·13 호헌 조치에 맞선 <strong>6월 민주 항쟁</strong>으로 직선제 개헌을 수용하였다." }
+      ],
+      tip: "<strong>12·12 → 5·18 → 6월 항쟁</strong>으로 이어지는 신군부 집권 과정을 기억하자."
+    },
+    {
+      name: "장면", hanja: "張勉", years: "1899~1966", title: "장면 내각 국무총리", period: "현대",
+      categories: ["정치"], tags: ["4·19", "내각 책임제", "장면 내각"],
+      intro: "4·19 혁명 후 내각 책임제 정부의 국무총리로서 장면 내각을 이끈 인물이다.",
+      activities: [
+        { year: "1956", title: "부통령 당선", desc: "이승만 정부 시기 <strong>부통령</strong>에 당선되었다." },
+        { year: "1960", title: "국무총리 취임", desc: "4·19 혁명 후 <strong>내각 책임제 하의 국무총리</strong>로 장면 내각을 구성하였다." },
+        { year: "1961", title: "5·16 군사 정변으로 실각", desc: "<strong>군사 정변</strong>으로 9개월 만에 내각이 붕괴하였다." }
+      ],
+      tip: "장면 내각은 <strong>윤보선 대통령과 함께</strong>한 내각 책임제 정부임을 기억하자."
+    },
+    {
+      name: "윤보선", hanja: "尹潽善", years: "1897~1990", title: "대한민국 제4대 대통령", period: "현대",
+      categories: ["정치"], tags: ["내각 책임제", "장면 내각", "민주화"],
+      intro: "4·19 혁명 후 내각 책임제 하에서 상징적 국가 원수인 대통령을 지낸 인물이다.",
+      activities: [
+        { year: "1960", title: "제4대 대통령 취임", desc: "내각 책임제 하에서 <strong>상징적 대통령</strong>으로 선출되었다." },
+        { year: "1963", title: "대통령 선거 출마", desc: "박정희와 맞붙은 <strong>대통령 선거</strong>에서 패배하였다." },
+        { year: "1970년대", title: "민주화 운동 참여", desc: "유신 체제에 맞선 <strong>재야 민주화 운동</strong>에 참여하였다." }
+      ],
+      tip: "<strong>윤보선(대통령) + 장면(국무총리)</strong> 조합으로 내각 책임제 정부를 기억하자."
+    },
+    {
+      name: "김영삼", hanja: "金泳三", years: "1927~2015", title: "대한민국 제14대 대통령", period: "현대",
+      categories: ["정치"], tags: ["문민정부", "금융 실명제", "외환 위기"],
+      intro: "오랜 민주화 운동을 거쳐 문민정부를 출범시키고 금융 실명제 등 개혁을 추진한 인물이다.",
+      activities: [
+        { year: "1979", title: "신민당 총재 제명", desc: "유신 정권에 의해 <strong>국회의원직에서 제명</strong>되어 부마 항쟁의 배경이 되었다." },
+        { year: "1993", title: "문민정부 출범", desc: "<strong>금융 실명제</strong>를 전격 실시하고 지방 자치제를 전면 시행하였다." },
+        { year: "1996", title: "OECD 가입", desc: "<strong>경제 협력 개발 기구(OECD)</strong>에 가입하였다." },
+        { year: "1997", title: "외환 위기", desc: "임기 말 <strong>외환 위기</strong>로 IMF 구제 금융을 신청하였다." }
+      ],
+      tip: "김영삼 정부의 키워드는 <strong>금융 실명제·OECD·외환 위기</strong>이다."
+    },
+    {
+      name: "김대중", hanja: "金大中", years: "1924~2009", title: "대한민국 제15대 대통령", period: "현대",
+      categories: ["정치"], tags: ["국민의 정부", "남북 정상 회담", "노벨 평화상"],
+      intro: "외환 위기를 극복하고 최초의 남북 정상 회담을 성사시킨 국민의 정부 대통령이다.",
+      activities: [
+        { year: "1998", title: "국민의 정부 출범", desc: "<strong>외환 위기 극복</strong>을 위해 금 모으기 운동 등을 전개하였다." },
+        { year: "2000", title: "제1차 남북 정상 회담", desc: "<strong>6·15 남북 공동 선언</strong>을 채택하여 화해 협력의 길을 열었다." },
+        { year: "2000", title: "노벨 평화상 수상", desc: "민주주의와 <strong>한반도 평화</strong>에 기여한 공로로 노벨 평화상을 받았다." }
+      ],
+      tip: "김대중 정부는 <strong>외환 위기 극복 + 6·15 남북 공동 선언</strong>으로 기억하자."
+    },
+    {
+      name: "전태일", hanja: "全泰壹", years: "1948~1970", title: "노동 운동가", period: "현대",
+      categories: ["사회"], tags: ["노동 운동", "근로 기준법", "평화 시장"],
+      intro: "열악한 노동 환경 개선을 외치며 분신한 노동 운동가로, 노동 운동의 상징이 된 인물이다.",
+      activities: [
+        { year: "1960년대", title: "평화 시장 노동", desc: "서울 청계천 <strong>평화 시장</strong>에서 재단사로 일하며 노동 실태를 자각하였다." },
+        { year: "1970", title: "분신 항거", desc: "<strong>'근로 기준법을 준수하라'</strong>고 외치며 분신하였다." }
+      ],
+      tip: "전태일의 분신(1970)은 <strong>한국 노동 운동의 출발점</strong>으로 기억하자."
+    }
+  ],
+  comparisons: [
+    {
+      unit: "13",
+      title: "좌우 합작 운동 vs 남북 협상",
+      cols: ["구분", "좌우 합작 운동", "남북 협상"],
+      rows: [
+        ["시기", "1946~1947", "1948"],
+        ["주도 인물", "여운형·김규식", "김구·김규식"],
+        ["목표", "좌우 합작 통일 정부", "단독 선거 반대·통일 정부"],
+        ["결과", "여운형 암살로 실패", "성과 없이 5·10 총선거 실시"]
+      ]
+    },
+    {
+      unit: "14",
+      title: "4·19 혁명 vs 5·18 민주화 운동",
+      cols: ["구분", "4·19 혁명", "5·18 민주화 운동"],
+      rows: [
+        ["시기", "1960", "1980"],
+        ["배경", "3·15 부정 선거", "신군부의 권력 장악"],
+        ["대상", "이승만 자유당 정권", "전두환 등 신군부"],
+        ["결과", "이승만 하야", "신군부에 무력 진압됨"]
+      ]
+    },
+    {
+      unit: "15",
+      title: "주요 정부의 통일·경제 정책",
+      cols: ["정부", "통일 정책", "경제·사회"],
+      rows: [
+        ["노태우", "남북 기본 합의서·유엔 동시 가입", "서울 올림픽·북방 외교"],
+        ["김영삼", "민족 공동체 통일 방안", "금융 실명제·외환 위기"],
+        ["김대중", "6·15 남북 공동 선언", "외환 위기 극복"],
+        ["노무현", "10·4 남북 공동 선언", "한미 FTA 추진"]
+      ]
+    }
+  ],
+  timeline: [
+    { year: "1945", period: "현대", title: "8·15 광복", desc: "<strong>1945년 8월 15일</strong> 일본의 항복으로 광복을 맞이하였다.", major: true },
+    { year: "1945", period: "현대", title: "모스크바 3국 외상 회의", desc: "<strong>임시 정부 수립과 신탁 통치</strong> 등이 결정되었다.", major: false },
+    { year: "1948", period: "현대", title: "5·10 총선거", desc: "<strong>최초의 보통 선거</strong>로 제헌 국회 의원을 선출하였다.", major: false },
+    { year: "1948", period: "현대", title: "대한민국 정부 수립", desc: "<strong>1948년 8월 15일</strong> 이승만을 초대 대통령으로 정부가 수립되었다.", major: true },
+    { year: "1950", period: "현대", title: "6·25 전쟁 발발", desc: "<strong>북한의 남침</strong>으로 6·25 전쟁이 시작되었다.", major: true },
+    { year: "1953", period: "현대", title: "정전 협정 체결", desc: "<strong>1953년 7월</strong> 정전 협정으로 전쟁이 마무리되었다.", major: false },
+    { year: "1960", period: "현대", title: "4·19 혁명", desc: "<strong>3·15 부정 선거</strong>에 항거하여 이승만이 하야하였다.", major: true },
+    { year: "1961", period: "현대", title: "5·16 군사 정변", desc: "<strong>박정희</strong> 중심 군부가 정권을 장악하였다.", major: false },
+    { year: "1972", period: "현대", title: "10월 유신", desc: "<strong>유신 헌법</strong>으로 박정희 영구 집권 체제가 성립되었다.", major: true },
+    { year: "1980", period: "현대", title: "5·18 민주화 운동", desc: "<strong>광주</strong>에서 신군부에 맞선 민주화 운동이 일어났다.", major: true },
+    { year: "1987", period: "현대", title: "6월 민주 항쟁", desc: "<strong>대통령 직선제 개헌</strong>을 이끌어냈다.", major: true },
+    { year: "1988", period: "현대", title: "서울 올림픽 개최", desc: "<strong>노태우 정부</strong> 시기 서울 올림픽이 열렸다.", major: false },
+    { year: "1997", period: "현대", title: "외환 위기", desc: "<strong>IMF 구제 금융</strong>을 신청한 경제 위기가 발생하였다.", major: false },
+    { year: "2000", period: "현대", title: "제1차 남북 정상 회담", desc: "<strong>6·15 남북 공동 선언</strong>이 채택되었다.", major: true }
+  ]
+};
+</script>
 
 <script>
 // ============ DATA ============
@@ -3766,24 +5214,338 @@ const oxQuestions = [
   { era: 3, statement: "조소앙의 삼균주의는 정치·경제·교육의 균등을 핵심으로 한다.", answer: true, explanation: "O. 삼균주의는 <strong>정치·경제·교육의 균등</strong>을 통해 개인과 민족과 국가 간의 평등을 실현하자는 사상으로 대한민국 건국 강령의 기반이 되었습니다." }
 ];
 
+// ============ 단원(대단원/소단원) 통합 ============
+const UNITS = [
+  { da:"Ⅰ", daName:"전근대 한국사의 이해", color:"#3f7d4e", chapters:[
+    {id:"01",name:"고대 국가의 정치·사회와 문화"},
+    {id:"02",name:"고려의 정치·사회와 문화"},
+    {id:"03",name:"조선의 정치 운영과 세계관 변화"},
+    {id:"04",name:"양반 신분제 사회와 상품 화폐 경제"} ]},
+  { da:"Ⅱ", daName:"근대 국민 국가 수립 운동", color:"#b8862a", chapters:[
+    {id:"05",name:"흥선 대원군과 개항·근대적 개혁"},
+    {id:"06",name:"근대 국가 수립을 위한 노력"},
+    {id:"07",name:"일본의 침략 확대와 국권 수호 운동"},
+    {id:"08",name:"개항 이후 경제·사회·문화의 변화"} ]},
+  { da:"Ⅲ", daName:"일제 식민지 지배와 민족 운동", color:"#a02828", chapters:[
+    {id:"09",name:"1910~20년대 식민 정책·3·1 운동·임시 정부"},
+    {id:"10",name:"다양한 민족 운동의 전개"},
+    {id:"11",name:"사회·문화의 변화와 사회 운동"},
+    {id:"12",name:"전시 동원 체제와 광복을 위한 노력"} ]},
+  { da:"Ⅳ", daName:"대한민국의 발전", color:"#2a5d9e", chapters:[
+    {id:"13",name:"대한민국 정부 수립과 6·25 전쟁"},
+    {id:"14",name:"민주화를 위한 노력과 경제 성장"},
+    {id:"15",name:"6월 민주 항쟁 이후 사회와 동아시아 평화"} ]},
+];
+const CHAPTER_INDEX = {};
+UNITS.forEach(d => d.chapters.forEach(c => { CHAPTER_INDEX[c.id] = { id:c.id, name:c.name, da:d.da, daName:d.daName, color:d.color }; }));
+function daOfUnit(uid){ return CHAPTER_INDEX[uid] ? CHAPTER_INDEX[uid].da : null; }
+function colorOfUnit(uid){ return CHAPTER_INDEX[uid] ? CHAPTER_INDEX[uid].color : '#a02828'; }
+function chapterName(uid){ return CHAPTER_INDEX[uid] ? CHAPTER_INDEX[uid].name : ''; }
+function unitTag(uid){ return CHAPTER_INDEX[uid] ? (CHAPTER_INDEX[uid].da + ' · ' + uid) : uid; }
+
+// --- 일제(기존) 데이터에 소단원(unit) 태깅 ---
+const ILJE_CONCEPT_UNIT = {
+  "독립 의군부":"09","대한 광복회":"09","중광단":"09","경학사 · 신흥 강습소":"09","권업회 · 대한 광복군 정부":"09","신한청년당":"09","대한인 국민회":"09","3·1 운동":"09","대한민국 임시 정부":"09","연통제와 교통국":"09","국민 대표 회의":"09",
+  "의열단":"10","봉오동 전투":"10","청산리 대첩":"10","간도 참변 · 자유시 참변":"10","3부의 성립":"10","한인 애국단":"10","한국 독립군":"10","조선 혁명군":"10","민족 혁명당":"10","조선 의용대":"10",
+  "물산 장려 운동":"11","민립 대학 설립 운동":"11","6·10 만세 운동":"11","정우회 선언":"11","신간회":"11","근우회":"11","광주 학생 항일 운동":"11","조선 형평사":"11","소년 운동 (천도교 소년회)":"11","암태도 소작 쟁의":"11","원산 총파업":"11","조선어 연구회 · 학회":"11","브나로드 운동":"11","민족주의 사학":"11","사회 경제 사학":"11",
+  "한국 독립당":"12","대한민국 건국 강령":"12","한국광복군":"12","조선 독립 동맹":"12","조선 건국 동맹":"12","국가 총동원법":"12","황국 신민화 정책":"12","카이로 회담":"12","얄타 회담 · 포츠담 선언":"12","조선 건국 준비 위원회":"12"
+};
+const ILJE_KW = [
+  ["무단 통치","09"],["문화 통치","09"],["토지 조사","09"],["산미 증식","09"],["회사령","09"],["2·8 독립","09"],["제암리","09"],["태형령","09"],["헌병 경찰","09"],["연통제","09"],["교통국","09"],["구미 위원부","09"],["국민 대표","09"],["창조파","09"],["개조파","09"],
+  ["미쓰야","10"],["자유시","10"],["간도 참변","10"],["쌍성보","10"],["대전자령","10"],["영릉가","10"],["흥경성","10"],["이봉창","10"],["윤봉길","10"],["조선 혁명 선언","10"],["황푸","10"],["북로 군정서","10"],["봉오동","10"],["청산리","10"],["의열단","10"],["나석주","10"],["김익상","10"],["3부","10"],
+  ["치안 유지법","11"],["형평","11"],["소작 쟁의","11"],["노동 쟁의","11"],["학생 항일","11"],["나주역","11"],["근우회","11"],["신간회","11"],["정우회","11"],["조선어","11"],["한글","11"],["국혼","11"],["조선상고사","11"],["조선사회경제사","11"],["백남운","11"],["브나로드","11"],["방정환","11"],["어린이","11"],["물산 장려","11"],["민립 대학","11"],["6·10","11"],
+  ["국가 총동원","12"],["황국 신민","12"],["창씨개명","12"],["공출","12"],["징병","12"],["정신 근로","12"],["신사 참배","12"],["카이로","12"],["얄타","12"],["포츠담","12"],["삼균","12"],["건국 강령","12"],["광복군","12"],["조선 독립 동맹","12"],["건국 동맹","12"],["건국 준비 위원회","12"],["인민 공화국","12"],["중일 전쟁","12"]
+];
+const iljeNamesByLen = Object.keys(ILJE_CONCEPT_UNIT).sort((a,b)=>b.length-a.length);
+function inferIljeUnit(text, era){
+  text = (text||'').replace(/<[^>]+>/g,'');
+  for(const name of iljeNamesByLen){ if(text.includes(name)) return ILJE_CONCEPT_UNIT[name]; }
+  for(const [kw,u] of ILJE_KW){ if(text.includes(kw)) return u; }
+  return era===1 ? "09" : era===3 ? "12" : "11";
+}
+concepts.forEach(c => { c.unit = ILJE_CONCEPT_UNIT[c.name] || (c.era===1?"09":c.era===3?"12":"10"); });
+function tagArr(arr, getText){ arr.forEach(it => { if(!it.unit) it.unit = inferIljeUnit(getText(it), it.era); }); }
+tagArr(questions, q => q.q + ' ' + q.explanation + ' ' + (q.options||[]).join(' '));
+tagArr(shortAnswerQuestions, q => q.q + ' ' + q.explanation + ' ' + (q.acceptableAnswers||[]).join(' '));
+tagArr(oxQuestions, q => q.statement + ' ' + q.explanation);
+people.forEach(p => { if(!p.period) p.period = "일제"; });
+
+// --- 일제 비교표(구조화) ---
+const ILJE_COMPARISONS = [
+  { unit:"09", title:"1910년대 국내 비밀 결사", cols:["구분","독립 의군부","대한 광복회"], rows:[["연도","1912","1915"],["인물","임병찬(고종 밀명)","박상진"],["이념","복벽주의","공화정"],["조직","의병 전통","군대식 조직"]] },
+  { unit:"10", title:"1920년 만주 독립군", cols:["구분","봉오동 전투","청산리 대첩"], rows:[["지휘관","홍범도","김좌진"],["주력 부대","대한 독립군","북로 군정서"],["전개","일본군 두만강 침입 기습","봉오동 보복전에 맞섬"]] },
+  { unit:"10", title:"의열단 vs 한인 애국단", cols:["구분","의열단(1919)","한인 애국단(1931)"], rows:[["조직자","김원봉","김구"],["지침/목적","신채호 「조선 혁명 선언」","임시 정부 침체 극복"],["주요 의거","박재혁·김익상·김상옥·나석주","이봉창·윤봉길"]] },
+  { unit:"10", title:"1930년대 한중 연합 작전", cols:["구분","한국 독립군","조선 혁명군"], rows:[["지휘관","지청천","양세봉"],["지역","북만주","남만주"],["연합 상대","중국 호로군","중국 의용군"],["주요 전투","쌍성보·대전자령","영릉가·흥경성"]] },
+  { unit:"11", title:"민족주의 사학 vs 사회 경제 사학", cols:["사학자","주요 저서","핵심 사상"], rows:[["박은식","한국통사·한국독립운동지혈사","국혼(國魂) 강조"],["신채호","조선사연구초·조선상고사","낭가 사상·민족 정신"],["백남운","조선사회경제사","세계사적 보편 발전 법칙·정체성론 비판"]] },
+  { unit:"12", title:"해외 건국 준비 단체", cols:["단체","주도자","지역·특징"], rows:[["대한민국 임시 정부","김구·조소앙","충칭 / 삼균주의·한국광복군"],["조선 독립 동맹","김두봉","화북 / 사회주의·조선 의용군"],["조선 건국 동맹","여운형","국내 비밀 결성(1944)"]] }
+];
+
+// --- 외부(신규) 단원 데이터 병합 ---
+const EXT = [window.UNIT_DATA_I, window.UNIT_DATA_II, window.UNIT_DATA_IV].filter(Boolean);
+const extConcepts=[], extMC=[], extOX=[], extShort=[], extPeople=[], extComparisons=[], extTimeline=[];
+EXT.forEach(u => {
+  extConcepts.push(...(u.concepts||[])); extMC.push(...(u.mc||[])); extOX.push(...(u.ox||[]));
+  extShort.push(...(u.short||[])); extPeople.push(...(u.people||[]));
+  extComparisons.push(...(u.comparisons||[])); extTimeline.push(...(u.timeline||[]));
+});
+const allConcepts = concepts.concat(extConcepts);
+const allMC = questions.concat(extMC);
+const allShort = shortAnswerQuestions.concat(extShort);
+const allOX = oxQuestions.concat(extOX);
+const allPeople = people.concat(extPeople);
+const allComparisons = ILJE_COMPARISONS.concat(extComparisons);
+
+// --- 시대/색상 ---
+const PERIOD_ORDER = {"고대":0,"고려":1,"조선":2,"근대":3,"일제":4,"현대":5};
+const PERIOD_COLOR = {"고대":"#6b8f3a","고려":"#3f7d4e","조선":"#2e7d6b","근대":"#b8862a","일제":"#a02828","현대":"#2a5d9e"};
+function yearNum(y){ if(!y) return 0; const bc=/기원전|B\.?C/.test(y); const m=String(y).match(/\d+/); let n=m?parseInt(m[0]):0; return bc?-n:n; }
+const allTimeline = timelineEvents.map(e => ({ year:e.year, period:"일제", title:e.title, desc:e.desc, major:e.major, cause:e.cause }))
+  .concat(extTimeline.map(e => ({ year:e.year, period:e.period||"고대", title:e.title, desc:e.desc, major:e.major, cause:e.cause })));
+allTimeline.sort((a,b) => (PERIOD_ORDER[a.period]-PERIOD_ORDER[b.period]) || (yearNum(a.year)-yearNum(b.year)));
+
+// ============ 학습 진도(localStorage) ============
+function getProgress(){ try { return JSON.parse(localStorage.getItem('hist-progress')||'{}'); } catch(e){ return {}; } }
+function saveProgress(p){ localStorage.setItem('hist-progress', JSON.stringify(p)); }
+function setChapterStat(uid, key, val){ const p=getProgress(); p[uid]=p[uid]||{}; p[uid][key]=Math.max(p[uid][key]||0, val); saveProgress(p); }
+function unitConceptCount(uid){ return allConcepts.filter(c=>c.unit===uid).length; }
+
+// ============ 개념 카드 생성 (공용) ============
+function makeConceptCard(c, idx){
+  const card = document.createElement('div');
+  card.className = 'concept-card';
+  card.setAttribute('data-year', c.year || '');
+  card.style.setProperty('--i', Math.min(idx, 15));
+  card.innerHTML = `
+    <span class="era-tag" style="color:${colorOfUnit(c.unit)};border-color:${colorOfUnit(c.unit)}">${unitTag(c.unit)}</span>
+    <h3>${c.name}</h3>
+    <p class="summary">${autoLinkPeople(c.summary)}</p>
+    <div class="details">
+      <ul>${(c.details||[]).map((d, li) => `<li style="--li:${li}">${autoLinkPeople(d)}</li>`).join('')}</ul>
+    </div>`;
+  card.addEventListener('click', (e) => { if (!e.target.closest('.plink')) card.classList.toggle('expanded'); });
+  return card;
+}
+
+// ============ 단원 학습 홈 ============
+function renderHome(){
+  const wrap = document.getElementById('home-units');
+  const prog = getProgress();
+  wrap.innerHTML = UNITS.map(d => {
+    const chips = d.chapters.map(c => {
+      const total = unitConceptCount(c.id);
+      const learned = (prog[c.id] && prog[c.id].cards) || 0;
+      const pct = total ? Math.round(learned/total*100) : 0;
+      const mc = (prog[c.id] && prog[c.id].mc) || 0;
+      return `<div class="ch-row" data-unit="${c.id}">
+        <span class="ch-num">${c.id}</span>
+        <div class="ch-info">
+          <div class="ch-name">${c.name}</div>
+          <div class="ch-meta">개념 ${total}장${mc?` · 객관식 최고 ${mc}%`:''}</div>
+        </div>
+        <div class="ch-prog-wrap">
+          <div class="ch-prog-bar"><div class="ch-prog-fill" style="width:${pct}%"></div></div>
+          <div class="ch-prog-label">${pct}%</div>
+        </div>
+        <span class="ch-arrow">›</span>
+      </div>`;
+    }).join('');
+    return `<div class="da-block" style="--da-color:${d.color}">
+      <div class="da-head">
+        <span class="da-roman">${d.da}</span>
+        <div class="da-titles"><div class="da-name">${d.daName}</div><div class="da-sub">${d.chapters.length}개 소단원</div></div>
+        <span class="da-chevron">▾</span>
+      </div>
+      <div class="da-chapters">${chips}</div>
+    </div>`;
+  }).join('');
+
+  wrap.querySelectorAll('.da-head').forEach(h => h.addEventListener('click', () => h.parentElement.classList.toggle('open')));
+  wrap.querySelectorAll('.ch-row').forEach(r => r.addEventListener('click', () => openChapter(r.dataset.unit)));
+  if (wrap.querySelector('.da-block')) wrap.querySelector('.da-block').classList.add('open');
+}
+
+// ============ 개념 검색(홈) ============
+function renderConceptSearch(search){
+  const grid = document.getElementById('search-result-grid');
+  if (!search) { grid.style.display='none'; grid.innerHTML=''; document.getElementById('home-units').style.display=''; return; }
+  document.getElementById('home-units').style.display='none';
+  grid.style.display='grid';
+  const s = search.toLowerCase();
+  const filtered = allConcepts.filter(c => c.name.toLowerCase().includes(s) || (c.summary||'').toLowerCase().includes(s));
+  grid.innerHTML='';
+  if (!filtered.length){ grid.innerHTML = '<p style="grid-column:1/-1;text-align:center;padding:2rem;color:var(--ink-soft);">검색 결과가 없습니다.</p>'; return; }
+  filtered.slice(0,40).forEach((c,i)=> grid.appendChild(makeConceptCard(c,i)));
+}
+
+// ============ 소단원 상세 ============
+let currentChapter = null;
+function openChapter(uid){
+  currentChapter = uid;
+  const info = CHAPTER_INDEX[uid];
+  document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(b => b.classList.toggle('active', b.dataset.view==='home'));
+  const v = document.getElementById('view-chapter');
+  v.classList.add('active');
+  currentViewLabel.textContent = uid + ' ' + info.name;
+  currentViewLabel.setAttribute('data-num', uid);
+
+  const tag = document.getElementById('chapter-da-tag');
+  tag.textContent = info.da + '. ' + info.daName;
+  tag.style.setProperty('--da-color', info.color);
+  v.style.setProperty('--da-color', info.color);
+  document.getElementById('chapter-title').textContent = info.name;
+
+  const hasShort = parseInt(uid) >= 9 && allShort.some(q=>q.unit===uid);
+  const acts = document.getElementById('chapter-actions');
+  acts.innerHTML = `
+    <button class="chapter-action-btn flash" data-act="flash">🎴 플래시카드<small>개념 빠르게 암기</small></button>
+    <button class="chapter-action-btn" data-act="ox">⭕ OX 퀴즈<small>개념 점검</small></button>
+    <button class="chapter-action-btn" data-act="mc">📝 객관식 문제<small>실전 연습</small></button>
+    ${hasShort ? `<button class="chapter-action-btn" data-act="short">✍️ 서술형 문제<small>단답 암기</small></button>` : ''}`;
+  acts.querySelectorAll('.chapter-action-btn').forEach(b => b.addEventListener('click', () => {
+    const a = b.dataset.act;
+    if (a==='flash') startFlash(uid);
+    else if (a==='ox') startChapterOX(uid);
+    else if (a==='mc') startChapterQuiz(uid,'multiple');
+    else if (a==='short') startChapterQuiz(uid,'short');
+  }));
+
+  const grid = document.getElementById('chapter-concept-grid');
+  grid.innerHTML='';
+  const cs = allConcepts.filter(c => c.unit===uid);
+  cs.forEach((c,i)=> grid.appendChild(makeConceptCard(c,i)));
+  if (!cs.length) grid.innerHTML = '<p style="color:var(--ink-soft);">준비 중인 단원입니다.</p>';
+
+  const cmpWrap = document.getElementById('chapter-compare');
+  const cmps = allComparisons.filter(c => c.unit===uid);
+  cmpWrap.innerHTML = cmps.length ? `<div class="chapter-section-label">🔥 헷갈리기 쉬운 비교</div>` + cmps.map(renderComparisonHTML).join('') : '';
+  cmpWrap.innerHTML = autoLinkPeople(cmpWrap.innerHTML);
+
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function renderComparisonHTML(cmp){
+  return `<div style="background:var(--paper-light);border:1px solid var(--ink-soft);padding:1.3rem;box-shadow:3px 3px 0 var(--paper-dark);margin-bottom:1.4rem;">
+    <h3 style="font-family:'Nanum Myeongjo',serif;font-size:1.2rem;margin-bottom:0.9rem;border-bottom:2px solid var(--seal);padding-bottom:0.45rem;">${cmp.title}</h3>
+    <table style="width:100%;border-collapse:collapse;">
+      <tr style="background:var(--hanji);">${cmp.cols.map(h=>`<th style="padding:0.6rem;border:1px solid var(--ink-soft);text-align:left;font-size:0.9rem;">${h}</th>`).join('')}</tr>
+      ${cmp.rows.map(r=>`<tr>${r.map((cell,ci)=>`<td style="padding:0.6rem;border:1px solid var(--ink-soft);font-size:0.88rem;${ci===0?'font-weight:700;background:var(--paper);':''}">${cell}</td>`).join('')}</tr>`).join('')}
+    </table>
+  </div>`;
+}
+
+// ============ 플래시카드 ============
+let flashState = { cards:[], idx:0, known:0, unknown:0, unit:null, flipped:false };
+function startFlash(uid){
+  let cards = allConcepts.filter(c => c.unit===uid).slice();
+  if (!cards.length){ alert('이 단원의 개념 카드가 없습니다.'); return; }
+  cards = cards.sort(()=>Math.random()-0.5);
+  flashState = { cards, idx:0, known:0, unknown:0, unit:uid, flipped:false, reviewed:0 };
+  document.getElementById('flash-overlay').classList.add('active');
+  document.body.style.overflow='hidden';
+  renderFlash();
+}
+function renderFlash(){
+  const fs = flashState;
+  if (fs.idx >= fs.cards.length){ return finishFlash(); }
+  const c = fs.cards[fs.idx];
+  const card = document.getElementById('flash-card');
+  card.classList.remove('flipped'); fs.flipped=false;
+  document.getElementById('flash-progress').textContent = `${fs.idx+1} / ${fs.cards.length}`;
+  document.getElementById('flash-known').textContent = `○ ${fs.known}`;
+  document.getElementById('flash-unknown').textContent = `△ ${fs.unknown}`;
+  document.getElementById('flash-year').textContent = c.year || '';
+  document.getElementById('flash-name').textContent = c.name;
+  document.getElementById('flash-back').innerHTML = `
+    <h4>${c.name}</h4>
+    <div class="fc-summary">${c.summary}</div>
+    <ul>${(c.details||[]).map(d=>`<li>${d}</li>`).join('')}</ul>`;
+}
+function flipFlash(){ const card=document.getElementById('flash-card'); flashState.flipped=!flashState.flipped; card.classList.toggle('flipped'); }
+function answerFlash(known){
+  const fs = flashState;
+  if (known) fs.known++; else { fs.unknown++; fs.cards.push(fs.cards[fs.idx]); }
+  fs.idx++;
+  renderFlash();
+}
+function finishFlash(){
+  const fs = flashState;
+  setChapterStat(fs.unit, 'cards', fs.known);
+  const wrap = document.getElementById('flash-card-wrap');
+  wrap.innerHTML = `<div class="flash-done">
+    <div class="fd-seal">학습 완료!</div>
+    <p style="color:var(--ink-soft);line-height:1.7;">외운 카드 <strong style="color:var(--focus-correct-border)">${fs.known}</strong>장 · 복습 필요 <strong style="color:var(--seal)">${fs.unknown}</strong>회<br>${chapterName(fs.unit)}</p>
+    <div style="display:flex;gap:0.6rem;margin-top:1.5rem;justify-content:center;flex-wrap:wrap;">
+      <button class="start-btn" style="max-width:160px" onclick="startFlash('${fs.unit}')">다시 학습</button>
+      <button class="start-btn" style="max-width:160px;background:var(--ink-soft)" onclick="closeFlash()">닫기</button>
+    </div></div>`;
+  document.querySelector('.flash-buttons').style.display='none';
+}
+function closeFlash(){
+  document.getElementById('flash-overlay').classList.remove('active');
+  document.body.style.overflow='';
+  document.querySelector('.flash-buttons').style.display='';
+  // 카드 래퍼 복구
+  document.getElementById('flash-card-wrap').innerHTML = `
+    <div class="flash-card" id="flash-card">
+      <div class="flash-face front">
+        <div class="fc-year" id="flash-year"></div>
+        <div class="fc-name" id="flash-name"></div>
+        <div class="fc-hint">카드를 눌러 뜻을 확인하세요 ↻</div>
+      </div>
+      <div class="flash-face back" id="flash-back"></div>
+    </div>`;
+  document.getElementById('flash-card').addEventListener('click', flipFlash);
+  if (currentChapter) renderHome();
+}
+
+// ============ 단원 → 문제 연결 ============
+function startChapterQuiz(uid, type){
+  quizState.type = type; quizState.scopeDa='all'; quizState.scopeUnit=uid; quizState.diff='all';
+  quizState.count = 'all';
+  switchToView('quiz');
+  const ctx = document.getElementById('quiz-scope-context');
+  ctx.innerHTML = `📘 <strong>${uid} ${chapterName(uid)}</strong> · ${type==='short'?'서술형':'객관식'} 문제`;
+  ctx.classList.add('show');
+  document.getElementById('quiz-intro').style.display='none';
+  startQuiz();
+}
+function startChapterOX(uid){
+  oxState.scopeUnit = uid; oxState.scopeDa='all'; oxState.count='all';
+  switchToView('ox-standalone');
+  startOX();
+}
+
+function switchToView(view){
+  document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+  if (view==='ox-standalone'){ document.getElementById('view-ox').classList.add('active'); }
+  else { document.getElementById('view-'+view).classList.add('active'); }
+  document.querySelectorAll('.nav-btn').forEach(b => b.classList.toggle('active', b.dataset.view===view));
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
 // ============ OX 퀴즈 로직 ============
 let oxState = {
   questions: [],
   currentIdx: 0,
   score: 0,
   wrong: 0,
-  era: 'all',
-  count: 20,
+  scopeUnit: 'all',
+  scopeDa: 'all',
+  count: 'all',
   answered: false
 };
 
 function startOX() {
-  let pool = [...oxQuestions];
-  if (oxState.era !== 'all') pool = pool.filter(q => q.era === parseInt(oxState.era));
+  let pool = allOX.filter(q => {
+    if (oxState.scopeUnit && oxState.scopeUnit !== 'all') return q.unit === oxState.scopeUnit;
+    if (oxState.scopeDa && oxState.scopeDa !== 'all') return daOfUnit(q.unit) === oxState.scopeDa;
+    return true;
+  });
   pool = pool.sort(() => Math.random() - 0.5);
   if (oxState.count !== 'all') pool = pool.slice(0, Math.min(oxState.count, pool.length));
 
-  if (pool.length === 0) { alert('해당 시대의 OX 문제가 없습니다.'); return; }
+  if (pool.length === 0) { alert('해당 범위의 OX 문제가 없습니다.'); return; }
 
   oxState.questions = pool;
   oxState.currentIdx = 0;
@@ -3802,7 +5564,7 @@ function renderOXQuestion() {
   if (!q) { showOXResult(); return; }
 
   const total = oxState.questions.length;
-  const eraLabel = ['', '무단 통치기 · 1910s', '문화 통치기 · 1920s', '민족 말살 통치기 · 1930~40s'][q.era] || '';
+  const eraLabel = unitTag(q.unit) + ' · ' + chapterName(q.unit);
 
   document.getElementById('ox-progress-bar').style.width = `${(oxState.currentIdx / total) * 100}%`;
   document.getElementById('ox-status-num').textContent = `${oxState.currentIdx + 1} / ${total}`;
@@ -3895,7 +5657,13 @@ function showOXResult() {
 
 function resetOX() {
   document.getElementById('ox-result').style.display = 'none';
+  startOX();
+}
+function backToChapterFromOX() {
+  document.getElementById('ox-result').style.display = 'none';
+  document.getElementById('ox-quiz-area').style.display = 'none';
   document.getElementById('ox-intro').style.display = 'block';
+  if (currentChapter) openChapter(currentChapter); else switchToView('home');
 }
 
 // OX 이벤트
@@ -3940,7 +5708,7 @@ document.querySelectorAll('.ox-count-btn').forEach(btn => {
 // ============ AUTO-LINK PEOPLE NAMES ============
 // 개념 카드·타임라인의 HTML 내용에 등장하는 인물 이름을 자동으로 클릭 가능하게 변환
 // 긴 이름부터 먼저 처리(김두봉이 김두로 잘못 매치되는 것 방지)
-const peopleNames = people.map(p => p.name).sort((a, b) => b.length - a.length);
+const peopleNames = allPeople.map(p => p.name).filter(n => n && n.length >= 2).sort((a, b) => b.length - a.length);
 
 function autoLinkPeople(html) {
   if (!html) return html;
@@ -4003,18 +5771,21 @@ function renderConcepts(filter = 'all', search = '') {
 }
 
 // ============ RENDER TIMELINE ============
+let timelinePeriodFilter = 'all';
 function renderTimeline() {
   const tl = document.getElementById('timeline');
   tl.innerHTML = '';
-  timelineEvents.forEach((e, idx) => {
+  const events = allTimeline.filter(e => timelinePeriodFilter === 'all' || e.period === timelinePeriodFilter);
+  events.forEach((e, idx) => {
+    const col = PERIOD_COLOR[e.period] || '#a02828';
     const ev = document.createElement('div');
     ev.className = 'timeline-event';
     ev.style.setProperty('--i', Math.min(idx, 20));
     ev.innerHTML = `
       <div class="timeline-year">${e.year}</div>
-      <div class="timeline-dot era-${e.era} ${e.major ? 'major' : ''}"></div>
-      <div class="timeline-content era-${e.era}">
-        <h4>${autoLinkPeople(e.title)}</h4>
+      <div class="timeline-dot ${e.major ? 'major' : ''}" style="background:${col};border-color:${col}"></div>
+      <div class="timeline-content" style="border-left:3px solid ${col}">
+        <h4>${autoLinkPeople(e.title)} <span style="font-size:0.62rem;color:${col};font-weight:700;">${e.period}</span></h4>
         <p>${autoLinkPeople(e.desc)}</p>
         ${e.cause ? `<div class="causes-to">${autoLinkPeople(e.cause)}</div>` : ''}
       </div>
@@ -4028,12 +5799,14 @@ function renderPeople(filter = 'all', search = '') {
   const grid = document.getElementById('people-grid');
   grid.innerHTML = '';
 
-  const filtered = people.filter(p => {
-    const matchFilter = filter === 'all' || p.categories.includes(filter);
+  const filtered = allPeople.filter(p => {
+    const cats = p.categories || [];
+    const matchFilter = filter === 'all'
+      || (filter === '다중' ? cats.includes('다중') : (p.period === filter || cats.includes(filter)));
     const matchSearch = !search ||
       p.name.toLowerCase().includes(search.toLowerCase()) ||
-      p.hanja.includes(search) ||
-      p.tags.some(t => t.toLowerCase().includes(search.toLowerCase()));
+      (p.hanja||'').includes(search) ||
+      (p.tags||[]).some(t => t.toLowerCase().includes(search.toLowerCase()));
     return matchFilter && matchSearch;
   });
 
@@ -4044,17 +5817,17 @@ function renderPeople(filter = 'all', search = '') {
 
   filtered.forEach((p, idx) => {
     const card = document.createElement('div');
-    const isMulti = p.categories.includes('다중');
+    const isMulti = (p.categories||[]).includes('다중');
     card.className = 'person-card' + (isMulti ? ' multi' : '');
     card.style.setProperty('--i', Math.min(idx, 15));
     card.innerHTML = `
-      <div class="pname">${p.name}<span class="hanja">${p.hanja}</span></div>
-      <div class="pyears">${p.years}</div>
-      <div class="ptitle">${p.title}</div>
+      <div class="pname">${p.name}<span class="hanja">${p.hanja||''}</span></div>
+      <div class="pyears">${p.years||''}</div>
+      <div class="ptitle">${p.title||''} <span style="font-size:0.65rem;color:${PERIOD_COLOR[p.period]||'var(--seal)'};font-weight:700;">· ${p.period||''}</span></div>
       <div class="pactivities">
-        ${p.tags.slice(0, 4).map(t => `<span class="ptag">${t}</span>`).join('')}
+        ${(p.tags||[]).slice(0, 4).map(t => `<span class="ptag">${t}</span>`).join('')}
       </div>
-      <div class="count-badge">활동 ${p.activities.length}건</div>
+      <div class="count-badge">활동 ${(p.activities||[]).length}건</div>
     `;
     card.addEventListener('click', () => openPersonModal(p.name));
     grid.appendChild(card);
@@ -4063,7 +5836,7 @@ function renderPeople(filter = 'all', search = '') {
 
 // ============ OPEN PERSON MODAL ============
 function openPersonModal(name) {
-  const p = people.find(x => x.name === name);
+  const p = allPeople.find(x => x.name === name);
   if (!p) return;
 
   const body = document.getElementById('modal-body');
@@ -4105,99 +5878,18 @@ function closePersonModal() {
 // ============ RENDER KEYTERMS ============
 function renderKeyterms() {
   const content = document.getElementById('keyterms-content');
-  content.innerHTML = `
-    <div style="display:grid;gap:2rem;">
-
-    <div style="background:var(--paper-light);border:1px solid var(--ink-soft);padding:1.5rem;box-shadow:3px 3px 0 var(--paper-dark);">
-      <h3 style="font-family:'Nanum Myeongjo',serif;font-size:1.3rem;margin-bottom:1rem;border-bottom:2px solid var(--seal);padding-bottom:0.5rem;">🔥 헷갈리기 쉬운 구분 ①: 1910년대 국내 비밀 결사</h3>
-      <table style="width:100%;border-collapse:collapse;">
-        <tr style="background:var(--hanji);">
-          <th style="padding:0.7rem;border:1px solid var(--ink-soft);text-align:left;">구분</th>
-          <th style="padding:0.7rem;border:1px solid var(--ink-soft);text-align:left;">독립 의군부</th>
-          <th style="padding:0.7rem;border:1px solid var(--ink-soft);text-align:left;">대한 광복회</th>
-        </tr>
-        <tr><td style="padding:0.7rem;border:1px solid var(--ink-soft);"><strong>연도</strong></td><td style="padding:0.7rem;border:1px solid var(--ink-soft);">1912년</td><td style="padding:0.7rem;border:1px solid var(--ink-soft);">1915년</td></tr>
-        <tr><td style="padding:0.7rem;border:1px solid var(--ink-soft);"><strong>인물</strong></td><td style="padding:0.7rem;border:1px solid var(--ink-soft);">임병찬 (고종 밀명)</td><td style="padding:0.7rem;border:1px solid var(--ink-soft);">박상진</td></tr>
-        <tr><td style="padding:0.7rem;border:1px solid var(--ink-soft);"><strong>이념</strong></td><td style="padding:0.7rem;border:1px solid var(--ink-soft);"><span style="color:var(--seal);font-weight:700;">복벽주의</span></td><td style="padding:0.7rem;border:1px solid var(--ink-soft);"><span style="color:#2a5d3a;font-weight:700;">공화정</span></td></tr>
-        <tr><td style="padding:0.7rem;border:1px solid var(--ink-soft);"><strong>조직</strong></td><td style="padding:0.7rem;border:1px solid var(--ink-soft);">의병 전통</td><td style="padding:0.7rem;border:1px solid var(--ink-soft);">군대식 조직</td></tr>
-      </table>
-    </div>
-
-    <div style="background:var(--paper-light);border:1px solid var(--ink-soft);padding:1.5rem;box-shadow:3px 3px 0 var(--paper-dark);">
-      <h3 style="font-family:'Nanum Myeongjo',serif;font-size:1.3rem;margin-bottom:1rem;border-bottom:2px solid var(--seal);padding-bottom:0.5rem;">🔥 헷갈리기 쉬운 구분 ②: 1920년 만주 독립군</h3>
-      <table style="width:100%;border-collapse:collapse;">
-        <tr style="background:var(--hanji);">
-          <th style="padding:0.7rem;border:1px solid var(--ink-soft);text-align:left;">구분</th>
-          <th style="padding:0.7rem;border:1px solid var(--ink-soft);text-align:left;">봉오동 전투</th>
-          <th style="padding:0.7rem;border:1px solid var(--ink-soft);text-align:left;">청산리 대첩</th>
-        </tr>
-        <tr><td style="padding:0.7rem;border:1px solid var(--ink-soft);"><strong>지휘관</strong></td><td style="padding:0.7rem;border:1px solid var(--ink-soft);"><span style="color:var(--seal);font-weight:700;">홍범도</span></td><td style="padding:0.7rem;border:1px solid var(--ink-soft);"><span style="color:var(--seal);font-weight:700;">김좌진</span></td></tr>
-        <tr><td style="padding:0.7rem;border:1px solid var(--ink-soft);"><strong>주력 부대</strong></td><td style="padding:0.7rem;border:1px solid var(--ink-soft);">대한 독립군</td><td style="padding:0.7rem;border:1px solid var(--ink-soft);">북로 군정서</td></tr>
-        <tr><td style="padding:0.7rem;border:1px solid var(--ink-soft);"><strong>전개</strong></td><td style="padding:0.7rem;border:1px solid var(--ink-soft);">일본군 두만강 침입 기습</td><td style="padding:0.7rem;border:1px solid var(--ink-soft);">봉오동 보복 작전에 맞섬</td></tr>
-      </table>
-    </div>
-
-    <div style="background:var(--paper-light);border:1px solid var(--ink-soft);padding:1.5rem;box-shadow:3px 3px 0 var(--paper-dark);">
-      <h3 style="font-family:'Nanum Myeongjo',serif;font-size:1.3rem;margin-bottom:1rem;border-bottom:2px solid var(--seal);padding-bottom:0.5rem;">🔥 헷갈리기 쉬운 구분 ③: 의열단 vs 한인 애국단</h3>
-      <table style="width:100%;border-collapse:collapse;">
-        <tr style="background:var(--hanji);">
-          <th style="padding:0.7rem;border:1px solid var(--ink-soft);text-align:left;">구분</th>
-          <th style="padding:0.7rem;border:1px solid var(--ink-soft);text-align:left;">의열단 (1919)</th>
-          <th style="padding:0.7rem;border:1px solid var(--ink-soft);text-align:left;">한인 애국단 (1931)</th>
-        </tr>
-        <tr><td style="padding:0.7rem;border:1px solid var(--ink-soft);"><strong>조직자</strong></td><td style="padding:0.7rem;border:1px solid var(--ink-soft);"><span style="color:var(--seal);font-weight:700;">김원봉</span></td><td style="padding:0.7rem;border:1px solid var(--ink-soft);"><span style="color:var(--seal);font-weight:700;">김구</span></td></tr>
-        <tr><td style="padding:0.7rem;border:1px solid var(--ink-soft);"><strong>지침/목적</strong></td><td style="padding:0.7rem;border:1px solid var(--ink-soft);">신채호 「조선 혁명 선언」</td><td style="padding:0.7rem;border:1px solid var(--ink-soft);">임시 정부 침체 극복</td></tr>
-        <tr><td style="padding:0.7rem;border:1px solid var(--ink-soft);"><strong>주요 의거</strong></td><td style="padding:0.7rem;border:1px solid var(--ink-soft);">박재혁/김익상/김상옥/김지섭/나석주</td><td style="padding:0.7rem;border:1px solid var(--ink-soft);">이봉창/윤봉길</td></tr>
-      </table>
-    </div>
-
-    <div style="background:var(--paper-light);border:1px solid var(--ink-soft);padding:1.5rem;box-shadow:3px 3px 0 var(--paper-dark);">
-      <h3 style="font-family:'Nanum Myeongjo',serif;font-size:1.3rem;margin-bottom:1rem;border-bottom:2px solid var(--seal);padding-bottom:0.5rem;">🔥 헷갈리기 쉬운 구분 ④: 1930년대 한중 연합 작전</h3>
-      <table style="width:100%;border-collapse:collapse;">
-        <tr style="background:var(--hanji);">
-          <th style="padding:0.7rem;border:1px solid var(--ink-soft);text-align:left;">구분</th>
-          <th style="padding:0.7rem;border:1px solid var(--ink-soft);text-align:left;">한국 독립군</th>
-          <th style="padding:0.7rem;border:1px solid var(--ink-soft);text-align:left;">조선 혁명군</th>
-        </tr>
-        <tr><td style="padding:0.7rem;border:1px solid var(--ink-soft);"><strong>지휘관</strong></td><td style="padding:0.7rem;border:1px solid var(--ink-soft);"><span style="color:var(--seal);font-weight:700;">지청천</span></td><td style="padding:0.7rem;border:1px solid var(--ink-soft);"><span style="color:var(--seal);font-weight:700;">양세봉</span></td></tr>
-        <tr><td style="padding:0.7rem;border:1px solid var(--ink-soft);"><strong>지역</strong></td><td style="padding:0.7rem;border:1px solid var(--ink-soft);">북만주</td><td style="padding:0.7rem;border:1px solid var(--ink-soft);">남만주</td></tr>
-        <tr><td style="padding:0.7rem;border:1px solid var(--ink-soft);"><strong>연합 상대</strong></td><td style="padding:0.7rem;border:1px solid var(--ink-soft);">중국 호로군</td><td style="padding:0.7rem;border:1px solid var(--ink-soft);">중국 의용군</td></tr>
-        <tr><td style="padding:0.7rem;border:1px solid var(--ink-soft);"><strong>주요 전투</strong></td><td style="padding:0.7rem;border:1px solid var(--ink-soft);">쌍성보, 대전자령</td><td style="padding:0.7rem;border:1px solid var(--ink-soft);">영릉가, 흥경성</td></tr>
-      </table>
-    </div>
-
-    <div style="background:var(--paper-light);border:1px solid var(--ink-soft);padding:1.5rem;box-shadow:3px 3px 0 var(--paper-dark);">
-      <h3 style="font-family:'Nanum Myeongjo',serif;font-size:1.3rem;margin-bottom:1rem;border-bottom:2px solid var(--seal);padding-bottom:0.5rem;">🔥 헷갈리기 쉬운 구분 ⑤: 민족주의 사학 vs 사회 경제 사학</h3>
-      <table style="width:100%;border-collapse:collapse;">
-        <tr style="background:var(--hanji);">
-          <th style="padding:0.7rem;border:1px solid var(--ink-soft);text-align:left;">사학자</th>
-          <th style="padding:0.7rem;border:1px solid var(--ink-soft);text-align:left;">주요 저서</th>
-          <th style="padding:0.7rem;border:1px solid var(--ink-soft);text-align:left;">핵심 사상</th>
-        </tr>
-        <tr><td style="padding:0.7rem;border:1px solid var(--ink-soft);"><strong>박은식</strong></td><td style="padding:0.7rem;border:1px solid var(--ink-soft);">한국통사, 한국독립운동지혈사</td><td style="padding:0.7rem;border:1px solid var(--ink-soft);"><span style="color:var(--seal);font-weight:700;">국혼(國魂)</span> 강조</td></tr>
-        <tr><td style="padding:0.7rem;border:1px solid var(--ink-soft);"><strong>신채호</strong></td><td style="padding:0.7rem;border:1px solid var(--ink-soft);">조선사연구초, 조선상고사</td><td style="padding:0.7rem;border:1px solid var(--ink-soft);">민족 정신, 낭가 사상</td></tr>
-        <tr><td style="padding:0.7rem;border:1px solid var(--ink-soft);"><strong>백남운</strong></td><td style="padding:0.7rem;border:1px solid var(--ink-soft);">조선사회경제사</td><td style="padding:0.7rem;border:1px solid var(--ink-soft);"><span style="color:#2a5d3a;font-weight:700;">세계사적 보편 발전 법칙</span> / 정체성론 비판</td></tr>
-      </table>
-    </div>
-
-    <div style="background:var(--paper-light);border:1px solid var(--ink-soft);padding:1.5rem;box-shadow:3px 3px 0 var(--paper-dark);">
-      <h3 style="font-family:'Nanum Myeongjo',serif;font-size:1.3rem;margin-bottom:1rem;border-bottom:2px solid var(--seal);padding-bottom:0.5rem;">🔥 헷갈리기 쉬운 구분 ⑥: 해외 건국 준비 단체</h3>
-      <table style="width:100%;border-collapse:collapse;">
-        <tr style="background:var(--hanji);">
-          <th style="padding:0.7rem;border:1px solid var(--ink-soft);text-align:left;">단체</th>
-          <th style="padding:0.7rem;border:1px solid var(--ink-soft);text-align:left;">주도자</th>
-          <th style="padding:0.7rem;border:1px solid var(--ink-soft);text-align:left;">지역/특징</th>
-        </tr>
-        <tr><td style="padding:0.7rem;border:1px solid var(--ink-soft);"><strong>대한민국 임시 정부</strong></td><td style="padding:0.7rem;border:1px solid var(--ink-soft);">김구, 조소앙</td><td style="padding:0.7rem;border:1px solid var(--ink-soft);">충칭 / 삼균주의, 한국광복군</td></tr>
-        <tr><td style="padding:0.7rem;border:1px solid var(--ink-soft);"><strong>조선 독립 동맹</strong></td><td style="padding:0.7rem;border:1px solid var(--ink-soft);">김두봉</td><td style="padding:0.7rem;border:1px solid var(--ink-soft);">화북 / 사회주의, 조선 의용군</td></tr>
-        <tr><td style="padding:0.7rem;border:1px solid var(--ink-soft);"><strong>조선 건국 동맹</strong></td><td style="padding:0.7rem;border:1px solid var(--ink-soft);">여운형</td><td style="padding:0.7rem;border:1px solid var(--ink-soft);"><span style="color:var(--seal);font-weight:700;">국내 비밀 결성(1944)</span></td></tr>
-      </table>
-    </div>
-
-    </div>
-  `;
-  // 비교표 내용에도 인물 자동 링크 적용
-  content.innerHTML = autoLinkPeople(content.innerHTML);
+  const byDa = {};
+  allComparisons.forEach(c => { const da = daOfUnit(c.unit) || 'Ⅲ'; (byDa[da] = byDa[da] || []).push(c); });
+  const order = ['Ⅰ','Ⅱ','Ⅲ','Ⅳ'];
+  let html = '<div style="display:grid;gap:1.4rem;">';
+  order.forEach(da => {
+    if (!byDa[da]) return;
+    const daInfo = UNITS.find(u => u.da === da);
+    html += `<div style="font-family:'Nanum Myeongjo',serif;font-weight:800;font-size:1.05rem;color:${daInfo.color};margin-top:0.4rem;">${da}. ${daInfo.daName}</div>`;
+    byDa[da].forEach(c => { html += renderComparisonHTML(c); });
+  });
+  html += '</div>';
+  content.innerHTML = autoLinkPeople(html);
 }
 
 // ============ QUIZ LOGIC ============
@@ -4207,7 +5899,9 @@ let quizState = {
   score: 0,
   wrong: 0,
   wrongQuestions: [],
-  mode: 'all',
+  scopeDa: 'all',
+  scopeUnit: 'all',
+  diff: 'all',
   type: 'multiple',
   count: 20,
   currentWrongQ: null   // 오답 시 개념 모달에 쓸 현재 문제
@@ -4239,37 +5933,26 @@ function checkShortAnswer(userInput, q) {
   return allKeywordsMatch;
 }
 
-function filterPool(pool, scope) {
-  if (scope === 'era1') return pool.filter(q => q.era === 1);
-  if (scope === 'era2') return pool.filter(q => q.era === 2);
-  if (scope === 'era3') return pool.filter(q => q.era === 3);
-  if (scope === 'hard') return pool.filter(q => q.difficulty === 'hard');
-  return pool;
+function inQuizScope(it) {
+  if (quizState.scopeUnit && quizState.scopeUnit !== 'all') return it.unit === quizState.scopeUnit;
+  if (quizState.scopeDa && quizState.scopeDa !== 'all') return daOfUnit(it.unit) === quizState.scopeDa;
+  return true;
 }
 
 function startQuiz() {
   let pool = [];
+  const mcPool = () => allMC.filter(inQuizScope)
+    .filter(q => quizState.diff !== 'hard' || q.difficulty === 'hard')
+    .map(q => ({ ...q, type: 'multiple' }));
+  const saPool = () => allShort.filter(inQuizScope).map(q => ({ ...q, type: 'short' }));
 
-  if (quizState.type === 'multiple') {
-    pool = filterPool([...questions], quizState.mode)
-      .map(q => ({ ...q, type: 'multiple' }));
-  } else if (quizState.type === 'short') {
-    // 서술형은 hard 범위를 제외 (모두 단답형이므로)
-    const scope = quizState.mode === 'hard' ? 'all' : quizState.mode;
-    pool = filterPool([...shortAnswerQuestions], scope)
-      .map(q => ({ ...q, type: 'short' }));
-  } else {
-    // mixed
-    const mcPool = filterPool([...questions], quizState.mode)
-      .map(q => ({ ...q, type: 'multiple' }));
-    const scope = quizState.mode === 'hard' ? 'all' : quizState.mode;
-    const saPool = filterPool([...shortAnswerQuestions], scope)
-      .map(q => ({ ...q, type: 'short' }));
-    pool = [...mcPool, ...saPool];
-  }
+  if (quizState.type === 'multiple') pool = mcPool();
+  else if (quizState.type === 'short') pool = saPool();
+  else pool = [...mcPool(), ...saPool()];
 
   if (pool.length === 0) {
-    alert('해당 조건에 맞는 문제가 없습니다. 다른 범위를 선택해 주세요.');
+    if (quizState.type === 'short') alert('이 범위에는 서술형 문제가 없습니다. 서술형은 일제 강점기~현대(09~15단원)에만 있어요.');
+    else alert('해당 조건에 맞는 문제가 없습니다. 다른 범위를 선택해 주세요.');
     return;
   }
 
@@ -4459,11 +6142,17 @@ function showResult() {
   document.getElementById('result-seal').textContent = seal;
   document.getElementById('result-title').textContent = title;
   document.getElementById('result-comment').textContent = comment;
+
+  // 단원 범위 객관식이면 진도 저장
+  if (quizState.scopeUnit && quizState.scopeUnit !== 'all' && quizState.type === 'multiple') {
+    setChapterStat(quizState.scopeUnit, 'mc', pct);
+  }
 }
 
 function restartQuiz() {
   document.getElementById('result-screen').classList.remove('active');
   document.getElementById('quiz-intro').style.display = 'block';
+  if (currentChapter && quizState.scopeUnit !== 'all') { openChapter(currentChapter); }
 }
 
 function reviewWrong() {
@@ -4532,32 +6221,38 @@ document.querySelectorAll('.nav-btn').forEach(btn => {
     currentViewLabel.textContent = btn.textContent.trim();
     currentViewLabel.setAttribute('data-num', btn.dataset.num);
 
+    // 모의시험 탭을 직접 열면 단원 범위 컨텍스트 초기화
+    if (btn.dataset.view === 'quiz') {
+      document.getElementById('quiz-scope-context').classList.remove('show');
+      document.getElementById('quiz-intro').style.display = 'block';
+      document.getElementById('quiz-container').classList.remove('active');
+      document.getElementById('result-screen').classList.remove('active');
+      currentChapter = null;
+    }
+    if (btn.dataset.view === 'home') { currentChapter = null; renderHome(); }
+
     // 뷰 전환 애니메이션
     const targetView = document.getElementById('view-' + btn.dataset.view);
     document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
     void targetView.offsetWidth;
     targetView.classList.add('active');
 
-    // 드로어 닫기 (부드러운 전환 느낌을 위해 약간의 지연)
     setTimeout(closeDrawer, 180);
-
     window.scrollTo({ top: 0, behavior: 'smooth' });
   });
 });
 
-document.querySelectorAll('.era-btn').forEach(btn => {
-  btn.addEventListener('click', () => {
-    document.querySelectorAll('.era-btn').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    renderConcepts(btn.dataset.era, document.getElementById('concept-search').value);
-  });
-});
-
+// 단원 학습 홈 - 개념 검색
 document.getElementById('concept-search').addEventListener('input', e => {
-  const activeEra = document.querySelector('.era-btn.active').dataset.era;
-  renderConcepts(activeEra, e.target.value);
+  renderConceptSearch(e.target.value.trim());
+});
+// 소단원 상세 - 뒤로
+document.getElementById('chapter-back').addEventListener('click', () => {
+  currentChapter = null;
+  switchToView('home'); renderHome();
 });
 
+// 모의시험 - 문제 유형
 document.querySelectorAll('.type-btn').forEach(btn => {
   btn.addEventListener('click', () => {
     document.querySelectorAll('.type-btn').forEach(b => b.classList.remove('active'));
@@ -4566,11 +6261,53 @@ document.querySelectorAll('.type-btn').forEach(btn => {
   });
 });
 
-document.querySelectorAll('.scope-btn').forEach(btn => {
+// 모의시험 - 대단원 선택 (동적 생성)
+(function buildDaSelector(){
+  const sel = document.getElementById('da-selector');
+  UNITS.forEach(d => {
+    const b = document.createElement('button');
+    b.className = 'mode-btn da-btn'; b.dataset.da = d.da;
+    b.textContent = d.da + '. ' + d.daName;
+    sel.appendChild(b);
+  });
+  sel.querySelectorAll('.da-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      sel.querySelectorAll('.da-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      quizState.scopeDa = btn.dataset.da; quizState.scopeUnit = 'all';
+      buildSubscope(btn.dataset.da);
+    });
+  });
+})();
+
+function buildSubscope(da){
+  const row = document.getElementById('subscope-row');
+  const label = document.getElementById('subscope-label');
+  row.innerHTML = '';
+  if (da === 'all') { label.style.display='none'; row.style.display='none'; return; }
+  label.style.display=''; row.style.display='flex';
+  const daInfo = UNITS.find(u => u.da === da);
+  const mk = (unit, txt) => {
+    const b = document.createElement('button');
+    b.className = 'mode-btn da-btn' + (unit==='all'?' active':''); b.dataset.unit = unit;
+    b.textContent = txt;
+    b.addEventListener('click', () => {
+      row.querySelectorAll('.da-btn').forEach(x => x.classList.remove('active'));
+      b.classList.add('active');
+      quizState.scopeUnit = unit;
+    });
+    return b;
+  };
+  row.appendChild(mk('all', da + ' 전체'));
+  daInfo.chapters.forEach(c => row.appendChild(mk(c.id, c.id + ' ' + c.name.slice(0,12))));
+}
+
+// 모의시험 - 난이도
+document.querySelectorAll('.diff-btn').forEach(btn => {
   btn.addEventListener('click', () => {
-    document.querySelectorAll('.scope-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.diff-btn').forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
-    quizState.mode = btn.dataset.mode;
+    quizState.diff = btn.dataset.diff;
   });
 });
 
@@ -4761,15 +6498,15 @@ function findRelatedConcepts(q) {
   ].join(' ').toLowerCase().replace(/<[^>]+>/g, '');
 
   // 각 개념과의 매칭 점수 계산
-  const scored = concepts.map(c => {
+  const scored = allConcepts.map(c => {
     let score = 0;
-    const conceptText = (c.name + ' ' + c.summary + ' ' + c.details.join(' ')).toLowerCase().replace(/<[^>]+>/g, '');
+    const conceptText = (c.name + ' ' + c.summary + ' ' + (c.details||[]).join(' ')).toLowerCase().replace(/<[^>]+>/g, '');
 
     // 개념 이름이 문제에 있으면 높은 점수
     if (searchText.includes(c.name.toLowerCase())) score += 10;
 
     // 개념 상세 키워드 매칭
-    c.details.forEach(d => {
+    (c.details||[]).forEach(d => {
       const stripped = d.replace(/<[^>]+>/g, '').toLowerCase();
       // 핵심 단어(3글자 이상)만 추출해서 매칭
       stripped.split(/[\s:·,()·]+/).filter(w => w.length >= 3).forEach(word => {
@@ -4777,8 +6514,8 @@ function findRelatedConcepts(q) {
       });
     });
 
-    // 같은 era이면 가산점
-    if (c.era === q.era) score += 2;
+    // 같은 단원이면 가산점
+    if (c.unit === q.unit) score += 3;
 
     // 개념 이름 단어가 설명에 나오면 가산점
     c.name.split(/[\s·]+/).forEach(w => {
@@ -4807,15 +6544,15 @@ function openConceptFromQuiz() {
     body.innerHTML = `
       <div class="concept-modal-empty">
         <div>이 문제와 직접 연결된 개념 카드를 찾지 못했어요.</div>
-        <div class="hint-link" onclick="closeConceptModal(); document.querySelector('[data-view=concepts]').click()">
-          📚 개념 정리 탭에서 직접 찾아보기 →
+        <div class="hint-link" onclick="closeConceptModal(); document.querySelector('[data-view=home]').click()">
+          📚 단원 학습에서 직접 찾아보기 →
         </div>
       </div>`;
   } else {
     body.innerHTML = related.map(c => `
       <div class="concept-modal-card">
-        <span class="cm-year">${c.year}</span>
-        <span class="cm-era">${eraNames[c.era]}</span>
+        <span class="cm-year">${c.year||''}</span>
+        <span class="cm-era">${unitTag(c.unit)}</span>
         <h4>${c.name}</h4>
         <p class="cm-summary">${c.summary}</p>
         <div class="cm-details">
@@ -4948,8 +6685,31 @@ document.addEventListener('keydown', e => {
   }, { passive: true });
 })();
 
+// ============ 플래시카드 이벤트 ============
+document.getElementById('flash-card').addEventListener('click', flipFlash);
+document.getElementById('flash-close').addEventListener('click', closeFlash);
+document.getElementById('flash-btn-known').addEventListener('click', () => answerFlash(true));
+document.getElementById('flash-btn-unknown').addEventListener('click', () => answerFlash(false));
+document.addEventListener('keydown', e => {
+  if (!document.getElementById('flash-overlay').classList.contains('active')) return;
+  if (e.key === ' ' || e.key === 'Enter') { e.preventDefault(); flipFlash(); }
+  else if (e.key === 'ArrowRight' || e.key === 'o' || e.key === 'O') answerFlash(true);
+  else if (e.key === 'ArrowLeft' || e.key === 'x' || e.key === 'X') answerFlash(false);
+  else if (e.key === 'Escape') closeFlash();
+});
+
+// ============ 로드맵 시대 필터 ============
+document.querySelectorAll('#timeline-filter .era-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('#timeline-filter .era-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    timelinePeriodFilter = btn.dataset.period;
+    renderTimeline();
+  });
+});
+
 // Initial render
-renderConcepts();
+renderHome();
 renderTimeline();
 renderPeople();
 renderKeyterms();

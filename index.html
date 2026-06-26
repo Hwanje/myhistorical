@@ -2774,6 +2774,16 @@
   .flash-done { text-align: center; padding: 2.5rem 1rem; }
   .flash-done .fd-seal { font-family: 'Nanum Myeongjo', serif; font-size: 1.4rem; font-weight: 800; color: var(--seal); margin-bottom: 0.6rem; }
 
+  /* 개념 심화 보강 배지/라벨 */
+  .deep-badge {
+    position: absolute; top: 0.9rem; right: 2.6rem; font-size: 0.62rem; font-weight: 700;
+    color: var(--seal); border: 1px solid var(--seal); border-radius: 3px; padding: 1px 5px; letter-spacing: 0.03em;
+  }
+  .detail-label {
+    display: inline-block; font-weight: 800; font-size: 0.78rem; margin-right: 0.35rem;
+    padding: 0 2px; border-bottom: 2px solid currentColor;
+  }
+
   /* 퀴즈 범위 - 소단원 칩 */
   .subscope-row { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 0.6rem; }
   .quiz-scope-context {
@@ -5316,6 +5326,16 @@ const allOX = oxQuestions.concat(extOX);
 const allPeople = people.concat(extPeople);
 const allComparisons = ILJE_COMPARISONS.concat(extComparisons);
 
+// --- 개념 심화 보강(배경·의의·한계·영향) 오버레이 적용: 3·4 대단원 ---
+const CONCEPT_ENRICH = Object.assign({}, window.CONCEPT_ENRICH_ILJE || {}, window.CONCEPT_ENRICH_HYUNDAE || {});
+allConcepts.forEach(c => {
+  const extra = CONCEPT_ENRICH[c.name];
+  if (extra && extra.length) {
+    c.details = (c.details || []).concat(extra);
+    c.enriched = true;
+  }
+});
+
 // --- 시대/색상 ---
 const PERIOD_ORDER = {"고대":0,"고려":1,"조선":2,"근대":3,"일제":4,"현대":5};
 const PERIOD_COLOR = {"고대":"#6b8f3a","고려":"#3f7d4e","조선":"#2e7d6b","근대":"#b8862a","일제":"#a02828","현대":"#2a5d9e"};
@@ -5331,6 +5351,11 @@ function setChapterStat(uid, key, val){ const p=getProgress(); p[uid]=p[uid]||{}
 function unitConceptCount(uid){ return allConcepts.filter(c=>c.unit===uid).length; }
 
 // ============ 개념 카드 생성 (공용) ============
+const DETAIL_LABELS = { '배경':'#8a6d2b', '의의':'#2a5d3a', '한계':'#a02828', '영향':'#2a5d9e', '평가':'#6b3fa0', '특징':'#3a342c' };
+function highlightLabel(d){
+  return d.replace(/^(배경|의의|한계|영향|평가|특징)\s*:/, (m, lbl) =>
+    `<span class="detail-label" style="color:${DETAIL_LABELS[lbl]}">${lbl}</span>`);
+}
 function makeConceptCard(c, idx){
   const card = document.createElement('div');
   card.className = 'concept-card';
@@ -5338,10 +5363,11 @@ function makeConceptCard(c, idx){
   card.style.setProperty('--i', Math.min(idx, 15));
   card.innerHTML = `
     <span class="era-tag" style="color:${colorOfUnit(c.unit)};border-color:${colorOfUnit(c.unit)}">${unitTag(c.unit)}</span>
+    ${c.enriched ? '<span class="deep-badge">✦ 심화</span>' : ''}
     <h3>${c.name}</h3>
     <p class="summary">${autoLinkPeople(c.summary)}</p>
     <div class="details">
-      <ul>${(c.details||[]).map((d, li) => `<li style="--li:${li}">${autoLinkPeople(d)}</li>`).join('')}</ul>
+      <ul>${(c.details||[]).map((d, li) => `<li style="--li:${li}">${autoLinkPeople(highlightLabel(d))}</li>`).join('')}</ul>
     </div>`;
   card.addEventListener('click', (e) => { if (!e.target.closest('.plink')) card.classList.toggle('expanded'); });
   return card;

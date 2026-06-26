@@ -2783,6 +2783,11 @@
     display: inline-block; font-weight: 800; font-size: 0.78rem; margin-right: 0.35rem;
     padding: 0 2px; border-bottom: 2px solid currentColor;
   }
+  .exam-badge {
+    display: inline-block; font-size: 0.66rem; font-weight: 800; color: #fff;
+    background: var(--seal); border-radius: 3px; padding: 2px 7px; margin-bottom: 0.55rem;
+    letter-spacing: 0.02em; box-shadow: 1px 1px 0 var(--seal-dark);
+  }
 
   /* 퀴즈 범위 - 소단원 칩 */
   .subscope-row { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 0.6rem; }
@@ -4723,6 +4728,102 @@ window.CONCEPT_ENRICH_HYUNDAE = {
 </script>
 
 <script>
+// 강의(녹음) 반영: 14·15단원 신규 개념 + 문제
+window.UNIT_DATA_LECTURE = {
+  concepts: [
+    { unit:"14", name:"3저 호황", year:"1980년대 중반", summary:"저유가·저금리·저달러에 힘입은 1980년대 중반의 경제 호황이다.", details:[
+      "<strong>3저 = 저유가 · 저금리 · 저달러</strong>(달러 가치 하락 → 원화 가치 상승)",
+      "배경: 1970년대 말 <strong>2차 석유 파동</strong>과 중화학 공업 과잉 투자로 침체된 경제가 회복되었다.",
+      "전개: 전두환 정부 시기 <strong>자동차·철강·전자</strong> 등 산업이 호황을 누렸다.",
+      "의의: 만성적 적자에서 벗어나 <strong>무역 흑자</strong>를 기록하였다.",
+      "한계: 호황이 <strong>외부 경제 여건에 의존</strong>한 것이어서 대외 의존적이었고, 정경유착·재벌 집중은 계속되었다." ] },
+    { unit:"14", name:"전태일 분신 사건", year:"1970", summary:"평화시장 재단사 전태일이 노동 조건 개선을 외치며 분신한 사건이다.", details:[
+      "배경: 수출 주도 성장 속에서 <strong>저임금·장시간 노동</strong> 등 노동 환경이 매우 열악하였다.",
+      "전개: 1970년 평화시장 재단사 <strong>전태일</strong>이 '근로 기준법을 지켜라'를 외치며 분신하였다.",
+      "의의: 1970년대 <strong>노동 운동이 본격화</strong>되는 계기가 되었다.",
+      "영향: 지식인·학생·종교계가 노동 문제에 관심을 갖게 되었다." ] },
+    { unit:"14", name:"언론 통제와 저항", year:"1950~80년대", summary:"이승만·박정희·전두환 정부의 언론 탄압과 이에 맞선 언론 운동이다.", details:[
+      "이승만 정부: 정부에 비판적이던 <strong>경향신문을 폐간</strong>하였다.",
+      "박정희 정부: 유신 이후 언론을 통제하자 동아일보 기자들이 <strong>자유 언론 실천 선언</strong>을 발표 → 정부의 광고 탄압으로 <strong>백지 광고 사태</strong>가 일어나고 기자들이 대량 해직되었다.",
+      "전두환 정부: <strong>언론사 통폐합</strong>과 <strong>보도 지침</strong>으로 기사 내용까지 통제하였다.",
+      "의의: 언론 자유를 향한 저항이 민주화 운동의 한 축이 되었다." ] }
+  ],
+  mc: [
+    { unit:"14", difficulty:"normal", q:"1980년대 중반 우리 경제가 호황을 누린 이른바 '3저 호황'의 세 가지 요인으로 옳은 것은?", options:["저유가·저금리·저달러","고유가·고금리·고환율","저임금·저곡가·저물가","고성장·고물가·고금리","저관세·저임금·저유가"], answer:0, explanation:"<strong>3저 호황</strong>은 <strong>저유가·저금리·저달러(원화 가치 상승)</strong>에 힘입은 1980년대 중반의 호황으로, 자동차·철강 등 산업이 성장하고 무역 흑자를 기록하였습니다." },
+    { unit:"14", difficulty:"hard", q:"경제 개발 5개년 계획에 대한 설명으로 옳지 않은 것은?", options:["1·2차는 경공업(노동 집약적) 중심이었다","3·4차는 중화학 공업(자본 집약적) 중심이었다","수출 주도형 성장을 위해 저임금·저곡가 정책을 폈다","1977년 수출액 100억 달러를 달성하였다","처음부터 농민·노동자의 복지 향상을 최우선으로 삼았다"], answer:4, explanation:"경제 개발 5개년 계획은 <strong>수출 주도형 성장</strong>을 위해 저임금·저곡가 정책을 펴 <strong>노동자·농민의 희생</strong>이 따랐고, 도농 격차·대외 의존도 심화 등의 한계가 있었습니다." },
+    { unit:"14", difficulty:"normal", q:"1970년 평화시장에서 '근로 기준법을 지켜라'를 외치며 분신하여 노동 운동이 본격화되는 계기가 된 인물은?", options:["전태일","이한열","박종철","조영래","김주열"], answer:0, explanation:"<strong>전태일</strong>은 1970년 분신하여 열악한 노동 현실을 고발하였고, 이를 계기로 1970년대 노동 운동이 본격화되었습니다." },
+    { unit:"15", difficulty:"normal", q:"1972년 발표된 7·4 남북 공동 성명에서 합의한 통일의 3대 원칙으로 옳은 것은?", options:["자주·평화·민족 대단결","민주·자유·평등","선건설·후통일","상호 불가침·체제 인정","교류·협력·개방"], answer:0, explanation:"<strong>7·4 남북 공동 성명(1972)</strong>은 <strong>자주·평화·민족 대단결</strong>의 3대 통일 원칙에 합의하였으나, 남북 모두 이를 독재 체제 강화에 이용하였습니다." },
+    { unit:"15", difficulty:"hard", q:"남북 기본 합의서(1991)에 대한 설명으로 옳은 것은?", options:["남북이 서로의 체제를 인정하고 상호 불가침에 합의하였다","6·25 전쟁 직후 이승만 정부가 채택하였다","제1차 남북 정상 회담의 결과로 채택되었다","남북한 유엔 동시 가입을 무산시켰다","개성 공단 건설을 직접 규정하였다"], answer:0, explanation:"<strong>남북 기본 합의서(1991, 노태우 정부)</strong>는 남북이 <strong>서로의 체제를 인정</strong>하고 <strong>상호 불가침</strong>에 합의한 것으로, 같은 해 남북한 유엔 동시 가입이 이루어졌습니다." },
+    { unit:"15", difficulty:"normal", q:"2000년 제1차 남북 정상 회담의 결과로 발표된 것은?", options:["6·15 남북 공동 선언","7·4 남북 공동 성명","남북 기본 합의서","10·4 남북 공동 선언","6·23 평화 통일 선언"], answer:0, explanation:"<strong>6·15 남북 공동 선언(2000)</strong>은 김대중 정부의 대북 화해 협력 정책(햇볕 정책) 아래 열린 <strong>제1차 남북 정상 회담</strong>의 결과로, 이후 금강산 관광·개성 공단 등 교류가 확대되었습니다." }
+  ],
+  ox: [
+    { unit:"14", statement:"3저 호황은 저유가·저금리·저달러에 힘입은 1980년대 중반의 호황이다.", answer:true, explanation:"O. <strong>3저 = 저유가·저금리·저달러</strong>이며, 이 시기 무역 흑자를 기록하였습니다." },
+    { unit:"14", statement:"경제 개발 5개년 계획의 1·2차는 중화학 공업, 3·4차는 경공업 중심이었다.", answer:false, explanation:"X. 순서가 반대입니다. <strong>1·2차는 경공업(노동 집약적), 3·4차는 중화학 공업(자본 집약적)</strong> 중심이었습니다." },
+    { unit:"14", statement:"새마을 운동은 농촌 환경 개선에 치우쳐 소득 증대로는 충분히 이어지지 못했고, 유신 체제 유지에 이용되었다는 비판을 받았다.", answer:true, explanation:"O. 새마을 운동은 환경 개선 성과에 비해 소득 증대가 미흡했고, 정부 지지 동원으로 유신 체제 유지에 이용되었다는 비판이 있습니다." },
+    { unit:"15", statement:"7·4 남북 공동 성명 이후 남북은 곧바로 통일을 이루었다.", answer:false, explanation:"X. 7·4 남북 공동 성명 직후 남북은 오히려 <strong>유신 헌법·사회주의 헌법</strong>으로 독재 체제를 강화하였습니다." },
+    { unit:"15", statement:"6·15 남북 공동 선언은 김대중 정부 때 제1차 남북 정상 회담의 결과로 발표되었다.", answer:true, explanation:"O. <strong>6·15 남북 공동 선언(2000)</strong>은 김대중 정부의 햇볕 정책 아래 제1차 남북 정상 회담에서 발표되었습니다." }
+  ],
+  short: [
+    { unit:"14", q:"저유가·저금리·저달러에 힘입어 1980년대 중반 우리 경제가 호황을 누린 현상을 무엇이라 하는가?", acceptableAnswers:["3저 호황","삼저 호황","3저호황","삼저호황"], keywords:["3저","삼저","호황"], explanation:"<strong>3저 호황</strong>은 저유가·저금리·저달러(원화 가치 상승)에 힘입은 1980년대 중반의 호황으로, 무역 흑자를 기록했습니다." },
+    { unit:"15", q:"1972년 남북이 자주·평화·민족 대단결의 통일 3대 원칙에 합의하여 발표한 성명은?", acceptableAnswers:["7·4 남북 공동 성명","7.4 남북 공동 성명","7·4 남북공동성명","7 4 남북 공동 성명","칠사 남북 공동 성명"], keywords:["7·4","7.4","7 4","공동 성명","공동성명"], explanation:"<strong>7·4 남북 공동 성명(1972)</strong>은 자주·평화·민족 대단결의 3대 통일 원칙에 합의했으나, 남북 모두 독재 체제 강화에 이용했습니다." },
+    { unit:"15", q:"2000년 제1차 남북 정상 회담의 결과 김대중 정부 때 발표된 남북 공동 선언은?", acceptableAnswers:["6·15 남북 공동 선언","6.15 남북 공동 선언","6·15 남북공동선언","6 15 남북 공동 선언"], keywords:["6·15","6.15","6 15","공동 선언","공동선언"], explanation:"<strong>6·15 남북 공동 선언(2000)</strong>은 제1차 남북 정상 회담의 결과로, 이후 금강산 관광·개성 공단 등 남북 교류가 확대되었습니다." }
+  ]
+};
+
+// 강의 강조점 보강(기존 개념에 배경·의의·한계·특징 추가)
+window.CONCEPT_ENRICH_LECTURE = {
+  "경제 개발 5개년 계획": [
+    "전개: <strong>1·2차(1962~71)</strong>는 가발·신발·의류 등 <strong>경공업(노동 집약적)</strong>, <strong>3·4차(1972~81)</strong>는 석유·화학·철강 등 <strong>중화학 공업(자본 집약적)</strong> 중심이었다.",
+    "성장 요인: <strong>베트남 전쟁 특수</strong>, <strong>경부 고속 도로 개통(1970)</strong>, 1977년 <strong>수출액 100억 달러 달성</strong>('한강의 기적')",
+    "한계: <strong>저임금·저곡가 정책</strong>으로 노동자·농민이 희생되었고, 도농 격차·대외 의존도 심화, 2차 석유 파동과 중화학 공업 <strong>과잉(중복) 투자</strong>로 1970년대 말 경제가 침체되었다."
+  ],
+  "새마을 운동": [
+    "한계: 실제로는 <strong>환경 개선에 치우쳐 소득 증대로 충분히 이어지지 못했다.</strong>",
+    "평가: 농촌의 지지를 동원하여 <strong>유신 체제 유지에 이용</strong>되었다는 비판을 받았다."
+  ],
+  "베트남 파병": [
+    "영향: 미국의 경제·군사 원조(브라운 각서)와 <strong>베트남 전쟁 특수</strong>로 경제 성장에 기여하였다.",
+    "한계: 많은 사상자와 고엽제 피해 등 후유증을 남겼다."
+  ],
+  "김영삼 정부": [
+    "경제: 신자유주의 정책으로 공기업 민영화·금융 규제 완화를 추진하고, 1996년 <strong>경제 협력 개발 기구(OECD)에 가입</strong>하였다.",
+    "한계: 임기 말 외환 보유고 고갈로 <strong>외환 위기(IMF 구제 금융, 1997)</strong>를 맞았다."
+  ],
+  "외환 위기": [
+    "배경: 외환 보유고가 고갈되어 기업이 외채를 갚지 못해 줄도산하자 1997년 <strong>국제 통화 기금(IMF)에 구제 금융을 요청</strong>하였다.",
+    "극복: <strong>김대중 정부</strong>가 강도 높은 구조 조정, 외자 유치, <strong>금 모으기 운동</strong>으로 빚을 조기 상환하였다.",
+    "한계: <strong>대량 실업과 빈부 격차 심화</strong> 등 후유증이 남았다."
+  ],
+  "7·4 남북 공동 성명": [
+    "원칙: <strong>자주·평화·민족 대단결</strong>의 3대 통일 원칙에 합의하였다.",
+    "배경: 닉슨 독트린(1969) 이후 <strong>냉전 완화</strong> 분위기 속에서 발표되었다.",
+    "한계: 남북 모두 이를 <strong>독재 체제 강화(유신 헌법·사회주의 헌법)에 이용</strong>하였다."
+  ],
+  "남북 기본 합의서": [
+    "내용: 남북이 <strong>서로의 체제를 인정</strong>하고 <strong>상호 불가침</strong>에 합의하였다.",
+    "배경: 노태우 정부의 북방 외교 속에서 1991년 <strong>남북한이 유엔에 동시 가입</strong>하였다."
+  ],
+  "6·15 남북 공동 선언": [
+    "배경: 김대중 정부의 <strong>대북 화해 협력 정책(햇볕 정책)</strong>과 <strong>제1차 남북 정상 회담(2000)</strong>의 결과이다.",
+    "성과: 이후 <strong>금강산 관광</strong>·개성 공단 등 남북 교류가 확대되었다."
+  ],
+  "10·4 남북 공동 선언": [
+    "배경: <strong>노무현 정부</strong> 때 열린 <strong>제2차 남북 정상 회담(2007)</strong>의 결과이다.",
+    "특징: 6·15 공동 선언을 계승하여 남북 경제 협력 등을 구체화하였다."
+  ],
+  "노태우 정부": [
+    "남북 관계: 1991년 <strong>남북한 유엔 동시 가입</strong>과 <strong>남북 기본 합의서</strong> 채택이 이루어졌다."
+  ]
+};
+
+// 선생님이 시험에 강조한 개념(🎯 시험 강조 표시)
+window.EXAM_EMPHASIS = [
+  "경제 개발 5개년 계획","3저 호황","새마을 운동","전태일 분신 사건",
+  "7·4 남북 공동 성명","남북 기본 합의서","6·15 남북 공동 선언","10·4 남북 공동 선언","외환 위기"
+];
+</script>
+
+<script>
 // ============ DATA ============
 const concepts = [
   // 1910s - 무단 통치기
@@ -5595,7 +5696,7 @@ const ILJE_COMPARISONS = [
 ];
 
 // --- 외부(신규) 단원 데이터 병합 ---
-const EXT = [window.UNIT_DATA_I, window.UNIT_DATA_II, window.UNIT_DATA_IV].filter(Boolean);
+const EXT = [window.UNIT_DATA_I, window.UNIT_DATA_II, window.UNIT_DATA_IV, window.UNIT_DATA_LECTURE].filter(Boolean);
 const extConcepts=[], extMC=[], extOX=[], extShort=[], extPeople=[], extComparisons=[], extTimeline=[];
 EXT.forEach(u => {
   extConcepts.push(...(u.concepts||[])); extMC.push(...(u.mc||[])); extOX.push(...(u.ox||[]));
@@ -5610,7 +5711,7 @@ const allPeople = people.concat(extPeople);
 const allComparisons = ILJE_COMPARISONS.concat(extComparisons);
 
 // --- 개념 심화 보강(배경·의의·한계·영향) 오버레이 적용: 3·4 대단원 ---
-const CONCEPT_ENRICH = Object.assign({}, window.CONCEPT_ENRICH_ILJE || {}, window.CONCEPT_ENRICH_HYUNDAE || {});
+const CONCEPT_ENRICH = Object.assign({}, window.CONCEPT_ENRICH_ILJE || {}, window.CONCEPT_ENRICH_HYUNDAE || {}, window.CONCEPT_ENRICH_LECTURE || {});
 allConcepts.forEach(c => {
   const extra = CONCEPT_ENRICH[c.name];
   if (extra && extra.length) {
@@ -5618,6 +5719,9 @@ allConcepts.forEach(c => {
     c.enriched = true;
   }
 });
+// 강의에서 강조된 개념 표시(🎯 시험 강조)
+const EXAM_EMPHASIS = window.EXAM_EMPHASIS || [];
+allConcepts.forEach(c => { if (EXAM_EMPHASIS.includes(c.name)) c.exam = true; });
 
 // --- 시대/색상 ---
 const PERIOD_ORDER = {"고대":0,"고려":1,"조선":2,"근대":3,"일제":4,"현대":5};
@@ -5646,6 +5750,7 @@ function makeConceptCard(c, idx){
   card.style.setProperty('--i', Math.min(idx, 15));
   card.innerHTML = `
     <span class="era-tag" style="color:${colorOfUnit(c.unit)};border-color:${colorOfUnit(c.unit)}">${unitTag(c.unit)}</span>
+    ${c.exam ? '<span class="exam-badge">🎯 시험 강조</span>' : ''}
     ${c.enriched ? '<span class="deep-badge">✦ 심화</span>' : ''}
     <h3>${c.name}</h3>
     <p class="summary">${autoLinkPeople(c.summary)}</p>
